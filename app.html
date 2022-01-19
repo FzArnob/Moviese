@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Moviease</title>
+    <link rel="shortcut icon" href="./icon/logo-contrust.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link
+      rel="stylesheet"
+      href="./bootstrap.css"
+    />
+    <style>
+      * {
+        user-select: none; /* supported by Chrome and Opera */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+      }
+      body {
+        font-family: "Segoe UI";
+        color: white;
+        background-color: #383838;
+      }
+      ::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+        font-size: 15px;
+        color: rgb(192, 207, 228);
+      }
+      ::-moz-placeholder {
+        /* Firefox 19+ */
+        font-size: 15px;
+        color: rgb(192, 207, 228);
+      }
+      :-ms-input-placeholder {
+        /* IE 10+ */
+        font-size: 15px;
+        color: rgb(192, 207, 228);
+      }
+      :-moz-placeholder {
+        /* Firefox 18- */
+        font-size: 15px;
+        color: rgb(192, 207, 228);
+      }
+      .search .row .col input {
+        height: 35px;
+        border: none;
+        background-color: #404040;
+        color: white;
+        min-width: 300px;
+      }
+      .search .row .col input:focus {
+        border: none;
+        outline: none;
+      }
+      @-webkit-keyframes placeHolderShimmer {
+        0% {
+          background-position: -368px 0;
+        }
+        100% {
+          background-position: 368px 0;
+        }
+      }
+
+      @keyframes placeHolderShimmer {
+        0% {
+          background-position: -368px 0;
+        }
+        100% {
+          background-position: 368px 0;
+        }
+      }
+      .animated-background,
+      .text-line1,
+      .text-line2,
+      .image {
+        -webkit-animation-duration: 1.25s;
+        animation-duration: 1.25s;
+        -webkit-animation-fill-mode: forwards;
+        animation-fill-mode: forwards;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        -webkit-animation-name: placeHolderShimmer;
+        animation-name: placeHolderShimmer;
+        -webkit-animation-timing-function: ease;
+        animation-timing-function: ease;
+        background: #404040;
+        background: linear-gradient(
+          to right,
+          #404040 8%,
+          #484848 18%,
+          #404040 33%
+        );
+        background-size: 800px 104px;
+        height: 96px;
+        position: relative;
+      }
+      .items{
+        margin-top: 20px;
+      }
+      .item {
+        margin: auto;
+        padding: 10px;
+        max-width: 330px;
+      }
+
+      .image {
+        padding-bottom: 100%;
+        width: 100%;
+        max-width: 310px;
+        border-radius: 10px;
+      }
+
+      .text {
+        width: 100%;
+        margin: 5px 0;
+      }
+
+      .text-line1 {
+        border-radius: 4px;
+        height: 18px;
+        width: 70%;
+        margin: 5px 0;
+      }
+      .text-line2 {
+        border-radius: 3px;
+        height: 15px;
+        width: 40%;
+        margin: 5px 0;
+      }
+      .site{
+        margin: auto;
+        max-width: 1000px;
+        padding: 20px;
+        padding-bottom: 0;
+      }
+      .header {
+        width: 150px;
+        display: flex;
+        margin-left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 10px;
+      }
+      .logo {
+        width: 50px;
+        height: 50px;
+      }
+      .logo-text {
+        font-family: "Segoe UI";
+        margin-top: 9px;
+        margin-left: -10px;
+        font-size: 20px;
+        color: white;
+      }
+      .search {
+        position: relative;
+        box-shadow: 0 0 10px #282828;
+        background-color: #404040;
+        border-radius: 8px;
+        padding: 10px;
+        height: 55px;
+        width: auto;
+      }
+
+      .btn-grad {
+        background-image: linear-gradient(
+          to right,
+          #9f46ce 0%,
+          #31a2db 51%,
+          #9f46ce 100%
+        );
+      }
+      .btn-grad {
+        cursor: pointer;
+        padding: 5px 15px;
+        text-align: center;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        border-radius: 10px;
+        display: block;
+      }
+      .abs{
+        position: absolute;
+        right: 10px;
+      }
+
+      .btn-grad:hover {
+        background-position: right center; /* change the direction of the change here */
+        color: #fff;
+        text-decoration: none;
+      }
+      .tabs{
+        box-shadow: 0 0 10px #282828;
+        background-color: #404040;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        display: flex;
+        margin-top: 20px;
+      }
+      .tab-item{
+        cursor: pointer;
+        background-color: #404040;
+        width: 33.33%;
+        height: 60px;
+        font-weight: 400;
+        font-size: 15px;
+        text-align: center;
+        color: rgb(192, 207, 228);
+        padding: 18px;
+      }
+      .tab-item:hover{
+        color: white;
+        background-color: #393939;
+      }
+      .active{
+        color: white;
+        background-color: #393939;
+      }
+      .line{
+        
+        margin-top: -5px;
+        width: 100%;
+        height: 0px;
+        border-radius: 50%;
+      }
+      .dev{
+        margin-top: 20px;
+        padding: 20px;
+        box-shadow: 0 0 10px #282828;
+        background-color: #404040;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        font-family:'Segoe UI';
+        font-size: 15px;
+        color: white;
+        width: 100%;
+        text-align: center;
+      }
+      .dev span{
+        font-family:'Segoe UI';
+        font-size: 15px;
+        font-weight: 500;
+        color: #31a2db;
+        background: -webkit-linear-gradient(#c55aff, #4fc2fb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site">
+      <div class="header">
+            <img class="logo" src="./icon/logo-contrust.png" />
+          <div class="logo-text col-md-auto">MOVIEASE</div>
+      </div>
+      <div class="search" onclick="search_focus(this)">
+        <div class="row">
+          <div class="col" >
+            <input type="text" placeholder="Search Movies or TV Series..." />
+          </div>
+            <div class="btn-grad abs" onclick="trigger_search()">Search</div>
+        </div>
+      </div>
+      <div class="tabs">
+        <div class="tab-item active" style="border-top-left-radius: 8px; border-right: 2px solid #343434;">Hollywood</div>
+        <div class="tab-item">Bollywood</div>
+        <div class="tab-item" style="border-top-right-radius: 8px; border-left: 2px solid #343434;">TV Series</div>
+      </div>
+      <div class="line btn-grad"></div>
+      <div class="items" id="items"></div>
+      <div class="footer">
+        <div class="dev">Developped by <span>FZ'S LAB</span></div>
+      </div>
+    </div>
+    
+    <script>
+      // GLOBAL VARIABLE
+
+      var lodedBuffer = 1;
+    </script>
+
+    <script>
+
+      // WORKING FUNC.
+
+      function search_focus(ele) {
+        ele.children[0].children[0].children[0].focus();
+      }
+      function trigger_search() {}
+      function loadingBuffer() {
+        for(var i = lodedBuffer; i< lodedBuffer+12; i+=2)
+        document.getElementById('items').innerHTML += 
+        `<div class="row">
+          <div class="col-sm">
+            <div class="item" id="item`+i+`" onclick="loadVideo(`+i+`)">
+              <div class="image"></div>
+              <div class="text">
+                <div class="text-line1"></div>
+                <div class="text-line2"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="item" id="item`+(i+1)+`" onclick="loadVideo(`+(i+1)+`)">
+              <div class="image"></div>
+              <div class="text">
+                <div class="text-line1"></div>
+                <div class="text-line2"></div>
+              </div>
+            </div>
+          </div>
+        </div>`
+        lodedBuffer += 12;
+      }
+      function loadVideo(index) {
+
+      }
+    </script>
+
+
+
+    <script>
+      // INITIATE
+
+      loadingBuffer();
+      loadingBuffer();
+      loadingBuffer();
+      loadingBuffer();
+    </script>
+  </body>
+</html>
