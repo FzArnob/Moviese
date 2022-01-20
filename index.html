@@ -328,6 +328,9 @@
         ele.children[0].children[0].children[0].focus();
       }
       function trigger_search() {}
+      function  emptyBuffer() {
+        document.getElementById("items").innerHTML = "";
+        }
       function loadingBuffer() {
         for (var i = loadedBuffer; i < loadedBuffer + 12; i += 2)
           document.getElementById("items").innerHTML +=
@@ -364,6 +367,8 @@
       // function getData(tab, index, length) {}
       function loadVideo(index) {}
       function tabEng(ele) {
+        emptyBuffer();
+        loadingBuffer();
         loadedEng = 1;
         loadedHin = 1;
         loadedTv = 1;
@@ -408,6 +413,8 @@
         }
       }
       function tabHin(ele) {
+        emptyBuffer();
+        loadingBuffer();
         loadedEng = 1;
         loadedHin = 1;
         loadedTv = 1;
@@ -452,6 +459,8 @@
         }
       }
       function tabTv(ele) {
+        emptyBuffer();
+        loadingBuffer();
         loadedEng = 1;
         loadedHin = 1;
         loadedTv = 1;
@@ -499,7 +508,6 @@
         if(tab == "Eng"){
           for(let i= loadedEng; i<loadedEng+12; i++){
             let box = document.getElementById('item'+i);
-            console.log(dataEng.length)
             box.children[0].style.backgroundSize = "cover";
             box.children[0].style.backgroundImage = "url("+dataEng[i-1].image;+")";
             box.children[0].style.animationName = "none";
@@ -566,6 +574,8 @@
         } 
       }
       function recieveData(data, page, tab, load) {
+        console.log(data.length, 'ln', pageEng)
+        
         if (tab == "Eng") {
           if (pageEng == page && JSON.parse(data).length > 0) {
             let temp = dataEng.concat(JSON.parse(data));
@@ -654,10 +664,10 @@
       function getNextOffset(tab, load){
         if(tab == 'Eng'){
           var query = JSON.stringify({
-            url: "https://www.mojaloss.stream/category/movies/page/"+toString(pageEng)+"/",
+            url: "https://www.mojaloss.stream/category/movies/page/"+pageEng+"/",
             query: "getData",
             tab: "Eng",
-            page: toString(pageEng),
+            page: pageEng,
             load: load,
             callback: `function getData(target, page, load, tab){
                   var collection = document.getElementsByTagName(target);
@@ -752,7 +762,6 @@
     <script>
       // INITIATE
 
-      loadingBuffer();
       document.getElementById("Eng").click();
     </script>
   </body>
