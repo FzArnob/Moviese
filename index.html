@@ -567,34 +567,54 @@
       }
       function recieveData(data, page, tab, load) {
         if (tab == "Eng") {
-          if (pageEng == page) {
+          if (pageEng == page && JSON.parse(data).length > 0) {
             let temp = dataEng.concat(JSON.parse(data));
             dataEng = temp;
             pageEng += 1;
-          }
           if (load) {
-            loadContent(tab);
+            if(dataEng.length > loadedBuffer && loadedBuffer > 13) {
+              loadingBuffer();
+            setTimeout(function() {
+              if(activeTab == 'Eng') loadContent('Eng');
+            }, 2000);
+            } else {
+              loadContent('Eng');
+            }
+          }
           }
         } else if (tab == "Hin") {
-          if (pageHin == page) {
+          if (pageHin == page && JSON.parse(data).length > 0) {
             let temp = dataHin.concat(JSON.parse(data));
             dataHin = temp;
             pageHin += 1;
-          }
           if (load) {
-            loadContent(tab);
+              if(dataHin.length > loadedBuffer && loadedBuffer > 13) {
+                loadingBuffer();
+              setTimeout(function() {
+                if(activeTab == 'Hin') loadContent('Hin');
+              }, 2000);
+              } else {
+                loadContent('Hin');
+              }
+            }
           }
         } else if (tab == "Tv") {
-          if (pageTv == page) {
+          if (pageTv == page && JSON.parse(data).length > 0) {
             let temp = dataTv.concat(JSON.parse(data));
             dataTv = temp;
             pageTv += 1;
-          }
           if (load) {
-            loadContent(tab);
+              if(dataTv.length > loadedBuffer && loadedBuffer > 13) {
+                loadingBuffer();
+              setTimeout(function() {
+                if(activeTab == 'Tv') loadContent('Tv');
+              }, 2000);
+              } else {
+                loadContent('Tv');
+              }
+            }
           }
         }
-        console.log(data);
       }
 
       function loadMore(){
