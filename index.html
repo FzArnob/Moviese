@@ -478,8 +478,9 @@
       function recieveData(data, page, tab, load) {
         if (tab == "Eng") {
           if (pageEng == page) {
-            dataEng.concat(JSON.parse(data));
+            dataEng = dataEng.concat(JSON.parse(data));
             page += 1;
+
           }
           if (load) {
             loadContent(tab);
