@@ -5,10 +5,7 @@
     <link rel="shortcut icon" href="./icon/logo-contrust.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link
-      rel="stylesheet"
-      href="./bootstrap.css"
-    />
+    <link rel="stylesheet" href="./bootstrap.css" />
     <style>
       * {
         user-select: none; /* supported by Chrome and Opera */
@@ -95,7 +92,7 @@
         height: 96px;
         position: relative;
       }
-      .items{
+      .items {
         margin-top: 20px;
       }
       .item {
@@ -112,11 +109,14 @@
       }
 
       .text {
+        font-family: "Segoe UI";
+        font-size: 15px;
         width: 100%;
         margin: 5px 0;
       }
 
       .text-line1 {
+        font-weight: 400;
         border-radius: 4px;
         height: 18px;
         width: 70%;
@@ -128,7 +128,7 @@
         width: 40%;
         margin: 5px 0;
       }
-      .site{
+      .site {
         margin: auto;
         max-width: 1000px;
         padding: 20px;
@@ -180,7 +180,7 @@
         border-radius: 10px;
         display: block;
       }
-      .abs{
+      .abs {
         position: absolute;
         right: 10px;
       }
@@ -190,7 +190,7 @@
         color: #fff;
         text-decoration: none;
       }
-      .tabs{
+      .tabs {
         box-shadow: 0 0 10px #282828;
         background-color: #404040;
         border-top-left-radius: 8px;
@@ -198,7 +198,7 @@
         display: flex;
         margin-top: 20px;
       }
-      .tab-item{
+      .tab-item {
         cursor: pointer;
         background-color: #404040;
         width: 33.33%;
@@ -209,63 +209,76 @@
         color: rgb(192, 207, 228);
         padding: 18px;
       }
-      .tab-item:hover{
+      .tab-item:hover {
         color: white;
         background-color: #393939;
       }
-      .active{
+      .active {
         color: white;
         background-color: #393939;
       }
-      .line{
-        
+      .line {
         margin-top: -5px;
         width: 100%;
         height: 0px;
         border-radius: 50%;
       }
-      .dev{
+      .dev {
         margin-top: 20px;
         padding: 20px;
         box-shadow: 0 0 10px #282828;
         background-color: #404040;
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
-        font-family:'Segoe UI';
+        font-family: "Segoe UI";
         font-size: 15px;
         color: white;
         width: 100%;
         text-align: center;
       }
-      .dev span{
-        font-family:'Segoe UI';
+      .dev span {
+        font-family: "Segoe UI";
         font-size: 15px;
         font-weight: 500;
         color: #31a2db;
         background: -webkit-linear-gradient(#c55aff, #4fc2fb);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
     </style>
   </head>
   <body>
     <div class="site">
       <div class="header">
-            <img class="logo" src="./icon/logo-contrust.png" />
-          <div class="logo-text col-md-auto">MOVIEASE</div>
+        <img class="logo" src="./icon/logo-contrust.png" />
+        <div class="logo-text col-md-auto">MOVIEASE</div>
       </div>
       <div class="search" onclick="search_focus(this)">
         <div class="row">
-          <div class="col" >
+          <div class="col">
             <input type="text" placeholder="Search Movies or TV Series..." />
           </div>
-            <div class="btn-grad abs" onclick="trigger_search()">Search</div>
+          <div class="btn-grad abs" onclick="trigger_search()">Search</div>
         </div>
       </div>
       <div class="tabs">
-        <div class="tab-item active" style="border-top-left-radius: 8px; border-right: 2px solid #343434;">Hollywood</div>
-        <div class="tab-item">Bollywood</div>
-        <div class="tab-item" style="border-top-right-radius: 8px; border-left: 2px solid #343434;">TV Series</div>
+        <div
+          id="Eng"
+          onclick="tabEng(this)"
+          class="tab-item active"
+          style="border-top-left-radius: 8px; border-right: 2px solid #343434"
+        >
+          Hollywood
+        </div>
+        <div id="Hin" onclick="tabHin(this)" class="tab-item">Bollywood</div>
+        <div
+          id="Tv"
+          onclick="tabTv(this)"
+          class="tab-item"
+          style="border-top-right-radius: 8px; border-left: 2px solid #343434"
+        >
+          TV Series
+        </div>
       </div>
       <div class="line btn-grad"></div>
       <div class="items" id="items"></div>
@@ -273,15 +286,23 @@
         <div class="dev">Developped by <span>FZ'S LAB</span></div>
       </div>
     </div>
-    
+
     <script>
       // GLOBAL VARIABLE
 
-      var lodedBuffer = 1;
+      var loadedBuffer = 1;
+      var dataEng = [];
+      var dataHin = [];
+      var dataTv = [];
+      var loadedEng = 0;
+      var loadedHin = 0;
+      var loadedTv = 0;
+      var pageEng = 1;
+      var pageHin = 1;
+      var pageTv = 1;
     </script>
 
     <script>
-
       // WORKING FUNC.
 
       function search_focus(ele) {
@@ -289,11 +310,28 @@
       }
       function trigger_search() {}
       function loadingBuffer() {
-        for(var i = lodedBuffer; i< lodedBuffer+12; i+=2)
-        document.getElementById('items').innerHTML += 
-        `<div class="row">
+        for (var i = loadedBuffer; i < loadedBuffer + 12; i += 2)
+          document.getElementById("items").innerHTML +=
+            `<div class="row">
           <div class="col-sm">
-            <div class="item" id="item`+i+`" onclick="loadVideo(`+i+`)">
+            <div class="item" id="item` +
+            i +
+            `" onclick="loadVideo(` +
+            i +
+            `)">
+              <div class="image"></div>
+              <div class="text">
+                <div class="text-line1">A asdar iwuyi bsd wyg ub uyweg uyguwg uygw ubw uywg ydugubuy uybwgd wg ub wgdyub wg dyg </div>
+                <div class="text-line2"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="item" id="item` +
+            (i + 1) +
+            `" onclick="loadVideo(` +
+            (i + 1) +
+            `)">
               <div class="image"></div>
               <div class="text">
                 <div class="text-line1"></div>
@@ -301,32 +339,142 @@
               </div>
             </div>
           </div>
-          <div class="col-sm">
-            <div class="item" id="item`+(i+1)+`" onclick="loadVideo(`+(i+1)+`)">
-              <div class="image"></div>
-              <div class="text">
-                <div class="text-line1"></div>
-                <div class="text-line2"></div>
-              </div>
-            </div>
-          </div>
-        </div>`
-        lodedBuffer += 12;
+        </div>`;
+        loadedBuffer += 12;
       }
-      function loadVideo(index) {
+      // function getData(tab, index, length) {}
+      function loadVideo(index) {}
+      function tabEng(ele) {
+        ele.parentElement.children[0].className = "tab-item active";
+        ele.parentElement.children[1].className = "tab-item";
+        ele.parentElement.children[2].className = "tab-item";
+        if (pageEng == 1) {
+          var query = JSON.stringify({
+              query: 'getData',
+              tab: 'Eng',
+              page: 1,
+              load: true,
+              callback: 
+              `function getData(target, page, load, tab){
+                  var collection = document.getElementsByTagName(target);
+                  var dataArr = [];
+                  for (let i = 0; i < collection.length; i++) {
+                      let item = {
+                                  title: collection[i].children[0].children[3].children[2].children[0].innerHTML,
+                                  category: collection[i].children[0].children[3].children[0].innerHTML,
+                                  link: collection[i].children[0].children[0].href,
+                                  image: collection[i].children[0].children[0].children[0].children[1].src
+                              };
+                              dataArr.push(item)
+                  }
+                  let dataObj = {
+                      query: 'callback',
+                      output: dataArr,
+                      page: page,
+                      load: load,
+                      tab: tab
+                      callback: 'funct'
+                  }
+                  console.log(JSON.stringify(dataObj))
+              }
+              getData('article', 1, true, 'Eng')`
+            });
+
+          console.log(query)
+        } else {
+          loadContent('Eng');
+        }
+      }
+      function tabHin(ele) {
+        ele.parentElement.children[0].className = "tab-item";
+        ele.parentElement.children[1].className = "tab-item active";
+        ele.parentElement.children[2].className = "tab-item";
+        if (pageHin == 1) {
+          var query = JSON.stringify({
+              query: 'getData',
+              tab: 'Hin',
+              page: 1,
+              load: true,
+              callback: 
+              `function getData(target, page, load, tab){
+                  var collection = document.getElementsByTagName(target);
+                  var dataArr = [];
+                  for (let i = 0; i < collection.length; i++) {
+                      let item = {
+                                  title: collection[i].children[0].children[3].children[2].children[0].innerHTML,
+                                  category: collection[i].children[0].children[3].children[0].innerHTML,
+                                  link: collection[i].children[0].children[0].href,
+                                  image: collection[i].children[0].children[0].children[0].children[1].src
+                              };
+                              dataArr.push(item)
+                  }
+                  let dataObj = {
+                      query: 'callback',
+                      output: dataArr,
+                      page: page,
+                      load: load,
+                      tab: tab
+                  }
+                  console.log(JSON.stringify(dataObj))
+              }
+              getData('article', 1, true, 'Hin')`
+            });
+
+          console.log(query)
+        } else {
+          loadContent('Hin');
+        }
+      }
+      function tabTv(ele) {
+        ele.parentElement.children[0].className = "tab-item";
+        ele.parentElement.children[1].className = "tab-item";
+        ele.parentElement.children[2].className = "tab-item active";
+        if (pageTv == 1) {
+          var query = JSON.stringify({
+              query: 'getData',
+              tab: 'Tv',
+              page: 1,
+              load: true,
+              callback: 
+              `function getData(target, page, load, tab){
+                  var collection = document.getElementsByTagName(target);
+                  var dataArr = [];
+                  for (let i = 0; i < collection.length; i++) {
+                      let item = {
+                                  title: collection[i].children[0].children[3].children[2].children[0].innerHTML,
+                                  category: collection[i].children[0].children[3].children[0].innerHTML,
+                                  link: collection[i].children[0].children[0].href,
+                                  image: collection[i].children[0].children[0].children[0].children[1].src
+                              };
+                              dataArr.push(item)
+                  }
+                  let dataObj = {
+                      query: 'callback',
+                      output: dataArr,
+                      page: page,
+                      load: load,
+                      tab: tab
+                  }
+                  console.log(JSON.stringify(dataObj))
+              }
+              getData('article', 1, true, 'Tv')`
+            });
+
+          console.log(query)
+        } else {
+          loadContent('Tv');
+        }
+      }
+      function loadContent(tab) {
 
       }
     </script>
-
-
 
     <script>
       // INITIATE
 
       loadingBuffer();
-      loadingBuffer();
-      loadingBuffer();
-      loadingBuffer();
+      document.getElementById('Eng').click();
     </script>
   </body>
 </html>

@@ -1,6 +1,6 @@
-function getData(target){
+function getData(target, page, load, tab){
     var collection = document.getElementsByTagName(target);
-    var dataObj = [];
+    var dataArr = [];
     for (let i = 0; i < collection.length; i++) {
         let item = {
                     title: collection[i].children[0].children[3].children[2].children[0].innerHTML,
@@ -8,8 +8,22 @@ function getData(target){
                     link: collection[i].children[0].children[0].href,
                     image: collection[i].children[0].children[0].children[0].children[1].src
                 };
-                dataObj.push(item)
+                dataArr.push(item)
     }
-    console.log("outputData",JSON.stringify(dataObj))
+    let dataObj = {
+        query: 'callback',
+        output: dataArr,
+        page: page,
+        load: load,
+        tab: tab
+    }
+    console.log(JSON.stringify(dataObj))
 }
-getData('article')
+getData('article', 1, true, 'Eng')
+
+
+function dataReturn(output, page, load, tab){
+    
+  if(load) loadContent(tab)
+  
+}
