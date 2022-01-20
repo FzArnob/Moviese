@@ -321,7 +321,7 @@
             `)">
               <div class="image"></div>
               <div class="text">
-                <div class="text-line1">A asdar iwuyi bsd wyg ub uyweg uyguwg uygw ubw uywg ydugubuy uybwgd wg ub wgdyub wg dyg </div>
+                <div class="text-line1"></div>
                 <div class="text-line2"></div>
               </div>
             </div>
@@ -353,8 +353,6 @@
               url: 'https://www.mojaloss.stream/category/movies/',
               query: 'getData',
               tab: 'Eng',
-              page: '1',
-              load: true,
               callback: 
               `function getData(target, page, load, tab){
                   var collection = document.getElementsByTagName(target);
@@ -368,12 +366,10 @@
                               };
                               dataArr.push(item);
                   }
+                  let data = JSON.stringify(dataArr);
                   let dataObj = {
                       query: 'callback',
-                      output: dataArr,
-                      page: page,
-                      load: load,
-                      tab: tab
+                      function: 'recieveData('+data+', '+page+', '+tab+', '+load+');'
                   };
                   console.log(JSON.stringify(dataObj));
               }
@@ -469,6 +465,9 @@
       }
       function loadContent(tab) {
 
+      }
+      function recieveData(data, page, tab, load) {
+        console.log(JSON.parse(data));
       }
     </script>
 
