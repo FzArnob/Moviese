@@ -556,7 +556,7 @@
           }
           loadedHin +=12;
         } else if (tab == "Tv"){
-          console.log(loadedTv, 'from', dataTv.length)
+          // console.log(loadedTv, 'from', dataTv.length)
           for(let i= loadedTv; i<loadedTv+12; i++){
             let box = document.getElementById('item'+i);
             box.children[0].style.backgroundSize = "cover";
@@ -586,7 +586,7 @@
             let temp = dataEng.concat(JSON.parse(data));
             dataEng = temp;
             pageEng += 1;
-            console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageEng, ' of Eng: ', dataEng.length)
+            // console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageEng, ' of Eng: ', dataEng.length)
           if (load) {
             if(dataEng.length > loadedBuffer && loadedBuffer > 13) {
               loadingBuffer();
@@ -603,7 +603,7 @@
             let temp = dataHin.concat(JSON.parse(data));
             dataHin = temp;
             pageHin += 1;
-            console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageHin, ' of Hin: ', dataHin.length)
+            // console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageHin, ' of Hin: ', dataHin.length)
           if (load) {
               if(dataHin.length > loadedBuffer && loadedBuffer > 13) {
                 loadingBuffer();
@@ -620,7 +620,7 @@
             let temp = dataTv.concat(JSON.parse(data));
             dataTv = temp;
             pageTv += 1;
-            console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageTv, ' of Tv: ', dataTv.length)
+            // console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageTv, ' of Tv: ', dataTv.length)
           if (load) {
               if(dataTv.length > loadedBuffer && loadedBuffer > 13) {
                 loadingBuffer();
@@ -700,7 +700,7 @@
               }
               getData('article', `+pageEng+`, `+load+`, 'Eng');`,
           });
-          console.log("https://www.mojaloss.stream/category/movies/page/"+pageEng+"/");
+          // console.log("https://www.mojaloss.stream/category/movies/page/"+pageEng+"/");
           console.log(query);
         } else if(tab == 'Hin'){
           var query = JSON.stringify({
@@ -732,7 +732,7 @@
               }
               getData('article', `+pageHin+`, `+load+`, 'Hin');`,
           });
-          console.log("https://www.mojaloss.stream/category/hindi/page/"+pageHin+"/");
+          // console.log("https://www.mojaloss.stream/category/hindi/page/"+pageHin+"/");
           console.log(query);
         } else if(tab == 'Tv'){
           var query = JSON.stringify({
@@ -764,7 +764,7 @@
               }
               getData('article', `+pageTv+`, `+load+`, 'Tv');`,
           });
-          console.log("https://www.mojaloss.stream/category/tv-shows/page/"+pageTv+"/");
+          // console.log("https://www.mojaloss.stream/category/tv-shows/page/"+pageTv+"/");
           console.log(query);
         }
       }
@@ -773,7 +773,7 @@
     <script>
       // INITIATE
 
-      document.getElementById("Tv").click();
+      document.getElementById("Eng").click();
     </script>
   </body>
 </html>
