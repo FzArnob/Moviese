@@ -8,7 +8,7 @@ function getData(target, page, load, tab){
                     link: collection[i].children[0].children[0].href,
                     image: collection[i].children[0].children[0].children[0].children[1].src
                 };
-                dataArr.push(item)
+                dataArr.push(item);
     }
     let dataObj = {
         query: 'callback',
@@ -16,10 +16,10 @@ function getData(target, page, load, tab){
         page: page,
         load: load,
         tab: tab
-    }
-    console.log(JSON.stringify(dataObj))
+    };
+    console.log(JSON.stringify(dataObj));
 }
-getData('article', 1, true, 'Eng')
+getData('article', 1, true, 'Eng');
 
 
 function dataReturn(output, page, load, tab){
