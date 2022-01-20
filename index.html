@@ -369,7 +369,7 @@
                   let data = JSON.stringify(dataArr);
                   let dataObj = {
                       query: 'callback',
-                      function: 'recieveData('+'"'+data+'"'+', '+page+', '+'"'+tab+'"'+', '+load+');'
+                      function: 'let temp = '+'"'+data+'"'+'; recieveData(temp, '+page+', '+'"'+tab+'"'+', '+load+');'
                   };
                   console.log(JSON.stringify(dataObj));
               }
