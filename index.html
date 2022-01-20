@@ -466,8 +466,10 @@
       }
       function loadContent(tab) {
         if(tab == "Eng"){
+          console.log(dataEng.length)
           for(let i= loadedEng; i<loadedEng+12; i++){
             let box = document.getElementById('item'+i);
+            console.log(dataEng.length)
             box.children[0].style.backgroundImage = "url("+dataEng[i-1].image;+")";
             box.children[1].children[0].innerHTML = dataEng[i-1].title;
             box.children[1].children[1].innerHTML = dataEng[i-1].category;
@@ -478,9 +480,11 @@
       function recieveData(data, page, tab, load) {
         if (tab == "Eng") {
           if (pageEng == page) {
-            dataEng = dataEng.concat(JSON.parse(data));
+            console.log(dataEng.length)
+            let temp = dataEng.concat(JSON.parse(data));
+            dataEng = temp;
             page += 1;
-
+            console.log(dataEng.length)
           }
           if (load) {
             loadContent(tab);
