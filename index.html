@@ -294,9 +294,9 @@
       var dataEng = [];
       var dataHin = [];
       var dataTv = [];
-      var loadedEng = 0;
-      var loadedHin = 0;
-      var loadedTv = 0;
+      var loadedEng = 1;
+      var loadedHin = 1;
+      var loadedTv = 1;
       var pageEng = 1;
       var pageHin = 1;
       var pageTv = 1;
@@ -350,13 +350,12 @@
         ele.parentElement.children[2].className = "tab-item";
         if (pageEng == 1) {
           var query = JSON.stringify({
-              url: 'https://www.mojaloss.stream/category/movies/',
-              query: 'getData',
-              tab: 'Eng',
-              page: '1',
-              load: true,
-              callback: 
-              `function getData(target, page, load, tab){
+            url: "https://www.mojaloss.stream/category/movies/",
+            query: "getData",
+            tab: "Eng",
+            page: "1",
+            load: true,
+            callback: `function getData(target, page, load, tab){
                   var collection = document.getElementsByTagName(target);
                   var dataArr = [];
                   for (let i = 0; i < collection.length; i++) {
@@ -377,12 +376,12 @@
                   };
                   console.log(JSON.stringify(dataObj));
               }
-              getData('article', 1, true, 'Eng');`
-            });
+              getData('article', 1, true, 'Eng');`,
+          });
 
-          console.log(query)
+          console.log(query);
         } else {
-          loadContent('Eng');
+          loadContent("Eng");
         }
       }
       function tabHin(ele) {
@@ -391,13 +390,12 @@
         ele.parentElement.children[2].className = "tab-item";
         if (pageHin == 1) {
           var query = JSON.stringify({
-              url: 'https://www.mojaloss.stream/category/hindi/',
-              query: 'getData',
-              tab: 'Hin',
-              page: '1',
-              load: true,
-              callback: 
-              `function getData(target, page, load, tab){
+            url: "https://www.mojaloss.stream/category/hindi/",
+            query: "getData",
+            tab: "Hin",
+            page: "1",
+            load: true,
+            callback: `function getData(target, page, load, tab){
                   var collection = document.getElementsByTagName(target);
                   var dataArr = [];
                   for (let i = 0; i < collection.length; i++) {
@@ -418,12 +416,12 @@
                   };
                   console.log(JSON.stringify(dataObj));
               }
-              getData('article', 1, true, 'Hin');`
-            });
+              getData('article', 1, true, 'Hin');`,
+          });
 
-          console.log(query)
+          console.log(query);
         } else {
-          loadContent('Hin');
+          loadContent("Hin");
         }
       }
       function tabTv(ele) {
@@ -432,13 +430,12 @@
         ele.parentElement.children[2].className = "tab-item active";
         if (pageTv == 1) {
           var query = JSON.stringify({
-              url: 'https://www.mojaloss.stream/category/tv-shows/',
-              query: 'getData',
-              tab: 'Tv',
-              page: '1',
-              load: true,
-              callback: 
-              `function getData(target, page, load, tab){
+            url: "https://www.mojaloss.stream/category/tv-shows/",
+            query: "getData",
+            tab: "Tv",
+            page: "1",
+            load: true,
+            callback: `function getData(target, page, load, tab){
                   var collection = document.getElementsByTagName(target);
                   var dataArr = [];
                   for (let i = 0; i < collection.length; i++) {
@@ -459,18 +456,36 @@
                   };
                   console.log(JSON.stringify(dataObj));
               }
-              getData('article', 1, true, 'Tv');`
-            });
+              getData('article', 1, true, 'Tv');`,
+          });
 
-          console.log(query)
+          console.log(query);
         } else {
-          loadContent('Tv');
+          loadContent("Tv");
         }
       }
       function loadContent(tab) {
-
+        if(tab == "Eng"){
+          for(let i= loadedEng; i<loadedEng+12; i++){
+            let box = document.getElementById('item'+i);
+            box.children[0].style.backgroundImage = "url("+dataEng[i-1].image;+")";
+            box.children[1].children[0].innerHTML = dataEng[i-1].title;
+            box.children[1].children[1].innerHTML = dataEng[i-1].category;
+          }
+          loadedEng +=12;
+        } 
       }
       function recieveData(data, page, tab, load) {
+        if (tab == "Eng") {
+          if (pageEng == page) {
+            dataEng.concat(JSON.parse(data));
+            page += 1;
+          }
+          if (load) {
+            loadContent(tab);
+          }
+        }
+
         console.log(data);
       }
     </script>
@@ -479,7 +494,7 @@
       // INITIATE
 
       loadingBuffer();
-      document.getElementById('Eng').click();
+      document.getElementById("Eng").click();
     </script>
   </body>
 </html>
