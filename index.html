@@ -574,7 +574,7 @@
         } 
       }
       function recieveData(data, page, tab, load) {
-        console.log(data.length, 'ln', pageEng)
+        console.log(JSON.parse(data).length, 'ln', pageEng)
         
         if (tab == "Eng") {
           if (pageEng == page && JSON.parse(data).length > 0) {
