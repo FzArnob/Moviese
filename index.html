@@ -690,15 +690,15 @@
                   };
                   console.log(JSON.stringify(dataObj));
               }
-              getData('article', `+toString(pageEng)+`, `+load+`, 'Eng');`,
+              getData('article', `+pageEng+`, `+load+`, 'Eng');`,
           });
           console.log(query);
         } else if(tab == 'Hin'){
           var query = JSON.stringify({
-            url: "https://www.mojaloss.stream/category/movies/page/"+toString(pageHin)+"/",
+            url: "https://www.mojaloss.stream/category/movies/page/"+pageHin+"/",
             query: "getData",
             tab: "Hin",
-            page: toString(pageHin),
+            page: pageHin,
             load: load,
             callback: `function getData(target, page, load, tab){
                   var collection = document.getElementsByTagName(target);
@@ -721,15 +721,15 @@
                   };
                   console.log(JSON.stringify(dataObj));
               }
-              getData('article', `+toString(pageHin)+`, `+load+`, 'Hin');`,
+              getData('article', `+pageHin+`, `+load+`, 'Hin');`,
           });
           console.log(query);
         } else if(tab == 'Tv'){
           var query = JSON.stringify({
-            url: "https://www.mojaloss.stream/category/movies/page/"+toString(pageTv)+"/",
+            url: "https://www.mojaloss.stream/category/movies/page/"+pageTv+"/",
             query: "getData",
             tab: "Tv",
-            page: toString(pageTv),
+            page: pageTv,
             load: load,
             callback: `function getData(target, page, load, tab){
                   var collection = document.getElementsByTagName(target);
@@ -752,7 +752,7 @@
                   };
                   console.log(JSON.stringify(dataObj));
               }
-              getData('article', `+toString(pageTv)+`, `+load+`, 'Tv');`,
+              getData('article', `+pageTv+`, `+load+`, 'Tv');`,
           });
           console.log(query);
         }
