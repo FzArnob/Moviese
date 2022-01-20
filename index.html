@@ -118,15 +118,15 @@
       .text-line1 {
         font-weight: 400;
         border-radius: 4px;
-        height: 18px;
+        height: 20px;
         width: 70%;
-        margin: 5px 0;
+        margin: 10px 0;
       }
       .text-line2 {
         border-radius: 3px;
-        height: 15px;
+        height: 20px;
         width: 40%;
-        margin: 5px 0;
+        margin: 10px 0;
       }
       .site {
         margin: auto;
@@ -471,6 +471,7 @@
             let box = document.getElementById('item'+i);
             console.log(dataEng.length)
             box.children[0].style.backgroundImage = "url("+dataEng[i-1].image;+")";
+            box.children[0].style.animationName = "none";
             box.children[1].children[0].innerHTML = dataEng[i-1].title;
             box.children[1].children[1].innerHTML = dataEng[i-1].category;
           }
