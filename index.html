@@ -586,7 +586,7 @@
             let temp = dataEng.concat(JSON.parse(data));
             dataEng = temp;
             pageEng += 1;
-            console.log(JSON.parse(data).length, ' in ', pageEng, ' of ', dataEng.length)
+            console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageEng, ' of Eng: ', dataEng.length)
           if (load) {
             if(dataEng.length > loadedBuffer && loadedBuffer > 13) {
               loadingBuffer();
@@ -603,7 +603,7 @@
             let temp = dataHin.concat(JSON.parse(data));
             dataHin = temp;
             pageHin += 1;
-            console.log(JSON.parse(data).length, ' in ', pageHin, ' of ', dataHin.length)
+            console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageHin, ' of Hin: ', dataHin.length)
           if (load) {
               if(dataHin.length > loadedBuffer && loadedBuffer > 13) {
                 loadingBuffer();
@@ -620,7 +620,7 @@
             let temp = dataTv.concat(JSON.parse(data));
             dataTv = temp;
             pageTv += 1;
-            console.log(JSON.parse(data).length, ' in ', pageTv, ' of ', dataTv.length)
+            console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageTv, ' of Tv: ', dataTv.length)
           if (load) {
               if(dataTv.length > loadedBuffer && loadedBuffer > 13) {
                 loadingBuffer();
@@ -704,7 +704,7 @@
           console.log(query);
         } else if(tab == 'Hin'){
           var query = JSON.stringify({
-            url: "https://www.mojaloss.stream/category/movies/page/"+pageHin+"/",
+            url: "https://www.mojaloss.stream/category/hindi/page/"+pageHin+"/",
             query: "getData",
             tab: "Hin",
             page: pageHin,
@@ -732,11 +732,11 @@
               }
               getData('article', `+pageHin+`, `+load+`, 'Hin');`,
           });
-          console.log("https://www.mojaloss.stream/category/movies/page/"+pageHin+"/");
+          console.log("https://www.mojaloss.stream/category/hindi/page/"+pageHin+"/");
           console.log(query);
         } else if(tab == 'Tv'){
           var query = JSON.stringify({
-            url: "https://www.mojaloss.stream/category/movies/page/"+pageTv+"/",
+            url: "https://www.mojaloss.stream/category/tv-shows/page/"+pageTv+"/",
             query: "getData",
             tab: "Tv",
             page: pageTv,
@@ -764,7 +764,7 @@
               }
               getData('article', `+pageTv+`, `+load+`, 'Tv');`,
           });
-          console.log("https://www.mojaloss.stream/category/movies/page/"+pageTv+"/");
+          console.log("https://www.mojaloss.stream/category/tv-shows/page/"+pageTv+"/");
           console.log(query);
         }
       }
