@@ -574,13 +574,12 @@
         } 
       }
       function recieveData(data, page, tab, load) {
-        console.log(JSON.parse(data).length, 'ln', pageEng)
-        
         if (tab == "Eng") {
           if (pageEng == page && JSON.parse(data).length > 0) {
             let temp = dataEng.concat(JSON.parse(data));
             dataEng = temp;
             pageEng += 1;
+            console.log(JSON.parse(data).length, ' in ', pageEng, ' of ', dataEng)
           if (load) {
             if(dataEng.length > loadedBuffer && loadedBuffer > 13) {
               loadingBuffer();
@@ -597,6 +596,7 @@
             let temp = dataHin.concat(JSON.parse(data));
             dataHin = temp;
             pageHin += 1;
+            console.log(JSON.parse(data).length, ' in ', pageHin, ' of ', dataHin)
           if (load) {
               if(dataHin.length > loadedBuffer && loadedBuffer > 13) {
                 loadingBuffer();
@@ -613,6 +613,7 @@
             let temp = dataTv.concat(JSON.parse(data));
             dataTv = temp;
             pageTv += 1;
+            console.log(JSON.parse(data).length, ' in ', pageTv, ' of ', dataTv)
           if (load) {
               if(dataTv.length > loadedBuffer && loadedBuffer > 13) {
                 loadingBuffer();
