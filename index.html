@@ -118,7 +118,7 @@
       .text-line1 {
         font-weight: 400;
         border-radius: 4px;
-        height: 25px;
+        height: 30px;
         width: 70%;
         margin: 10px 0;
       }
@@ -470,15 +470,15 @@
           for(let i= loadedEng; i<loadedEng+12; i++){
             let box = document.getElementById('item'+i);
             console.log(dataEng.length)
-            box.children[0].style.background = "none";
+            box.children[0].style.backgroundSize = "cover";
             box.children[0].style.backgroundImage = "url("+dataEng[i-1].image;+")";
-            box.children[0].style.animation = "none";
+            box.children[0].style.animationName = "none";
             box.children[1].children[0].innerHTML = dataEng[i-1].title;
-            box.children[1].children[0].style.animation = "none";
-            box.children[1].children[0].style.background = "none";
+            box.children[1].children[0].style.animationName = "none";
+            box.children[1].children[0].style.backgroundSize = "cover";
             box.children[1].children[1].innerHTML = dataEng[i-1].category;
-            box.children[1].children[1].style.animation = "none";
-            box.children[1].children[1].style.background = "none";
+            box.children[1].children[1].style.animationName = "none";
+            box.children[1].children[1].style.backgroundSize = "cover";
 
           }
           loadedEng +=12;
