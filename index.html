@@ -582,7 +582,7 @@
             let temp = dataEng.concat(JSON.parse(data));
             dataEng = temp;
             pageEng += 1;
-            console.log(JSON.parse(data).length, ' in ', pageEng, ' of ', dataEng)
+            console.log(JSON.parse(data).length, ' in ', pageEng, ' of ', dataEng.length)
           if (load) {
             if(dataEng.length > loadedBuffer && loadedBuffer > 13) {
               loadingBuffer();
@@ -599,7 +599,7 @@
             let temp = dataHin.concat(JSON.parse(data));
             dataHin = temp;
             pageHin += 1;
-            console.log(JSON.parse(data).length, ' in ', pageHin, ' of ', dataHin)
+            console.log(JSON.parse(data).length, ' in ', pageHin, ' of ', dataHin.length)
           if (load) {
               if(dataHin.length > loadedBuffer && loadedBuffer > 13) {
                 loadingBuffer();
@@ -616,7 +616,7 @@
             let temp = dataTv.concat(JSON.parse(data));
             dataTv = temp;
             pageTv += 1;
-            console.log(JSON.parse(data).length, ' in ', pageTv, ' of ', dataTv)
+            console.log(JSON.parse(data).length, ' in ', pageTv, ' of ', dataTv.length)
           if (load) {
               if(dataTv.length > loadedBuffer && loadedBuffer > 13) {
                 loadingBuffer();
