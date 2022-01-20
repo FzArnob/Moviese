@@ -353,6 +353,8 @@
               url: 'https://www.mojaloss.stream/category/movies/',
               query: 'getData',
               tab: 'Eng',
+              page: '1',
+              load: true,
               callback: 
               `function getData(target, page, load, tab){
                   var collection = document.getElementsByTagName(target);
@@ -366,10 +368,12 @@
                               };
                               dataArr.push(item);
                   }
-                  let data = JSON.stringify(dataArr);
                   let dataObj = {
                       query: 'callback',
-                      function: 'let temp = '+'"'+data+'"'+'; recieveData(temp, '+page+', '+'"'+tab+'"'+', '+load+');'
+                      output: dataArr,
+                      page: page,
+                      load: load,
+                      tab: tab,
                   };
                   console.log(JSON.stringify(dataObj));
               }
@@ -467,7 +471,7 @@
 
       }
       function recieveData(data, page, tab, load) {
-        console.log(data);
+        console.log(JSON.parse(data));
       }
     </script>
 
