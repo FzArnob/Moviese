@@ -368,15 +368,7 @@
                               };
                               dataArr.push(item);
                   }
-                  let dataObj = {
-                      query: 'callback',
-                      output: dataArr,
-                      page: page,
-                      load: load,
-                      tab: tab
-                      callback: 'funct'
-                  };
-                  console.log(JSON.stringify(dataObj));
+                  console.log(JSON.stringify(dataArr));
               }
               getData('article', 1, true, 'Eng');`
             });
