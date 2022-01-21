@@ -382,7 +382,9 @@
         ele.parentElement.children[1].className = "tab-item";
         ele.parentElement.children[2].className = "tab-item";
         if (pageEng == 1) {
-          if(loader_count == 0) console.log("vir_off");
+          if(loader_count == 0) {
+              console.log("vir_off")
+          }
           var query = JSON.stringify({
             url: "https://www.mojaloss.stream/category/movies/",
             query: "getData",
@@ -779,5 +781,8 @@
       // INITIATE
 
       document.getElementById("Eng").click();
+      document.getElementById("Hin").click();
+      document.getElementById("Tv").click();
+    </script>
   </body>
 </html>
