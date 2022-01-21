@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Moviease</title>
+    <link rel="shortcut icon" href="./icon/logo-contrust.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="./bootstrap.css" />
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.5.6/plyr.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.plyr.io/3.5.6/plyr.js"></script>
+    <style>
+        * {
+        user-select: none; /* supported by Chrome and Opera */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        }
+        body {
+            font-family: "Segoe UI";
+            color: white;
+            background-color: #383838;
+            padding: 0;
+            margin: 0;
+        }
+        .js-player {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .plyr {
+        height: 100%;
+        width :100%;
+        }
+        #wrapper{
+        display: flex;
+        justify-content:center;
+        width: 100%;
+        height: auto;
+        background-color: black;
+        }
+        .plyr__video-wrapper {
+        height: 100%;
+        }
+        .plyr__video-wrapper iframe {
+        width: 100%;
+        height: 100%;
+        }
+        .hide{
+            visibility: hidden;
+        }
+        .back{
+            padding: 10px;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            z-index: 999;
+        }
+        .back:hover{
+            background: rgb(0 179 255 / 50%);
+        }
+         
+        .title{
+            font-size: 15px;
+            font-family: 'Segoe UI';
+            background: transparent;
+            color: white;
+            position: absolute;
+            width: auto;
+            top: 24px;
+            left: 70px;
+            z-index: 999;
+        }
+        .series_controls{
+            background: transparent;
+            color: white;
+            position: absolute;
+            width: auto;
+            top: 20px;
+            right: 20px;
+            font-size: 15px;
+            z-index: 999;
+            display: flex;
+        }
+        .Seasons{
+            margin-right: 10px;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            padding: 7px;
+            background: rgba(144, 144, 144, 0.294);
+            color: white;
+            width: auto;
+            height: 40px;
+            font-size: 15px;
+            font-family: 'Segoe UI';
+        }
+        .Episodes{
+            border: 2px solid #fff;
+            border-radius: 8px;
+            padding: 7px;
+            background: rgba(144, 144, 144, 0.294);
+            color: white;
+            width: auto;
+            height: 40px;
+            font-size: 15px;
+            font-family: 'Segoe UI';
+        }
+    </style>
+    </head>
+    <body>
+        <div id="header">
+            <img class="back" src="./icon/back.png">
+            <div class="title" id="title">View_From_A_Blue_Moon_Trailer-HD</div>
+            <div class="series_controls hide">
+                <div class="Seasons">
+                    Season 1
+                </div>
+                <div class="Episodes">
+                    Episode 1
+                </div>
+            </div>
+        </div>
+        <div id="wrapper">
+            <video 
+            controls
+                crossorigin
+                playsinline
+                poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" class="js-player">
+        <!-- Video files -->
+                <source
+                src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4"
+                type="video/mp4"
+                size="1080"
+                />
+        <!-- Caption files -->
+                <track 
+                    kind="captions" 
+                    label="English" 
+                    srclang="en" 
+                    src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt" 
+                    default
+                />
+            </video>
+        </div>
+    <script>
+
+        var controls = [
+            'play-large', // The large play button in the center
+            'rewind', // Rewind by the seek time (default 10 seconds)
+            'play', // Play/pause playback
+            'fast-forward', // Fast forward by the seek time (default 10 seconds)
+            'progress', // The progress bar and scrubber for playback and buffering
+            'current-time', // The current time of playback
+            'duration', // The full duration of the media
+            'mute', // Toggle mute
+            'volume', // Volume control
+            'captions', // Toggle captions
+            'settings', // Settings menu
+            'download', // Show a download button with a link to either the current source or a custom URL you specify in your options
+            // 'fullscreen' // Toggle fullscreen
+        ];
+
+        var player = new Plyr('.js-player', { controls });
+    </script>
+    <script>
+        function playChecker() {
+            setTimeout(function() {
+              if(!document.getElementsByClassName('plyr__control plyr__control--overlaid')[0].pressed) document.getElementById('header').style.display = "block";
+              else document.getElementById('header').style.display = "none";
+              playChecker();
+            }, 500);
+        }
+        playChecker();
+    </script>
+        </body>
+    </html>
