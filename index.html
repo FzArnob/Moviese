@@ -320,16 +320,19 @@
     </div>
     <script>
       // Nav Bar
+      var nav_fixed = false;
       var stickyNavTop = $('#top').offset().top;
 
       $(window).scroll(function() {  
           if ($(window).scrollTop() > stickyNavTop) {
               $('#top').addClass('fixed');
-              $('#items').css('margin-top',190);
+              $('#items').css('padding-top', 170);
+              nav_fixed = true;
           }
           else {
-              $('#items').css('margin-top',20);
+              $('#items').css('padding-top', 0);
               $('#top').removeClass('fixed');
+              nav_fixed = false;
           }  
       });
     </script>
@@ -397,6 +400,10 @@
       function loadVideo(index) {}
       function tabEng(ele) {
         if(activeTab != "Eng") {
+          if(nav_fixed){
+            var itemsTop = $('#items').offset().top;
+            window.scrollTo(0, itemsTop);
+          }
         emptyBuffer();
         loadedBuffer = 1;
         loadingBuffer();
@@ -451,6 +458,10 @@
       }
       function tabHin(ele) {
         if(activeTab != "Hin") {
+          if(nav_fixed){
+            var itemsTop = $('#items').offset().top;
+            window.scrollTo(0, itemsTop);
+          }
         emptyBuffer();
         loadedBuffer = 1;
         loadingBuffer();
@@ -502,6 +513,10 @@
       }
       function tabTv(ele) {
         if(activeTab != "Tv") {
+          if(nav_fixed){
+            var itemsTop = $('#items').offset().top;
+            window.scrollTo(0, itemsTop);
+          }
         emptyBuffer();
         loadedBuffer = 1;
         loadingBuffer();
