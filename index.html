@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="./bootstrap.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
       * {
         user-select: none; /* supported by Chrome and Opera */
@@ -260,6 +261,19 @@
         font-size: 12px;
         color: #31a2db;
       }
+      #top{
+        width: 100%;
+        max-width: 960px;
+        -webkit-transition: all 0.3s ease-in;
+        transition: all 0.3s ease-in;
+        padding-top: 20px;
+        background-color: #383838;
+      }
+      .fixed{
+        position: fixed;
+        top: 0;
+        z-index: 99;
+      }
     </style>
   </head>
   <body>
@@ -269,6 +283,7 @@
         <div class="logo-text">MOVIEASE</div>
         <div class="dev">Made in <span>FZ'S LAB</span></div>
       </div>
+      <div id="top">
       <div class="search" onclick="search_focus(this)">
         <div class="row">
           <div class="col">
@@ -297,11 +312,27 @@
         </div>
       </div>
       <div class="line btn-grad"></div>
+    </div>
       <div class="items" id="items"></div>
       <div class="footer">
         <div class="load" onclick="loadMore()">⟳ Load More</span></div>
       </div>
     </div>
+    <script>
+      // Nav Bar
+      var stickyNavTop = $('#top').offset().top;
+
+      $(window).scroll(function() {  
+          if ($(window).scrollTop() > stickyNavTop) {
+              $('#top').addClass('fixed');
+              $('#items').css('margin-top',190);
+          }
+          else {
+              $('#items').css('margin-top',20);
+              $('#top').removeClass('fixed');
+          }  
+      });
+    </script>
 
     <script>
       // GLOBAL VARIABLE
@@ -316,7 +347,7 @@
       var pageEng = 1;
       var pageHin = 1;
       var pageTv = 1;
-      var activeTab = "Eng"
+      var activeTab = ""
       var loader_count = 0;
     </script>
 
@@ -365,6 +396,7 @@
       // function getData(tab, index, length) {}
       function loadVideo(index) {}
       function tabEng(ele) {
+        if(activeTab != "Eng") {
         emptyBuffer();
         loadedBuffer = 1;
         loadingBuffer();
@@ -416,7 +448,9 @@
             }, 500);
         }
       }
+      }
       function tabHin(ele) {
+        if(activeTab != "Hin") {
         emptyBuffer();
         loadedBuffer = 1;
         loadingBuffer();
@@ -465,7 +499,9 @@
             }, 500);
         }
       }
+      }
       function tabTv(ele) {
+        if(activeTab != "Tv") {
         emptyBuffer();
         loadedBuffer = 1;
         loadingBuffer();
@@ -513,6 +549,7 @@
               if(activeTab == 'Tv') loadContent('Tv');
             }, 500);
         }
+      }
       }
       function loadContent(tab) {
         if(tab == "Eng"){
