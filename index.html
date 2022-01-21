@@ -382,6 +382,7 @@
         ele.parentElement.children[1].className = "tab-item";
         ele.parentElement.children[2].className = "tab-item";
         if (pageEng == 1) {
+          if(loader_count == 0) console.log("vir_off");
           var query = JSON.stringify({
             url: "https://www.mojaloss.stream/category/movies/",
             query: "getData",
@@ -585,10 +586,6 @@
         if (tab == "Eng") {
           if (pageEng == page && JSON.parse(data).length > 0) {
             loader_count += 1;
-            if(loader_count == 3) {
-              console.log("vir_off")
-              document.getElementById("Eng").click();
-            }
             let temp = dataEng.concat(JSON.parse(data));
             dataEng = temp;
             pageEng += 1;
@@ -607,10 +604,6 @@
         } else if (tab == "Hin") {
           if (pageHin == page && JSON.parse(data).length > 0) {
             loader_count += 1;
-            if(loader_count == 3) {
-              console.log("vir_off")
-              document.getElementById("Eng").click();
-            }
             let temp = dataHin.concat(JSON.parse(data));
             dataHin = temp;
             pageHin += 1;
@@ -629,10 +622,6 @@
         } else if (tab == "Tv") {
           if (pageTv == page && JSON.parse(data).length > 0) {
             loader_count += 1;
-            if(loader_count == 3) {
-              console.log("vir_off")
-              document.getElementById("Eng").click();
-            }
             let temp = dataTv.concat(JSON.parse(data));
             dataTv = temp;
             pageTv += 1;
@@ -790,8 +779,5 @@
       // INITIATE
 
       document.getElementById("Eng").click();
-      document.getElementById("Hin").click();
-      document.getElementById("Tv").click();
-    </script>
   </body>
 </html>
