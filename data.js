@@ -12,14 +12,11 @@ function getData(target, page, load, tab){
     }
     let dataObj = {
         query: 'callback',
-        function: `if(pageEnd == `+page+`){
-            JSON.parse(`JSON.stringify(dataArr)`)
-            dataEng.concat()
-        }`
+        output: dataArr,
+        page: page,
+        load: load,
+        tab: tab
     };
-    
     console.log(JSON.stringify(dataObj));
 }
-getData('article', 1, true, 'Eng');
-
-
+getData('article', 1, true, 'Tv');

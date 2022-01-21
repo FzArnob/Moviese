@@ -224,6 +224,9 @@
         height: 0px;
         border-radius: 50%;
       }
+      .footer{
+        margin-bottom: 30px;
+      }
       .load{
         margin-left: 50%;
         transform: translateX(-50%);
@@ -305,7 +308,6 @@
       <div class="items" id="items"></div>
       <div class="footer">
         <div class="load" onclick="loadMore()">⟳ Load More</span></div>
-        <div class="dev">Developped by <span>FZ'S LAB</span></div>
       </div>
     </div>
 
@@ -417,7 +419,9 @@
 
           console.log(query);
         } else {
-          loadContent("Eng");
+          setTimeout(function() {
+              if(activeTab == 'Eng') loadContent('Eng');
+            }, 500);
         }
       }
       function tabHin(ele) {
@@ -464,7 +468,9 @@
 
           console.log(query);
         } else {
-          loadContent("Hin");
+          setTimeout(function() {
+              if(activeTab == 'Hin') loadContent('Hin');
+            }, 500);
         }
       }
       function tabTv(ele) {
@@ -511,7 +517,9 @@
 
           console.log(query);
         } else {
-          loadContent("Tv");
+          setTimeout(function() {
+              if(activeTab == 'Tv') loadContent('Tv');
+            }, 500);
         }
       }
       function loadContent(tab) {
