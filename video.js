@@ -3,13 +3,22 @@ function getVideoData(link) {
     var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
 console.log(year);
     if (isNaN(year)) {
+        let value = [];
+        let data = jwplayer().getPlaylist();
+        data.forEach(item => {
+            value.push({
+                file: item.file,
+                poster: item.image,
+                tracks: item.tracks
+            });
+        });
         var output =
         {
             query: 'callback',
             type: 'series',
             title: title,
             link: link,
-            data: jwplayer().getPlaylist(),
+            data: value,
             seasons: document.getElementsByClassName('page_num').length
         };
         console.log(JSON.stringify(output));
