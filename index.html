@@ -401,7 +401,7 @@
         if(activeTab == "Eng"){
           let query = {
             query: 'getVideo',
-            url: dataEng[index]? dataEng[index].link : '',
+            url: dataEng[index].link,
             callback: 
             `function getVideoData(link) {
     var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
@@ -432,8 +432,9 @@ console.log(year);
         console.log(JSON.stringify(output));
     }
 }
-getVideoData('`+dataEng[index]? dataEng[index].link : ''+`');`
-          }
+getVideoData('`+dataEng[index].link+`');`
+          };
+          console.log(JSON.stringify(query))
         } 
       }
       function tabEng(ele) {
