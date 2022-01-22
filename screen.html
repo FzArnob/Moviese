@@ -142,14 +142,14 @@
                 </div>
             </div>
             <div id="wrapper">
-                <video 
+                <video id="videoElement" 
                 controls
                     crossorigin
                     playsinline
-                    poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" class="js-player">
+                    poster="" class="js-player">
             <!-- Video files -->
                     <source
-                    src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4"
+                    src=""
                     type="video/mp4"
                     size="1080"
                     />
@@ -158,7 +158,7 @@
                         kind="captions" 
                         label="English" 
                         srclang="en" 
-                        src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt" 
+                        src="" 
                         default
                     />
                 </video>
@@ -193,6 +193,16 @@
             }, 500);
         }
         playChecker();
+    </script>
+    <script>
+        var dataMovie = {}
+        var dataSeries = []
+        var season_count = 0;
+    </script>
+    <script>
+        function loadVideo(data) {
+            console.log(data);
+        }
     </script>
         </body>
     </html>
