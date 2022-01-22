@@ -165,8 +165,17 @@
             </div>
         </div>
     <script>
-        
+
         function loadVideo(data) {
+            var dataObj = JSON.parse(data);
+            if(dataObj.type == 'movie') {
+                let ele = document.getElementById('videoElement');
+                ele.src = dataObj.file;
+                ele.poster = dataObj.poster;
+                ele.children[0].src = dataObj.file;
+                ele.children[1].src = dataObj.track;
+                document.getElementById('title').innerHTML = dataObj.title;
+            }
             console.log(data);
         }
         var controls = [
