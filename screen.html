@@ -24,33 +24,6 @@
             padding: 0;
             margin: 0;
         }
-        .js-player {
-            padding: 0;
-            margin: 0;
-            width: 100%;
-            height: 100%;
-        }
-        .plyr {
-        height: auto;
-        width :100%;
-        }
-        #wrapper{
-        position: fixed;
-        top: 50%;
-        transform: translateY(-50%);
-        display: flex;
-        justify-content:center;
-        width: 100%;
-        height: auto;
-        background-color: black;
-        }
-        .plyr__video-wrapper {
-        height: 100%;
-        }
-        .plyr__video-wrapper iframe {
-        width: 100%;
-        height: 100%;
-        }
         .hide{
             visibility: hidden;
         }
@@ -105,9 +78,9 @@
             font-family: 'Segoe UI';
         }
         .site{
-            position: fixed;
-            height: 100%;
+            height: auto;
             width: 100%;
+            background: red;
         }
         .Episodes{
             border: 2px solid #fff;
@@ -120,7 +93,41 @@
             font-size: 15px;
             font-family: 'Segoe UI';
         }
+        .video-container {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%; 
+            overflow: hidden;
+            }
+            .video-container video {
+            /* Make video to at least 100% wide and tall */
+            min-width: 100%; 
+            min-height: 100%; 
+
+            /* Setting width & height to auto prevents the browser from stretching or squishing the video */
+            width: 100%;
+            height: auto;
+
+            /* Center the video */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .poster{
+            width: auto;
+            height: 100%;
+
+            /* Center the video */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
         #header{
+            position: fixed;
             background: rgba(0,0,0, 0.8);
             height: 80px;
             z-index: 999;
@@ -129,11 +136,13 @@
     </style>
     </head>
     <body>
+        <div id="wrapper" class="video-container">
+        </div>
         <div class="site">
             <div id="header">
                 <img class="back" src="./icon/back.png">
-                <div class="title" id="title">View_From_A_Blue_Moon_Trailer-HD</div>
-                <div class="series_controls hide">
+                <div class="title" id="title">NaN</div>
+                <div class="series_controls">
                     <div class="Seasons">
                         Season 1
                     </div>
@@ -142,74 +151,28 @@
                     </div>
                 </div>
             </div>
-            <div id="wrapper">
-            </div>
+            
         </div>
-    <script>
-
-        function loadVideo(data) {
-            var dataObj = JSON.parse(data);
-            if(dataObj.type == 'movie') {
-                document.getElementById('wrapper').innerHTML = 
-                `<video id="videoElement" 
-                controls
-                    crossorigin
-                    playsinline
-                    poster="`+dataObj.poster+`" class="js-player">
-            <!-- Video files -->
-                    <source
-                    src="`+dataObj.file+`"
-                    type="video/mp4"
-                    size="1080"
-                    />
-            <!-- Caption files -->
-                    <track 
-                        kind="captions" 
-                        label="English" 
-                        srclang="en" 
-                        src="`+dataObj.track+`" 
-                        default
-                    />
-                </video>`;
-                document.getElementById('title').innerHTML = dataObj.title;
-                loadPlyr('js-player')
-            }
-            console.log('vir_show');
-        }
-        function loadPlyr(ele) {
-            var controls = [
-            'play-large', // The large play button in the center
-            'rewind', // Rewind by the seek time (default 10 seconds)
-            'play', // Play/pause playback
-            'fast-forward', // Fast forward by the seek time (default 10 seconds)
-            'progress', // The progress bar and scrubber for playback and buffering
-            'current-time', // The current time of playback
-            'duration', // The full duration of the media
-            'mute', // Toggle mute
-            'volume', // Volume control
-            'captions', // Toggle captions
-            'settings', // Settings menu
-            'download', // Show a download button with a link to either the current source or a custom URL you specify in your options
-            // 'fullscreen' // Toggle fullscreen
-        ];
-
-        var player = new Plyr('.' + ele, { controls });
-        }
-    </script>
-    <script>
-        function playChecker() {
-            setTimeout(function() {
-              if(!document.getElementsByClassName('plyr__control plyr__control--overlaid')[0].pressed) document.getElementById('header').style.display = "block";
-              else document.getElementById('header').style.display = "none";
-              playChecker();
-            }, 500);
-        }
-        playChecker();
-    </script>
     <script>
         var dataMovie = {}
         var dataSeries = []
         var season_count = 0;
     </script>
+    <script>
+        function loadVideo(data) {
+            var dataObj = JSON.parse(data);
+            
+            if(dataObj.type == 'movie') {
+                dataMovie = dataObj;
+                document.getElementById('wrapper').innerHTML = 
+                `<video controls poster="`+dataObj.poster+`" style="height: 100%">
+                    <source id="video" src="`+dataObj.file+`" type="video/mp4">
+                </video>`;
+                document.getElementById('title').innerHTML = dataObj.title;
+            }
+            console.log('vir_show');
+        }
+    </script>
+    
         </body>
     </html>
