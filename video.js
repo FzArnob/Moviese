@@ -1,5 +1,6 @@
 function getVideoData(link) {
     var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
+    title = title.substring(0, title.lastIndexOf(")") + 1);
     var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
 console.log(year);
     if (isNaN(year)) {
