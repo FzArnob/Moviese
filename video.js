@@ -1,9 +1,8 @@
 function getVideoData(link) {
-    String.prototype.isNumber = function(){return /^\d+$/.test(this);}
     var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
     var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
 console.log(year);
-    if (!year.isNumber()) {
+    if (isNaN(year)) {
         var output =
         {
             query: 'callback',
