@@ -38,3 +38,10 @@ console.log(year);
     }
 }
 getVideoData('`+dataEng[index].link+`');
+
+
+
+
+
+let datata = '{"query":"callback","type":"movie","title":"Ray Donovan (2022)","link":"`+dataEng[index].link+`","file":"https://www.mojaloss.stream/directlink/FTP7/English%20Movies/Ray%20Donovan%20(2022)/Ray.Donovan.The.Movie.2022.1080p.WEBRip.mp4","poster":"https://www.mojaloss.stream/wp-content/uploads/2022/01/MV5BMThkMTBiMDItZGVhOC00MWJkLThlZjgtNmJiMTA0NjFjMDgyXkEyXkFqcGdeQXVyOTA3MTMyOTk@.jpeg","track":"https://www.mojaloss.stream/directlink/FTP7/English%20Movies/Ray%20Donovan%20(2022)/Ray.Donovan.The.Movie.2022.1080p.WEBRip.srt"}'
+loadVideo(datata);
