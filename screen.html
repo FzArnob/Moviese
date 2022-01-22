@@ -142,14 +142,22 @@
                 </div>
             </div>
             <div id="wrapper">
-                <video id="videoElement" 
+            </div>
+        </div>
+    <script>
+
+        function loadVideo(data) {
+            var dataObj = JSON.parse(data);
+            if(dataObj.type == 'movie') {
+                document.getElementById('wrapper').innerHTML = 
+                `<video id="videoElement" 
                 controls
                     crossorigin
                     playsinline
-                    poster="" class="js-player">
+                    poster="`+dataObj.poster+`" class="js-player">
             <!-- Video files -->
                     <source
-                    src=""
+                    src="`+dataObj.file+`"
                     type="video/mp4"
                     size="1080"
                     />
@@ -158,27 +166,18 @@
                         kind="captions" 
                         label="English" 
                         srclang="en" 
-                        src="" 
+                        src="`+dataObj.track+`" 
                         default
                     />
-                </video>
-            </div>
-        </div>
-    <script>
-
-        function loadVideo(data) {
-            var dataObj = JSON.parse(data);
-            if(dataObj.type == 'movie') {
-                let ele = document.getElementById('videoElement');
-                ele.src = dataObj.file;
-                ele.poster = dataObj.poster;
-                ele.children[0].src = dataObj.file;
-                ele.children[1].src = dataObj.track;
+                </video>`;
                 document.getElementById('title').innerHTML = dataObj.title;
+                loadPlyr('js-player')
+                
             }
             console.log(data);
         }
-        var controls = [
+        function loadPlyr(ele) {
+            var controls = [
             'play-large', // The large play button in the center
             'rewind', // Rewind by the seek time (default 10 seconds)
             'play', // Play/pause playback
@@ -194,7 +193,8 @@
             // 'fullscreen' // Toggle fullscreen
         ];
 
-        var player = new Plyr('.js-player', { controls });
+        var player = new Plyr('.' + ele, { controls });
+        }
     </script>
     <script>
         function playChecker() {
