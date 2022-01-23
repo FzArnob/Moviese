@@ -20,6 +20,7 @@
         color: white;
         background-color: #383838;
       }
+      
       ::-webkit-input-placeholder {
         /* Chrome/Opera/Safari */
         font-size: 15px;
@@ -50,6 +51,22 @@
       .search .row .col input:focus {
         border: none;
         outline: none;
+      }
+      @-webkit-keyframes rotation {
+        from {
+            -webkit-transform: rotate(0deg);
+        }
+        to {
+            -webkit-transform: rotate(359deg);
+        }
+      }
+      @keyframes rotation {
+        from {
+            -webkit-transform: rotate(0deg);
+        }
+        to {
+            -webkit-transform: rotate(359deg);
+        }
       }
       @-webkit-keyframes placeHolderShimmer {
         0% {
@@ -315,7 +332,7 @@
     </div>
       <div class="items" id="items"></div>
       <div class="footer">
-        <div class="load" onclick="loadMore()">⟳ Load More</span></div>
+        <div class="load" onclick="loadMore()"><span id="rotar">⟳</span> Load More</span></div>
       </div>
     </div>
     <script>
@@ -806,6 +823,7 @@ getVideoData('`+dataTv[index].link+`');
           if (load) {
             if(dataEng.length > loadedBuffer && loadedBuffer > 13) {
               loadingBuffer();
+              document.getElementById('rotar').style.animation = "none";
             setTimeout(function() {
               if(activeTab == 'Eng') loadContent('Eng');
             }, 500);
@@ -824,6 +842,7 @@ getVideoData('`+dataTv[index].link+`');
           if (load) {
               if(dataHin.length > loadedBuffer && loadedBuffer > 13) {
                 loadingBuffer();
+                document.getElementById('rotar').style.animation = "none";
               setTimeout(function() {
                 if(activeTab == 'Hin') loadContent('Hin');
               }, 500);
@@ -842,6 +861,7 @@ getVideoData('`+dataTv[index].link+`');
           if (load) {
               if(dataTv.length > loadedBuffer && loadedBuffer > 13) {
                 loadingBuffer();
+                document.getElementById('rotar').style.animation = "none";
               setTimeout(function() {
                 if(activeTab == 'Tv') loadContent('Tv');
               }, 500);
@@ -862,7 +882,12 @@ getVideoData('`+dataTv[index].link+`');
               if(activeTab == 'Eng') loadContent('Eng');
             }, 500);
           } else {
-            getNextOffset('Eng', true)
+            if(pageEng > 1) { 
+              getNextOffset('Eng', true); 
+              document.getElementById('rotar').style.animation = "rotation 2s infinite linear";
+            }
+            else { document.getElementById("Eng").click(); }
+            
           }
         } else if(activeTab == 'Hin') {
           if(loadedHin < dataHin.length){
@@ -872,7 +897,11 @@ getVideoData('`+dataTv[index].link+`');
               if(activeTab == 'Hin') loadContent('Hin');
             }, 500);
           } else {
-            getNextOffset('Hin', true)
+            if(pageEng > 1) { 
+              getNextOffset('Hin', true);
+              document.getElementById('rotar').style.animation = "rotation 2s infinite linear";
+            }
+            else { document.getElementById("Hin").click(); }
           }
         } else if(activeTab == 'Tv') {
           if(loadedTv < dataTv.length){
@@ -882,7 +911,11 @@ getVideoData('`+dataTv[index].link+`');
               if(activeTab == 'Tv') loadContent('Tv');
             }, 500);
           } else {
-            getNextOffset('Tv', true)
+            if(pageEng > 1) { 
+              getNextOffset('Tv', true);
+              document.getElementById('rotar').style.animation = "rotation 2s infinite linear";
+            }
+            else { document.getElementById("Tv").click(); }
           }
         }
       }
