@@ -591,6 +591,7 @@ getVideoData('` + dataTv[index].link + `');
 	}
 
 	function tabEng(ele) {
+
 		if(activeTab != "Eng") {
 			if(nav_fixed) {
 				var itemsTop = $('#items').offset().top;
@@ -1061,6 +1062,8 @@ getVideoData('` + dataTv[index].link + `');
 		setTimeout(function() {
 			if(activeTab == "Eng") {
         if(dataEng.length == 0) {
+          console.log("call-Eng");
+          activeTab = "Hin";
           tabEng(document.getElementById("Eng"));
         }
 				for(let i = 1; i < loadedEng; i++) {
@@ -1085,6 +1088,8 @@ getVideoData('` + dataTv[index].link + `');
 				}
 			} else if(activeTab == "Hin") {
         if(dataHin.length == 0) {
+          console.log("call-Hin");
+          activeTab = "Eng";
           tabHin(document.getElementById("Hin"));
         }
 				for(let i = 1; i < loadedHin; i++) {
@@ -1109,6 +1114,8 @@ getVideoData('` + dataTv[index].link + `');
 				}
 			} else if(activeTab == "Tv") {
         if(dataTv.length == 0) {
+          console.log("call-Tv");
+          activeTab = "Hin";
           tabTv(document.getElementById("Tv"));
         }
 				for(let i = 1; i < loadedTv; i++) {
