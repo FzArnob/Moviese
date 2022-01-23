@@ -37,8 +37,11 @@ console.log(year);
         console.log(JSON.stringify(output));
     }
 }
+try{
 getVideoData('`+dataEng[index].link+`');
-
+} catch (err) {
+    console.log("VideoDataLoadFailed");
+}
 
 
 

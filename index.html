@@ -442,7 +442,12 @@ console.log(year);
         console.log(JSON.stringify(output));
     }
 }
-getVideoData('`+dataEng[index].link+`');`
+try{
+getVideoData('`+dataEng[index].link+`');
+} catch (err) {
+    console.log("VideoDataLoadFailed");
+}`
+
           };
           console.log(JSON.stringify(query))
         } else if(activeTab == "Hin"){
@@ -489,7 +494,11 @@ console.log(year);
         console.log(JSON.stringify(output));
     }
 }
-getVideoData('`+dataHin[index].link+`');`
+try{
+getVideoData('`+dataHin[index].link+`');
+} catch (err) {
+    console.log("VideoDataLoadFailed");
+}`
           };
           console.log(JSON.stringify(query))
         } else if(activeTab == "Tv"){
@@ -536,7 +545,11 @@ console.log(year);
         console.log(JSON.stringify(output));
     }
 }
-getVideoData('`+dataTv[index].link+`');;`
+try{
+getVideoData('`+dataTv[index].link+`');
+} catch (err) {
+    console.log("VideoDataLoadFailed");
+}`
           };
           console.log(JSON.stringify(query))
         } 

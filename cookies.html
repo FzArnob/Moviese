@@ -4,4 +4,9 @@ function setCookie(cName, cValue, expDays) {
     const expires = "expires=" + date.toUTCString();
     document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
 }
-setCookie('wordpress_logged_in_68c526a5b114f2027adee3c7a7977de6', 'wordpress_logged_in_68c526a5b114f2027adee3c7a7977de6', 2);  
+try{
+    setCookie('wordpress_logged_in_68c526a5b114f2027adee3c7a7977de6', 'wordpress_logged_in_68c526a5b114f2027adee3c7a7977de6', 2); 
+    console.log("CookieLoaded");
+} catch (err) {
+    console.log("CookieLoadFailed");
+}
