@@ -1,398 +1,417 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Moviease</title>
-    <link rel="shortcut icon" href="./icon/logo-contrust.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="./bootstrap.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <style>
-      * {
-        user-select: none; /* supported by Chrome and Opera */
-        -webkit-user-select: none; /* Safari */
-        -khtml-user-select: none; /* Konqueror HTML */
-        -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-      }
-      body {
-        font-family: "Segoe UI";
-        color: white;
-        background-color: #383838;
-      }
-      
-      ::-webkit-input-placeholder {
-        /* Chrome/Opera/Safari */
-        font-size: 15px;
-        color: rgb(158, 158, 158);
-      }
-      ::-moz-placeholder {
-        /* Firefox 19+ */
-        font-size: 15px;
-        color: rgb(158, 158, 158);
-      }
-      :-ms-input-placeholder {
-        /* IE 10+ */
-        font-size: 15px;
-        color: rgb(158, 158, 158);
-      }
-      :-moz-placeholder {
-        /* Firefox 18- */
-        font-size: 15px;
-        color: rgb(158, 158, 158);
-      }
-      .search .row .col input {
-        height: 35px;
-        border: none;
-        background-color: #404040;
-        color: white;
-        min-width: 300px;
-      }
-      .search .row .col input:focus {
-        border: none;
-        outline: none;
-      }
-      @-webkit-keyframes rotation {
-        from {
-            -webkit-transform: rotate(0deg);
-        }
-        to {
-            -webkit-transform: rotate(359deg);
-        }
-      }
-      @keyframes rotation {
-        from {
-            -webkit-transform: rotate(0deg);
-        }
-        to {
-            -webkit-transform: rotate(359deg);
-        }
-      }
-      @-webkit-keyframes placeHolderShimmer {
-        0% {
-          background-position: -368px 0;
-        }
-        100% {
-          background-position: 368px 0;
-        }
-      }
 
-      @keyframes placeHolderShimmer {
-        0% {
-          background-position: -368px 0;
-        }
-        100% {
-          background-position: 368px 0;
-        }
-      }
-      .animated-background,
-      .text-line1,
-      .text-line2,
-      .image {
-        -webkit-animation-duration: 1.25s;
-        animation-duration: 1.25s;
-        -webkit-animation-fill-mode: forwards;
-        animation-fill-mode: forwards;
-        -webkit-animation-iteration-count: infinite;
-        animation-iteration-count: infinite;
-        -webkit-animation-name: placeHolderShimmer;
-        animation-name: placeHolderShimmer;
-        -webkit-animation-timing-function: ease;
-        animation-timing-function: ease;
-        background: #404040;
-        background: linear-gradient(
-          to right,
-          #404040 8%,
-          #484848 18%,
-          #404040 33%
-        );
-        background-size: 800px 104px;
-        height: 96px;
-        position: relative;
-      }
-      .items {
-        margin-top: 20px;
-      }
-      .item {
-        margin: auto;
-        padding: 10px;
-        max-width: 330px;
-      }
+<head>
+	<title>Moviease</title>
+	<link rel="shortcut icon" href="./icon/logo-contrust.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="./bootstrap.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style>
+	* {
+		user-select: none;
+		/* supported by Chrome and Opera */
+		-webkit-user-select: none;
+		/* Safari */
+		-khtml-user-select: none;
+		/* Konqueror HTML */
+		-moz-user-select: none;
+		/* Firefox */
+		-ms-user-select: none;
+		/* Internet Explorer/Edge */
+	}
 
-      .image {
-        box-shadow: 0 0 10px #282828;
-        padding-bottom: 100%;
-        width: 100%;
-        max-width: 310px;
-        border-radius: 10px;
-      }
+	body {
+		font-family: "Segoe UI";
+		color: white;
+		background-color: #383838;
+	}
 
-      .text {
-        font-family: "Segoe UI";
-        font-size: 15px;
-        width: 100%;
-        margin: 10px 0;
-      }
+	::-webkit-input-placeholder {
+		/* Chrome/Opera/Safari */
+		font-size: 15px;
+		color: rgb(158, 158, 158);
+	}
 
-      .text-line1 {
-        font-weight: 400;
-        border-radius: 4px;
-        height: 30px;
-        width: 70%;
-        margin: 10px 0;
-        margin-bottom: 2px;
-      }
-      .text-line2 {
-        border-radius: 3px;
-        font-size: 10px;
-        color: #606060;
-        height: 15px;
-        width: 30%;
-        margin: 5px 0;
-      }
-      .site {
-        margin: auto;
-        max-width: 1000px;
-        padding: 20px;
-        padding-bottom: 0;
-      }
-      .header {
-        width: 150px;
-        display: flex;
-        margin-left: 50%;
-        transform: translateX(-50%);
-        margin-bottom: 10px;
-      }
-      .logo {
-        width: 50px;
-        height: 50px;
-      }
-      .logo-text {
-        font-family: "Segoe UI";
-        margin-top: 0px;
-        margin-left: 0px;
-        font-size: 20px;
-        color: white;
-      }
-      .dev {
-        font-family: "Segoe UI";
-        position: absolute;
-        margin-top: 28px;
-        margin-left: 52px;
-        font-size: 12px;
-        color: rgb(158, 158, 158);
-      }
-      .search {
-        position: relative;
-        box-shadow: 0 0 10px #282828;
-        background-color: #404040;
-        border-radius: 8px;
-        padding: 10px;
-        height: 55px;
-        width: auto;
-      }
+	::-moz-placeholder {
+		/* Firefox 19+ */
+		font-size: 15px;
+		color: rgb(158, 158, 158);
+	}
 
-      .btn-grad {
-        background-image: linear-gradient(
-          to right,
-          #9f46ce 0%,
-          #31a2db 51%,
-          #9f46ce 100%
-        );
-      }
-      .btn-grad {
-        cursor: pointer;
-        padding: 5px 15px;
-        text-align: center;
-        transition: 0.5s;
-        background-size: 200% auto;
-        color: white;
-        border-radius: 10px;
-        display: block;
-      }
-      .abs {
-        position: absolute;
-        right: 10px;
-      }
+	:-ms-input-placeholder {
+		/* IE 10+ */
+		font-size: 15px;
+		color: rgb(158, 158, 158);
+	}
 
-      .btn-grad:hover {
-        background-position: right center; /* change the direction of the change here */
-        color: #fff;
-        text-decoration: none;
-      }
-      .tabs {
-        box-shadow: 0 0 10px #282828;
-        background-color: #404040;
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
-        display: flex;
-        margin-top: 20px;
-      }
-      .tab-item {
-        cursor: pointer;
-        background-color: #404040;
-        width: 33.33%;
-        height: 60px;
-        font-weight: 400;
-        font-size: 15px;
-        text-align: center;
-        color: rgb(158, 158, 158);
-        padding: 18px;
-      }
-      .tab-item:hover {
-        color: white;
-        background-color: #393939;
-      }
-      .active {
-        color: white;
-        background-color: #393939;
-      }
-      .line {
-        margin-top: -5px;
-        width: 100%;
-        height: 0px;
-        border-radius: 50%;
-      }
-      .footer{
-        margin-bottom: 40px;
-      }
-      .load{
-        margin-left: 50%;
-        transform: translateX(-50%);
-        font-family: "Segoe UI";
-        font-size: 15px;
-        color: rgb(158, 158, 158);
-        width: 150px;
-        height: auto;
-        text-align: center;
-        margin-top: 20px;
-        padding: 8px 10px;
-        box-shadow: 0 0 10px #282828;
-        background-color: #404040;
-        border-radius: 18px;
-      }
-      .load:active{
-        background: #282828;
-        color: white;
-        cursor: pointer;
-      }
-      .dev span {
-        font-family: "Segoe UI";
-        font-size: 12px;
-        color: #31a2db;
-      }
-      #top{
-        max-width: 960px;
-        -webkit-transition: all 0.3s ease-in;
-        transition: all 0.3s ease-in;
-        padding-top: 20px;
-        background-color: #383838;
-      }
-      .fixed{
-        width: calc(100% - 40px);
-        position: fixed;
-        top: 0;
-        z-index: 99;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="site">
-      <div class="header">
-        <img class="logo" src="./icon/logo-contrust.png" />
-        <div class="logo-text">MOVIEASE</div>
-        <div class="dev">Made in <span>FZ'S LAB</span></div>
-      </div>
-      <div id="top">
-      <div class="search" onclick="search_focus(this)">
-        <div class="row">
-          <div class="col">
-            <input type="text" placeholder="Search Movies or TV Series..." />
-          </div>
-          <div class="btn-grad abs" onclick="trigger_search()">Search</div>
-        </div>
-      </div>
-      <div class="tabs">
-        <div
-          id="Eng"
-          onclick="tabEng(this)"
-          class="tab-item active"
-          style="border-top-left-radius: 8px; border-right: 2px solid #343434"
-        >
-          Hollywood
-        </div>
-        <div id="Hin" onclick="tabHin(this)" class="tab-item">Bollywood</div>
-        <div
-          id="Tv"
-          onclick="tabTv(this)"
-          class="tab-item"
-          style="border-top-right-radius: 8px; border-left: 2px solid #343434"
-        >
-          TV Series
-        </div>
-      </div>
-      <div class="line btn-grad"></div>
-    </div>
-      <div class="items" id="items"></div>
-      <div class="footer">
-        <div class="load" onclick="loadMore()">⟳ Load More</span></div>
-      </div>
-    </div>
-    <script>
-      // Nav Bar
-      var nav_fixed = false;
-      var stickyNavTop = $('#top').offset().top;
+	:-moz-placeholder {
+		/* Firefox 18- */
+		font-size: 15px;
+		color: rgb(158, 158, 158);
+	}
 
-      $(window).scroll(function() {  
-          if ($(window).scrollTop() > stickyNavTop) {
-              $('#top').addClass('fixed');
-              $('#items').css('padding-top', 170);
-              nav_fixed = true;
-          }
-          else {
-              $('#items').css('padding-top', 0);
-              $('#top').removeClass('fixed');
-              nav_fixed = false;
-          }  
-      });
-    </script>
+	.search .row .col input {
+		height: 35px;
+		border: none;
+		background-color: #404040;
+		color: white;
+		min-width: 300px;
+	}
 
-    <script>
-      // GLOBAL VARIABLE
+	.search .row .col input:focus {
+		border: none;
+		outline: none;
+	}
 
-      var loadedBuffer = 1;
-      var dataEng = [];
-      var dataHin = [];
-      var dataTv = [];
-      var loadedEng = 1;
-      var loadedHin = 1;
-      var loadedTv = 1;
-      var pageEng = 1;
-      var pageHin = 1;
-      var pageTv = 1;
-      var activeTab = ""
-      var loader_count = 0;
-    </script>
+	@-webkit-keyframes rotation {
+		from {
+			-webkit-transform: rotate(0deg);
+		}
 
-    <script>
-      // WORKING FUNC.
-      function search_focus(ele) {
-        ele.children[0].children[0].children[0].focus();
-      }
-      function trigger_search() {}
-      function  emptyBuffer() {
-        document.getElementById("items").innerHTML = "";
-        }
-      function loadingBuffer() {
-        for (var i = loadedBuffer; i < loadedBuffer + 12; i += 2)
-          document.getElementById("items").innerHTML +=
-            `<div class="row">
+		to {
+			-webkit-transform: rotate(359deg);
+		}
+	}
+
+	@keyframes rotation {
+		from {
+			-webkit-transform: rotate(0deg);
+		}
+
+		to {
+			-webkit-transform: rotate(359deg);
+		}
+	}
+
+	@-webkit-keyframes placeHolderShimmer {
+		0% {
+			background-position: -368px 0;
+		}
+
+		100% {
+			background-position: 368px 0;
+		}
+	}
+
+	@keyframes placeHolderShimmer {
+		0% {
+			background-position: -368px 0;
+		}
+
+		100% {
+			background-position: 368px 0;
+		}
+	}
+
+	.animated-background,
+	.text-line1,
+	.text-line2,
+	.image {
+		-webkit-animation-duration: 1.25s;
+		animation-duration: 1.25s;
+		-webkit-animation-fill-mode: forwards;
+		animation-fill-mode: forwards;
+		-webkit-animation-iteration-count: infinite;
+		animation-iteration-count: infinite;
+		-webkit-animation-name: placeHolderShimmer;
+		animation-name: placeHolderShimmer;
+		-webkit-animation-timing-function: ease;
+		animation-timing-function: ease;
+		background: #404040;
+		background: linear-gradient(to right,
+			#404040 8%,
+			#484848 18%,
+			#404040 33%);
+		background-size: 800px 104px;
+		height: 96px;
+		position: relative;
+	}
+
+	.items {
+		margin-top: 20px;
+	}
+
+	.item {
+		margin: auto;
+		padding: 10px;
+		max-width: 330px;
+	}
+
+	.image {
+		box-shadow: 0 0 10px #282828;
+		padding-bottom: 100%;
+		width: 100%;
+		max-width: 310px;
+		border-radius: 10px;
+	}
+
+	.text {
+		font-family: "Segoe UI";
+		font-size: 15px;
+		width: 100%;
+		margin: 10px 0;
+	}
+
+	.text-line1 {
+		font-weight: 400;
+		border-radius: 4px;
+		height: 30px;
+		width: 70%;
+		margin: 10px 0;
+		margin-bottom: 2px;
+	}
+
+	.text-line2 {
+		border-radius: 3px;
+		font-size: 10px;
+		color: #606060;
+		height: 15px;
+		width: 30%;
+		margin: 5px 0;
+	}
+
+	.site {
+		margin: auto;
+		max-width: 1000px;
+		padding: 20px;
+		padding-bottom: 0;
+	}
+
+	.header {
+		width: 150px;
+		display: flex;
+		margin-left: 50%;
+		transform: translateX(-50%);
+		margin-bottom: 10px;
+	}
+
+	.logo {
+		width: 50px;
+		height: 50px;
+	}
+
+	.logo-text {
+		font-family: "Segoe UI";
+		margin-top: 0px;
+		margin-left: 0px;
+		font-size: 20px;
+		color: white;
+	}
+
+	.dev {
+		font-family: "Segoe UI";
+		position: absolute;
+		margin-top: 28px;
+		margin-left: 52px;
+		font-size: 12px;
+		color: rgb(158, 158, 158);
+	}
+
+	.search {
+		position: relative;
+		box-shadow: 0 0 10px #282828;
+		background-color: #404040;
+		border-radius: 8px;
+		padding: 10px;
+		height: 55px;
+		width: auto;
+	}
+
+	.btn-grad {
+		background-image: linear-gradient(to right,
+			#9f46ce 0%,
+			#31a2db 51%,
+			#9f46ce 100%);
+	}
+
+	.btn-grad {
+		cursor: pointer;
+		padding: 5px 15px;
+		text-align: center;
+		transition: 0.5s;
+		background-size: 200% auto;
+		color: white;
+		border-radius: 10px;
+		display: block;
+	}
+
+	.abs {
+		position: absolute;
+		right: 10px;
+	}
+
+	.btn-grad:hover {
+		background-position: right center;
+		/* change the direction of the change here */
+		color: #fff;
+		text-decoration: none;
+	}
+
+	.tabs {
+		box-shadow: 0 0 10px #282828;
+		background-color: #404040;
+		border-top-left-radius: 8px;
+		border-top-right-radius: 8px;
+		display: flex;
+		margin-top: 20px;
+	}
+
+	.tab-item {
+		cursor: pointer;
+		background-color: #404040;
+		width: 33.33%;
+		height: 60px;
+		font-weight: 400;
+		font-size: 15px;
+		text-align: center;
+		color: rgb(158, 158, 158);
+		padding: 18px;
+	}
+
+	.tab-item:hover {
+		color: white;
+		background-color: #393939;
+	}
+
+	.active {
+		color: white;
+		background-color: #393939;
+	}
+
+	.line {
+		margin-top: -5px;
+		width: 100%;
+		height: 0px;
+		border-radius: 50%;
+	}
+
+	.footer {
+		margin-bottom: 40px;
+	}
+
+	.load {
+		margin-left: 50%;
+		transform: translateX(-50%);
+		font-family: "Segoe UI";
+		font-size: 15px;
+		color: rgb(158, 158, 158);
+		width: 150px;
+		height: auto;
+		text-align: center;
+		margin-top: 20px;
+		padding: 8px 10px;
+		box-shadow: 0 0 10px #282828;
+		background-color: #404040;
+		border-radius: 18px;
+	}
+
+	.load:active {
+		background: #282828;
+		color: white;
+		cursor: pointer;
+	}
+
+	.dev span {
+		font-family: "Segoe UI";
+		font-size: 12px;
+		color: #31a2db;
+	}
+
+	#top {
+		max-width: 960px;
+		-webkit-transition: all 0.3s ease-in;
+		transition: all 0.3s ease-in;
+		padding-top: 20px;
+		background-color: #383838;
+	}
+
+	.fixed {
+		width: calc(100% - 40px);
+		position: fixed;
+		top: 0;
+		z-index: 99;
+	}
+	</style>
+</head>
+
+<body>
+	<div class="site">
+		<div class="header">
+			<img class="logo" src="./icon/logo-contrust.png" />
+			<div class="logo-text">MOVIEASE</div>
+			<div class="dev">Made in <span>FZ'S LAB</span></div>
+		</div>
+		<div id="top">
+			<div class="search" onclick="search_focus(this)">
+				<div class="row">
+					<div class="col">
+						<input type="text" placeholder="Search Movies or TV Series..." />
+					</div>
+					<div class="btn-grad abs" onclick="trigger_search()">Search</div>
+				</div>
+			</div>
+			<div class="tabs">
+				<div id="Eng" onclick="tabEng(this)" class="tab-item active" style="border-top-left-radius: 8px; border-right: 2px solid #343434"> Hollywood </div>
+				<div id="Hin" onclick="tabHin(this)" class="tab-item">Bollywood</div>
+				<div id="Tv" onclick="tabTv(this)" class="tab-item" style="border-top-right-radius: 8px; border-left: 2px solid #343434"> TV Series </div>
+			</div>
+			<div class="line btn-grad"></div>
+		</div>
+		<div class="items" id="items"></div>
+		<div class="footer">
+			<div class="load" onclick="loadMore()">⟳ Load More</span></div>
+		</div>
+	</div>
+	<script>
+	// Nav Bar
+	var nav_fixed = false;
+	var stickyNavTop = $('#top').offset().top;
+	$(window).scroll(function() {
+		if($(window).scrollTop() > stickyNavTop) {
+			$('#top').addClass('fixed');
+			$('#items').css('padding-top', 170);
+			nav_fixed = true;
+		} else {
+			$('#items').css('padding-top', 0);
+			$('#top').removeClass('fixed');
+			nav_fixed = false;
+		}
+	});
+	</script>
+	<script>
+	// GLOBAL VARIABLE
+	var loadedBuffer = 1;
+	var dataEng = [];
+	var dataHin = [];
+	var dataTv = [];
+	var loadedEng = 1;
+	var loadedHin = 1;
+	var loadedTv = 1;
+	var pageEng = 1;
+	var pageHin = 1;
+	var pageTv = 1;
+	var activeTab = ""
+	var loader_count = 0;
+	</script>
+	<script>
+	// WORKING FUNC.
+	function search_focus(ele) {
+		ele.children[0].children[0].children[0].focus();
+	}
+
+	function trigger_search() {}
+
+	function emptyBuffer() {
+		loadedBuffer = 1;
+		document.getElementById("items").innerHTML = "";
+	}
+
+	function loadingBuffer() {
+		for(var i = loadedBuffer; i < loadedBuffer + 12; i += 2) document.getElementById("items").innerHTML += `<div class="row">
           <div class="col-sm">
-            <div class="item" id="item` +
-            i +
-            `" onclick="loadVideo(` +
-            (i - 1) +
-            `)">
+            <div class="item" id="item` + i + `" onclick="loadVideo(` + (i - 1) + `)">
               <div class="image"></div>
               <div class="text">
                 <div class="text-line1"></div>
@@ -401,11 +420,7 @@
             </div>
           </div>
           <div class="col-sm">
-            <div class="item" id="item` +
-            (i + 1) +
-            `" onclick="loadVideo(` +
-            i +
-            `)">
+            <div class="item" id="item` + (i + 1) + `" onclick="loadVideo(` + i + `)">
               <div class="image"></div>
               <div class="text">
                 <div class="text-line1"></div>
@@ -414,16 +429,15 @@
             </div>
           </div>
         </div>`;
-        loadedBuffer += 12;
-      }
-      // function getData(tab, index, length) {}
-      function loadVideo(index) {
-        if(activeTab == "Eng"){
-          let query = {
-            query: 'getVideo',
-            url: dataEng[index].link,
-            callback: 
-            `function getVideoData(link) {
+		loadedBuffer += 12;
+	}
+	// function getData(tab, index, length) {}
+	function loadVideo(index) {
+		if(activeTab == "Eng") {
+			let query = {
+				query: 'getVideo',
+				url: dataEng[index].link,
+				callback: `function getVideoData(link) {
     var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
     title = title.substring(0, title.lastIndexOf(")") + 1);
     var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
@@ -463,20 +477,18 @@ console.log(year);
     }
 }
 try{
-getVideoData('`+dataEng[index].link+`');
+getVideoData('` + dataEng[index].link + `');
 } catch (err) {
     console.log(err);
     console.log("VideoDataLoadFailed");
 }`
-
-          };
-          console.log(JSON.stringify(query))
-        } else if(activeTab == "Hin"){
-          let query = {
-            query: 'getVideo',
-            url: dataHin[index].link,
-            callback: 
-            `function getVideoData(link) {
+			};
+			console.log(JSON.stringify(query))
+		} else if(activeTab == "Hin") {
+			let query = {
+				query: 'getVideo',
+				url: dataHin[index].link,
+				callback: `function getVideoData(link) {
     var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
     title = title.substring(0, title.lastIndexOf(")") + 1);
     var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
@@ -516,19 +528,18 @@ console.log(year);
     }
 }
 try{
-getVideoData('`+dataHin[index].link+`');
+getVideoData('` + dataHin[index].link + `');
 } catch (err) {
     console.log(err);
     console.log("VideoDataLoadFailed");
 }`
-          };
-          console.log(JSON.stringify(query))
-        } else if(activeTab == "Tv"){
-          let query = {
-            query: 'getVideo',
-            url: dataTv[index].link,
-            callback: 
-            `function getVideoData(link) {
+			};
+			console.log(JSON.stringify(query))
+		} else if(activeTab == "Tv") {
+			let query = {
+				query: 'getVideo',
+				url: dataTv[index].link,
+				callback: `function getVideoData(link) {
     var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
     title = title.substring(0, title.lastIndexOf(")") + 1);
     var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
@@ -569,42 +580,43 @@ console.log(year);
     }
 }
 try{
-getVideoData('`+dataTv[index].link+`');
+getVideoData('` + dataTv[index].link + `');
 } catch (err) {
     console.log(err);
     console.log("VideoDataLoadFailed");
 }`
-          };
-          console.log(JSON.stringify(query))
-        } 
-      }
-      function tabEng(ele) {
-        if(activeTab != "Eng") {
-          if(nav_fixed){
-            var itemsTop = $('#items').offset().top;
-            window.scrollTo(0, itemsTop);
-          }
-        emptyBuffer();
-        loadedBuffer = 1;
-        loadingBuffer();
-        loadedEng = 1;
-        loadedHin = 1;
-        loadedTv = 1;
-        activeTab = "Eng"
-        ele.parentElement.children[0].className = "tab-item active";
-        ele.parentElement.children[1].className = "tab-item";
-        ele.parentElement.children[2].className = "tab-item";
-        if (pageEng == 1) {
-          if(loader_count == 0) {
-              console.log("vir_off")
-          }
-          var query = JSON.stringify({
-            url: "https://www.mojaloss.stream/category/movies/",
-            query: "getData",
-            tab: "Eng",
-            page: "1",
-            load: true,
-            callback: `function getData(target, page, load, tab){
+			};
+			console.log(JSON.stringify(query))
+		}
+	}
+
+	function tabEng(ele) {
+		if(activeTab != "Eng") {
+			if(nav_fixed) {
+				var itemsTop = $('#items').offset().top;
+				window.scrollTo(0, itemsTop);
+			}
+			emptyBuffer();
+			loadedBuffer = 1;
+			loadingBuffer();
+			loadedEng = 1;
+			loadedHin = 1;
+			loadedTv = 1;
+			activeTab = "Eng"
+			ele.parentElement.children[0].className = "tab-item active";
+			ele.parentElement.children[1].className = "tab-item";
+			ele.parentElement.children[2].className = "tab-item";
+			if(pageEng == 1) {
+				if(loader_count == 0) {
+					console.log("vir_off")
+				}
+				var query = JSON.stringify({
+					url: "https://www.mojaloss.stream/category/movies/",
+					query: "getData",
+					tab: "Eng",
+					page: "1",
+					load: true,
+					callback: `function getData(target, page, load, tab){
                   var collection = document.getElementsByTagName(target);
                   var dataArr = [];
                   for (let i = 0; i < collection.length; i++) {
@@ -626,40 +638,40 @@ getVideoData('`+dataTv[index].link+`');
                   console.log(JSON.stringify(dataObj));
               }
               getData('article', 1, true, 'Eng');`,
-          });
+				});
+				console.log(query);
+			} else {
+				setTimeout(function() {
+					if(activeTab == 'Eng') loadContent('Eng');
+				}, 500);
+			}
+		}
+	}
 
-          console.log(query);
-        } else {
-          setTimeout(function() {
-              if(activeTab == 'Eng') loadContent('Eng');
-            }, 500);
-        }
-      }
-      }
-      function tabHin(ele) {
-        if(activeTab != "Hin") {
-          if(nav_fixed){
-            var itemsTop = $('#items').offset().top;
-            window.scrollTo(0, itemsTop);
-          }
-        emptyBuffer();
-        loadedBuffer = 1;
-        loadingBuffer();
-        loadedEng = 1;
-        loadedHin = 1;
-        loadedTv = 1;
-        activeTab = "Hin"
-        ele.parentElement.children[0].className = "tab-item";
-        ele.parentElement.children[1].className = "tab-item active";
-        ele.parentElement.children[2].className = "tab-item";
-        if (pageHin == 1) {
-          var query = JSON.stringify({
-            url: "https://www.mojaloss.stream/category/hindi/",
-            query: "getData",
-            tab: "Hin",
-            page: "1",
-            load: true,
-            callback: `function getData(target, page, load, tab){
+	function tabHin(ele) {
+		if(activeTab != "Hin") {
+			if(nav_fixed) {
+				var itemsTop = $('#items').offset().top;
+				window.scrollTo(0, itemsTop);
+			}
+			emptyBuffer();
+			loadedBuffer = 1;
+			loadingBuffer();
+			loadedEng = 1;
+			loadedHin = 1;
+			loadedTv = 1;
+			activeTab = "Hin"
+			ele.parentElement.children[0].className = "tab-item";
+			ele.parentElement.children[1].className = "tab-item active";
+			ele.parentElement.children[2].className = "tab-item";
+			if(pageHin == 1) {
+				var query = JSON.stringify({
+					url: "https://www.mojaloss.stream/category/hindi/",
+					query: "getData",
+					tab: "Hin",
+					page: "1",
+					load: true,
+					callback: `function getData(target, page, load, tab){
                   var collection = document.getElementsByTagName(target);
                   var dataArr = [];
                   for (let i = 0; i < collection.length; i++) {
@@ -681,40 +693,40 @@ getVideoData('`+dataTv[index].link+`');
                   console.log(JSON.stringify(dataObj));
               }
               getData('article', 1, true, 'Hin');`,
-          });
+				});
+				console.log(query);
+			} else {
+				setTimeout(function() {
+					if(activeTab == 'Hin') loadContent('Hin');
+				}, 500);
+			}
+		}
+	}
 
-          console.log(query);
-        } else {
-          setTimeout(function() {
-              if(activeTab == 'Hin') loadContent('Hin');
-            }, 500);
-        }
-      }
-      }
-      function tabTv(ele) {
-        if(activeTab != "Tv") {
-          if(nav_fixed){
-            var itemsTop = $('#items').offset().top;
-            window.scrollTo(0, itemsTop);
-          }
-        emptyBuffer();
-        loadedBuffer = 1;
-        loadingBuffer();
-        loadedEng = 1;
-        loadedHin = 1;
-        loadedTv = 1;
-        activeTab = "Tv"
-        ele.parentElement.children[0].className = "tab-item";
-        ele.parentElement.children[1].className = "tab-item";
-        ele.parentElement.children[2].className = "tab-item active";
-        if (pageTv == 1) {
-          var query = JSON.stringify({
-            url: "https://www.mojaloss.stream/category/tv-shows/",
-            query: "getData",
-            tab: "Tv",
-            page: "1",
-            load: true,
-            callback: `function getData(target, page, load, tab){
+	function tabTv(ele) {
+		if(activeTab != "Tv") {
+			if(nav_fixed) {
+				var itemsTop = $('#items').offset().top;
+				window.scrollTo(0, itemsTop);
+			}
+			emptyBuffer();
+			loadedBuffer = 1;
+			loadingBuffer();
+			loadedEng = 1;
+			loadedHin = 1;
+			loadedTv = 1;
+			activeTab = "Tv"
+			ele.parentElement.children[0].className = "tab-item";
+			ele.parentElement.children[1].className = "tab-item";
+			ele.parentElement.children[2].className = "tab-item active";
+			if(pageTv == 1) {
+				var query = JSON.stringify({
+					url: "https://www.mojaloss.stream/category/tv-shows/",
+					query: "getData",
+					tab: "Tv",
+					page: "1",
+					load: true,
+					callback: `function getData(target, page, load, tab){
                   var collection = document.getElementsByTagName(target);
                   var dataArr = [];
                   for (let i = 0; i < collection.length; i++) {
@@ -736,203 +748,206 @@ getVideoData('`+dataTv[index].link+`');
                   console.log(JSON.stringify(dataObj));
               }
               getData('article', 1, true, 'Tv');`,
-          });
+				});
+				console.log(query);
+			} else {
+				setTimeout(function() {
+					if(activeTab == 'Tv') loadContent('Tv');
+				}, 500);
+			}
+		}
+	}
 
-          console.log(query);
-        } else {
-          setTimeout(function() {
-              if(activeTab == 'Tv') loadContent('Tv');
-            }, 500);
-        }
-      }
-      }
-      function loadContent(tab) {
-        if(tab == "Eng"){
-          for(let i= loadedEng; i<loadedEng+12; i++){
-            let box = document.getElementById('item'+i);
-            box.children[0].style.backgroundSize = "cover";
-            box.children[0].style.backgroundImage = "url("+dataEng[i-1].image;+")";
-            box.children[0].style.animationName = "none";
-            box.children[1].children[0].innerHTML = dataEng[i-1].title;
-            box.children[1].children[0].style.animationName = "none";
-            box.children[1].children[0].style.backgroundSize = "cover"; 
-            box.children[1].children[0].style.background = "#383838";
-            box.children[1].children[0].style.height = "auto";
-            box.children[1].children[0].style.width = "auto";
-            box.children[1].children[0].style.padding = "5px";
-            box.children[1].children[1].innerHTML = dataEng[i-1].category;
-            box.children[1].children[1].style.animationName = "none";
-            box.children[1].children[1].style.backgroundSize = "cover";
-            box.children[1].children[1].style.background = "#383838";
-            box.children[1].children[1].style.height = "auto";
-            box.children[1].children[1].style.width = "auto";
-            box.children[1].children[1].style.padding = "5px";
-          }
-          loadedEng +=12;
-        } else if (tab == "Hin"){
-          for(let i= loadedHin; i<loadedHin+12; i++){
-            let box = document.getElementById('item'+i);
-            box.children[0].style.backgroundSize = "cover";
-            box.children[0].style.backgroundImage = "url("+dataHin[i-1].image;+")";
-            box.children[0].style.animationName = "none";
-            box.children[1].children[0].innerHTML = dataHin[i-1].title;
-            box.children[1].children[0].style.animationName = "none";
-            box.children[1].children[0].style.backgroundSize = "cover"; 
-            box.children[1].children[0].style.background = "#383838";
-            box.children[1].children[0].style.height = "auto";
-            box.children[1].children[0].style.width = "auto";
-            box.children[1].children[0].style.padding = "5px";
-            box.children[1].children[1].innerHTML = dataHin[i-1].category;
-            box.children[1].children[1].style.animationName = "none";
-            box.children[1].children[1].style.backgroundSize = "cover";
-            box.children[1].children[1].style.background = "#383838";
-            box.children[1].children[1].style.height = "auto";
-            box.children[1].children[1].style.width = "auto";
-            box.children[1].children[1].style.padding = "5px";
-          }
-          loadedHin +=12;
-        } else if (tab == "Tv"){
-          // console.log(loadedTv, 'from', dataTv.length)
-          for(let i= loadedTv; i<loadedTv+12; i++){
-            let box = document.getElementById('item'+i);
-            box.children[0].style.backgroundSize = "cover";
-            box.children[0].style.backgroundImage = "url("+dataTv[i-1].image;+")";
-            box.children[0].style.animationName = "none";
-            box.children[1].children[0].innerHTML = dataTv[i-1].title;
-            box.children[1].children[0].style.animationName = "none";
-            box.children[1].children[0].style.backgroundSize = "cover"; 
-            box.children[1].children[0].style.background = "#383838";
-            box.children[1].children[0].style.height = "auto";
-            box.children[1].children[0].style.width = "auto";
-            box.children[1].children[0].style.padding = "5px";
-            box.children[1].children[1].innerHTML = dataTv[i-1].category;
-            box.children[1].children[1].style.animationName = "none";
-            box.children[1].children[1].style.backgroundSize = "cover";
-            box.children[1].children[1].style.background = "#383838";
-            box.children[1].children[1].style.height = "auto";
-            box.children[1].children[1].style.width = "auto";
-            box.children[1].children[1].style.padding = "5px";
-          }
-          loadedTv +=12;
-        } 
-      }
-      function recieveData(data, page, tab, load) {
-        if (tab == "Eng") {
-          if (pageEng == page && JSON.parse(data).length > 0) {
-            loader_count += 1;
-            let temp = dataEng.concat(JSON.parse(data));
-            dataEng = temp;
-            pageEng += 1;
-            // console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageEng, ' of Eng: ', dataEng.length)
-          if (load) {
-            if(dataEng.length > loadedBuffer && loadedBuffer > 13) {
-              loadingBuffer();
-              document.getElementsByClassName("load")[0].classList.remove("btn-grad");
-            setTimeout(function() {
-              if(activeTab == 'Eng') loadContent('Eng');
-            }, 500);
-            } else {
-              loadContent('Eng');
-            }
-          }
-          }
-        } else if (tab == "Hin") {
-          if (pageHin == page && JSON.parse(data).length > 0) {
-            loader_count += 1;
-            let temp = dataHin.concat(JSON.parse(data));
-            dataHin = temp;
-            pageHin += 1;
-            // console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageHin, ' of Hin: ', dataHin.length)
-          if (load) {
-              if(dataHin.length > loadedBuffer && loadedBuffer > 13) {
-                loadingBuffer();
-                document.getElementsByClassName("load")[0].classList.remove("btn-grad");
-              setTimeout(function() {
-                if(activeTab == 'Hin') loadContent('Hin');
-              }, 500);
-              } else {
-                loadContent('Hin');
-              }
-            }
-          }
-        } else if (tab == "Tv") {
-          if (pageTv == page && JSON.parse(data).length > 0) {
-            loader_count += 1;
-            let temp = dataTv.concat(JSON.parse(data));
-            dataTv = temp;
-            pageTv += 1;
-            // console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageTv, ' of Tv: ', dataTv.length)
-          if (load) {
-              if(dataTv.length > loadedBuffer && loadedBuffer > 13) {
-                loadingBuffer();
-                document.getElementsByClassName("load")[0].classList.remove("btn-grad");
-              setTimeout(function() {
-                if(activeTab == 'Tv') loadContent('Tv');
-              }, 500);
-              } else {
-                loadContent('Tv');
-              }
-            }
-          }
-        }
-      }
+	function loadContent(tab) {
+		if(tab == "Eng") {
+			for(let i = loadedEng; i < loadedEng + 12; i++) {
+				let box = document.getElementById('item' + i);
+				box.children[0].style.backgroundSize = "cover";
+				box.children[0].style.backgroundImage = "url(" + dataEng[i - 1].image; + ")";
+				box.children[0].style.animationName = "none";
+				box.children[1].children[0].innerHTML = dataEng[i - 1].title;
+				box.children[1].children[0].style.animationName = "none";
+				box.children[1].children[0].style.backgroundSize = "cover";
+				box.children[1].children[0].style.background = "#383838";
+				box.children[1].children[0].style.height = "auto";
+				box.children[1].children[0].style.width = "auto";
+				box.children[1].children[0].style.padding = "5px";
+				box.children[1].children[1].innerHTML = dataEng[i - 1].category;
+				box.children[1].children[1].style.animationName = "none";
+				box.children[1].children[1].style.backgroundSize = "cover";
+				box.children[1].children[1].style.background = "#383838";
+				box.children[1].children[1].style.height = "auto";
+				box.children[1].children[1].style.width = "auto";
+				box.children[1].children[1].style.padding = "5px";
+			}
+			loadedEng += 12;
+		} else if(tab == "Hin") {
+			for(let i = loadedHin; i < loadedHin + 12; i++) {
+				let box = document.getElementById('item' + i);
+				box.children[0].style.backgroundSize = "cover";
+				box.children[0].style.backgroundImage = "url(" + dataHin[i - 1].image; + ")";
+				box.children[0].style.animationName = "none";
+				box.children[1].children[0].innerHTML = dataHin[i - 1].title;
+				box.children[1].children[0].style.animationName = "none";
+				box.children[1].children[0].style.backgroundSize = "cover";
+				box.children[1].children[0].style.background = "#383838";
+				box.children[1].children[0].style.height = "auto";
+				box.children[1].children[0].style.width = "auto";
+				box.children[1].children[0].style.padding = "5px";
+				box.children[1].children[1].innerHTML = dataHin[i - 1].category;
+				box.children[1].children[1].style.animationName = "none";
+				box.children[1].children[1].style.backgroundSize = "cover";
+				box.children[1].children[1].style.background = "#383838";
+				box.children[1].children[1].style.height = "auto";
+				box.children[1].children[1].style.width = "auto";
+				box.children[1].children[1].style.padding = "5px";
+			}
+			loadedHin += 12;
+		} else if(tab == "Tv") {
+			// console.log(loadedTv, 'from', dataTv.length)
+			for(let i = loadedTv; i < loadedTv + 12; i++) {
+				let box = document.getElementById('item' + i);
+				box.children[0].style.backgroundSize = "cover";
+				box.children[0].style.backgroundImage = "url(" + dataTv[i - 1].image; + ")";
+				box.children[0].style.animationName = "none";
+				box.children[1].children[0].innerHTML = dataTv[i - 1].title;
+				box.children[1].children[0].style.animationName = "none";
+				box.children[1].children[0].style.backgroundSize = "cover";
+				box.children[1].children[0].style.background = "#383838";
+				box.children[1].children[0].style.height = "auto";
+				box.children[1].children[0].style.width = "auto";
+				box.children[1].children[0].style.padding = "5px";
+				box.children[1].children[1].innerHTML = dataTv[i - 1].category;
+				box.children[1].children[1].style.animationName = "none";
+				box.children[1].children[1].style.backgroundSize = "cover";
+				box.children[1].children[1].style.background = "#383838";
+				box.children[1].children[1].style.height = "auto";
+				box.children[1].children[1].style.width = "auto";
+				box.children[1].children[1].style.padding = "5px";
+			}
+			loadedTv += 12;
+		}
+	}
 
-      function loadMore(){
-        if(activeTab == 'Eng') {
-          if(loadedEng < dataEng.length){
-            getNextOffset('Eng', false)
-            loadingBuffer();
-            setTimeout(function() {
-              if(activeTab == 'Eng') loadContent('Eng');
-            }, 500);
-          } else {
-            if(pageEng > 1) { 
-              getNextOffset('Eng', true); 
-              document.getElementsByClassName("load")[0].classList.add("btn-grad");
-            }
-            else { document.getElementById("Eng").click(); }
-            
-          }
-        } else if(activeTab == 'Hin') {
-          if(loadedHin < dataHin.length){
-            getNextOffset('Hin', false)
-            loadingBuffer();
-            setTimeout(function() {
-              if(activeTab == 'Hin') loadContent('Hin');
-            }, 500);
-          } else {
-            if(pageEng > 1) { 
-              getNextOffset('Hin', true);
-              document.getElementsByClassName("load")[0].classList.add("btn-grad");
-            }
-            else { document.getElementById("Hin").click(); }
-          }
-        } else if(activeTab == 'Tv') {
-          if(loadedTv < dataTv.length){
-            getNextOffset('Tv', false)
-            loadingBuffer();
-            setTimeout(function() {
-              if(activeTab == 'Tv') loadContent('Tv');
-            }, 500);
-          } else {
-            if(pageEng > 1) { 
-              getNextOffset('Tv', true);
-              document.getElementsByClassName("load")[0].classList.add("btn-grad");
-            }
-            else { document.getElementById("Tv").click(); }
-          }
-        }
-      }
+	function recieveData(data, page, tab, load) {
+		if(tab == "Eng") {
+			if(pageEng == page && JSON.parse(data).length > 0) {
+				loader_count += 1;
+				let temp = dataEng.concat(JSON.parse(data));
+				dataEng = temp;
+				pageEng += 1;
+				// console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageEng, ' of Eng: ', dataEng.length)
+				if(load) {
+					if(dataEng.length > loadedBuffer && loadedBuffer > 13) {
+						loadingBuffer();
+						document.getElementsByClassName("load")[0].classList.remove("btn-grad");
+						setTimeout(function() {
+							if(activeTab == 'Eng') loadContent('Eng');
+						}, 500);
+					} else {
+						loadContent('Eng');
+					}
+				}
+			}
+		} else if(tab == "Hin") {
+			if(pageHin == page && JSON.parse(data).length > 0) {
+				loader_count += 1;
+				let temp = dataHin.concat(JSON.parse(data));
+				dataHin = temp;
+				pageHin += 1;
+				// console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageHin, ' of Hin: ', dataHin.length)
+				if(load) {
+					if(dataHin.length > loadedBuffer && loadedBuffer > 13) {
+						loadingBuffer();
+						document.getElementsByClassName("load")[0].classList.remove("btn-grad");
+						setTimeout(function() {
+							if(activeTab == 'Hin') loadContent('Hin');
+						}, 500);
+					} else {
+						loadContent('Hin');
+					}
+				}
+			}
+		} else if(tab == "Tv") {
+			if(pageTv == page && JSON.parse(data).length > 0) {
+				loader_count += 1;
+				let temp = dataTv.concat(JSON.parse(data));
+				dataTv = temp;
+				pageTv += 1;
+				// console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageTv, ' of Tv: ', dataTv.length)
+				if(load) {
+					if(dataTv.length > loadedBuffer && loadedBuffer > 13) {
+						loadingBuffer();
+						document.getElementsByClassName("load")[0].classList.remove("btn-grad");
+						setTimeout(function() {
+							if(activeTab == 'Tv') loadContent('Tv');
+						}, 500);
+					} else {
+						loadContent('Tv');
+					}
+				}
+			}
+		}
+	}
 
-      function getNextOffset(tab, load){
-        if(tab == 'Eng'){
-          var query = JSON.stringify({
-            url: "https://www.mojaloss.stream/category/movies/page/"+pageEng+"/",
-            query: "getData",
-            tab: "Eng",
-            page: pageEng,
-            load: load,
-            callback: `function getData(target, page, load, tab){
+	function loadMore() {
+		if(activeTab == 'Eng') {
+			if(loadedEng < dataEng.length) {
+				getNextOffset('Eng', false)
+				loadingBuffer();
+				setTimeout(function() {
+					if(activeTab == 'Eng') loadContent('Eng');
+				}, 500);
+			} else {
+				if(pageEng > 1) {
+					getNextOffset('Eng', true);
+					document.getElementsByClassName("load")[0].classList.add("btn-grad");
+				} else {
+					document.getElementById("Eng").click();
+				}
+			}
+		} else if(activeTab == 'Hin') {
+			if(loadedHin < dataHin.length) {
+				getNextOffset('Hin', false)
+				loadingBuffer();
+				setTimeout(function() {
+					if(activeTab == 'Hin') loadContent('Hin');
+				}, 500);
+			} else {
+				if(pageEng > 1) {
+					getNextOffset('Hin', true);
+					document.getElementsByClassName("load")[0].classList.add("btn-grad");
+				} else {
+					document.getElementById("Hin").click();
+				}
+			}
+		} else if(activeTab == 'Tv') {
+			if(loadedTv < dataTv.length) {
+				getNextOffset('Tv', false)
+				loadingBuffer();
+				setTimeout(function() {
+					if(activeTab == 'Tv') loadContent('Tv');
+				}, 500);
+			} else {
+				if(pageEng > 1) {
+					getNextOffset('Tv', true);
+					document.getElementsByClassName("load")[0].classList.add("btn-grad");
+				} else {
+					document.getElementById("Tv").click();
+				}
+			}
+		}
+	}
+
+	function getNextOffset(tab, load) {
+		if(tab == 'Eng') {
+			var query = JSON.stringify({
+				url: "https://www.mojaloss.stream/category/movies/page/" + pageEng + "/",
+				query: "getData",
+				tab: "Eng",
+				page: pageEng,
+				load: load,
+				callback: `function getData(target, page, load, tab){
                   var collection = document.getElementsByTagName(target);
                   var dataArr = [];
                   for (let i = 0; i < collection.length; i++) {
@@ -953,18 +968,18 @@ getVideoData('`+dataTv[index].link+`');
                   };
                   console.log(JSON.stringify(dataObj));
               }
-              getData('article', `+pageEng+`, `+load+`, 'Eng');`,
-          });
-          // console.log("https://www.mojaloss.stream/category/movies/page/"+pageEng+"/");
-          console.log(query);
-        } else if(tab == 'Hin'){
-          var query = JSON.stringify({
-            url: "https://www.mojaloss.stream/category/hindi/page/"+pageHin+"/",
-            query: "getData",
-            tab: "Hin",
-            page: pageHin,
-            load: load,
-            callback: `function getData(target, page, load, tab){
+              getData('article', ` + pageEng + `, ` + load + `, 'Eng');`,
+			});
+			// console.log("https://www.mojaloss.stream/category/movies/page/"+pageEng+"/");
+			console.log(query);
+		} else if(tab == 'Hin') {
+			var query = JSON.stringify({
+				url: "https://www.mojaloss.stream/category/hindi/page/" + pageHin + "/",
+				query: "getData",
+				tab: "Hin",
+				page: pageHin,
+				load: load,
+				callback: `function getData(target, page, load, tab){
                   var collection = document.getElementsByTagName(target);
                   var dataArr = [];
                   for (let i = 0; i < collection.length; i++) {
@@ -985,18 +1000,18 @@ getVideoData('`+dataTv[index].link+`');
                   };
                   console.log(JSON.stringify(dataObj));
               }
-              getData('article', `+pageHin+`, `+load+`, 'Hin');`,
-          });
-          // console.log("https://www.mojaloss.stream/category/hindi/page/"+pageHin+"/");
-          console.log(query);
-        } else if(tab == 'Tv'){
-          var query = JSON.stringify({
-            url: "https://www.mojaloss.stream/category/tv-shows/page/"+pageTv+"/",
-            query: "getData",
-            tab: "Tv",
-            page: pageTv,
-            load: load,
-            callback: `function getData(target, page, load, tab){
+              getData('article', ` + pageHin + `, ` + load + `, 'Hin');`,
+			});
+			// console.log("https://www.mojaloss.stream/category/hindi/page/"+pageHin+"/");
+			console.log(query);
+		} else if(tab == 'Tv') {
+			var query = JSON.stringify({
+				url: "https://www.mojaloss.stream/category/tv-shows/page/" + pageTv + "/",
+				query: "getData",
+				tab: "Tv",
+				page: pageTv,
+				load: load,
+				callback: `function getData(target, page, load, tab){
                   var collection = document.getElementsByTagName(target);
                   var dataArr = [];
                   for (let i = 0; i < collection.length; i++) {
@@ -1017,85 +1032,89 @@ getVideoData('`+dataTv[index].link+`');
                   };
                   console.log(JSON.stringify(dataObj));
               }
-              getData('article', `+pageTv+`, `+load+`, 'Tv');`,
-          });
-          // console.log("https://www.mojaloss.stream/category/tv-shows/page/"+pageTv+"/");
-          console.log(query);
-        }
-      }
+              getData('article', ` + pageTv + `, ` + load + `, 'Tv');`,
+			});
+			// console.log("https://www.mojaloss.stream/category/tv-shows/page/"+pageTv+"/");
+			console.log(query);
+		}
+	}
 
-      function refreshBuffer(){
-        if(activeTab == "Eng"){
-          for(let i= 1; i<loadedEng; i++){
-            let box = document.getElementById('item'+i);
-            box.children[0].style.backgroundSize = "cover";
-            box.children[0].style.backgroundImage = "url("+dataEng[i-1].image;+")";
-            box.children[0].style.animationName = "none";
-            box.children[1].children[0].innerHTML = dataEng[i-1].title;
-            box.children[1].children[0].style.animationName = "none";
-            box.children[1].children[0].style.backgroundSize = "cover"; 
-            box.children[1].children[0].style.background = "#383838";
-            box.children[1].children[0].style.height = "auto";
-            box.children[1].children[0].style.width = "auto";
-            box.children[1].children[0].style.padding = "5px";
-            box.children[1].children[1].innerHTML = dataEng[i-1].category;
-            box.children[1].children[1].style.animationName = "none";
-            box.children[1].children[1].style.backgroundSize = "cover";
-            box.children[1].children[1].style.background = "#383838";
-            box.children[1].children[1].style.height = "auto";
-            box.children[1].children[1].style.width = "auto";
-            box.children[1].children[1].style.padding = "5px";
-          }
-        } else if (activeTab == "Hin"){
-          for(let i= 1; i<loadedHin; i++){
-            let box = document.getElementById('item'+i);
-            box.children[0].style.backgroundSize = "cover";
-            box.children[0].style.backgroundImage = "url("+dataHin[i-1].image;+")";
-            box.children[0].style.animationName = "none";
-            box.children[1].children[0].innerHTML = dataHin[i-1].title;
-            box.children[1].children[0].style.animationName = "none";
-            box.children[1].children[0].style.backgroundSize = "cover"; 
-            box.children[1].children[0].style.background = "#383838";
-            box.children[1].children[0].style.height = "auto";
-            box.children[1].children[0].style.width = "auto";
-            box.children[1].children[0].style.padding = "5px";
-            box.children[1].children[1].innerHTML = dataHin[i-1].category;
-            box.children[1].children[1].style.animationName = "none";
-            box.children[1].children[1].style.backgroundSize = "cover";
-            box.children[1].children[1].style.background = "#383838";
-            box.children[1].children[1].style.height = "auto";
-            box.children[1].children[1].style.width = "auto";
-            box.children[1].children[1].style.padding = "5px";
-          }
-      } else if (activeTab == "Tv"){
-          for(let i= 1; i<loadedTv; i++){
-            let box = document.getElementById('item'+i);
-            box.children[0].style.backgroundSize = "cover";
-            box.children[0].style.backgroundImage = "url("+dataTv[i-1].image;+")";
-            box.children[0].style.animationName = "none";
-            box.children[1].children[0].innerHTML = dataTv[i-1].title;
-            box.children[1].children[0].style.animationName = "none";
-            box.children[1].children[0].style.backgroundSize = "cover"; 
-            box.children[1].children[0].style.background = "#383838";
-            box.children[1].children[0].style.height = "auto";
-            box.children[1].children[0].style.width = "auto";
-            box.children[1].children[0].style.padding = "5px";
-            box.children[1].children[1].innerHTML = dataTv[i-1].category;
-            box.children[1].children[1].style.animationName = "none";
-            box.children[1].children[1].style.backgroundSize = "cover";
-            box.children[1].children[1].style.background = "#383838";
-            box.children[1].children[1].style.height = "auto";
-            box.children[1].children[1].style.width = "auto";
-            box.children[1].children[1].style.padding = "5px";
-          }
-      }
-    }
-    </script>
+	function refreshBuffer() {
+		var refresh_count = (loadedBuffer - 1) / 12;
+		emptyBuffer();
+		for(let j = 0; j < refresh_count; i++) loadingBuffer();
+		setTimeout(function() {
+			if(activeTab == "Eng") {
+				for(let i = 1; i < loadedEng; i++) {
+					let box = document.getElementById('item' + i);
+					box.children[0].style.backgroundSize = "cover";
+					box.children[0].style.backgroundImage = "url(" + dataEng[i - 1].image; + ")";
+					box.children[0].style.animationName = "none";
+					box.children[1].children[0].innerHTML = dataEng[i - 1].title;
+					box.children[1].children[0].style.animationName = "none";
+					box.children[1].children[0].style.backgroundSize = "cover";
+					box.children[1].children[0].style.background = "#383838";
+					box.children[1].children[0].style.height = "auto";
+					box.children[1].children[0].style.width = "auto";
+					box.children[1].children[0].style.padding = "5px";
+					box.children[1].children[1].innerHTML = dataEng[i - 1].category;
+					box.children[1].children[1].style.animationName = "none";
+					box.children[1].children[1].style.backgroundSize = "cover";
+					box.children[1].children[1].style.background = "#383838";
+					box.children[1].children[1].style.height = "auto";
+					box.children[1].children[1].style.width = "auto";
+					box.children[1].children[1].style.padding = "5px";
+				}
+			} else if(activeTab == "Hin") {
+				for(let i = 1; i < loadedHin; i++) {
+					let box = document.getElementById('item' + i);
+					box.children[0].style.backgroundSize = "cover";
+					box.children[0].style.backgroundImage = "url(" + dataHin[i - 1].image; + ")";
+					box.children[0].style.animationName = "none";
+					box.children[1].children[0].innerHTML = dataHin[i - 1].title;
+					box.children[1].children[0].style.animationName = "none";
+					box.children[1].children[0].style.backgroundSize = "cover";
+					box.children[1].children[0].style.background = "#383838";
+					box.children[1].children[0].style.height = "auto";
+					box.children[1].children[0].style.width = "auto";
+					box.children[1].children[0].style.padding = "5px";
+					box.children[1].children[1].innerHTML = dataHin[i - 1].category;
+					box.children[1].children[1].style.animationName = "none";
+					box.children[1].children[1].style.backgroundSize = "cover";
+					box.children[1].children[1].style.background = "#383838";
+					box.children[1].children[1].style.height = "auto";
+					box.children[1].children[1].style.width = "auto";
+					box.children[1].children[1].style.padding = "5px";
+				}
+			} else if(activeTab == "Tv") {
+				for(let i = 1; i < loadedTv; i++) {
+					let box = document.getElementById('item' + i);
+					box.children[0].style.backgroundSize = "cover";
+					box.children[0].style.backgroundImage = "url(" + dataTv[i - 1].image; + ")";
+					box.children[0].style.animationName = "none";
+					box.children[1].children[0].innerHTML = dataTv[i - 1].title;
+					box.children[1].children[0].style.animationName = "none";
+					box.children[1].children[0].style.backgroundSize = "cover";
+					box.children[1].children[0].style.background = "#383838";
+					box.children[1].children[0].style.height = "auto";
+					box.children[1].children[0].style.width = "auto";
+					box.children[1].children[0].style.padding = "5px";
+					box.children[1].children[1].innerHTML = dataTv[i - 1].category;
+					box.children[1].children[1].style.animationName = "none";
+					box.children[1].children[1].style.backgroundSize = "cover";
+					box.children[1].children[1].style.background = "#383838";
+					box.children[1].children[1].style.height = "auto";
+					box.children[1].children[1].style.width = "auto";
+					box.children[1].children[1].style.padding = "5px";
+				}
+			}
+		}, 600);
+	}
+	</script>
+	<script>
+	// INITIATE
+	document.getElementById("Eng").click();
+	</script>
+</body>
 
-    <script>
-      // INITIATE
-
-      document.getElementById("Eng").click();
-    </script>
-  </body>
 </html>
