@@ -337,7 +337,7 @@
 </head>
 
 <body>
-	<div id="frame" class="site">
+	<div class="site">
 		<div class="header">
 			<img class="logo" src="./icon/logo-contrust.png" />
 			<div class="logo-text">MOVIEASE</div>
@@ -546,7 +546,7 @@ getVideoData('` + dataHin[index].link + `');
 console.log(year);
     if (isNaN(year)) {
         let value = [];
-        let data = jwplayer("season1").getPlaylist();
+        let data = jwplayer().getPlaylist();
         console.log("data- ", data)
         for( let i = 0; i< data.length; i++) {
             value.push({
@@ -1143,37 +1143,6 @@ getVideoData('` + dataTv[index].link + `');
 	}
 	</script>
 	<script>
-
-function fillDiv(div, proportional) {
-  var div = $("#"+div);
-  var currentWidth = div.outerWidth();
-  var currentHeight = div.outerHeight();
-
-  var availableHeight = window.innerHeight;
-  var availableWidth = window.innerWidth;
-
-  var X = (availableWidth / currentWidth) - 0.01;
-  var Y = (availableHeight / currentHeight) - 0.01;
-  var scaleX = X.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0];
-  var scaleY = Y.toString().match(/^-?\d+(?:\.\d{0,2})?/)[0];
-
-  if (proportional) {
-    scaleX = Math.min(scaleX, scaleY);
-    scaleY = scaleX;
-  }
-
-  var translationX = Math.round((availableWidth - (currentWidth * scaleX)) / 2);
-  var translationY = Math.round((availableHeight - (currentHeight * scaleY)) / 2);
-
-  div.css({
-    // "position": "fixed",
-    // "left": "0px",
-    // "top": "0px",
-    "transform": "scale(" + scaleX + ", " + scaleY + ")",
-    "transform-origin": "center top"
-  });
-}
-fillDiv('frame', true);
 	// INITIATE
 	document.getElementById("Eng").click();
 	</script>
