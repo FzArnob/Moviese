@@ -546,7 +546,7 @@ getVideoData('` + dataHin[index].link + `');
 console.log(year);
     if (isNaN(year)) {
         let value = [];
-        let data = jwplayer().getPlaylist();
+        let data = jwplayer("season1").getPlaylist();
         console.log("data- ", data)
         for( let i = 0; i< data.length; i++) {
             value.push({
