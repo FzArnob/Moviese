@@ -411,13 +411,13 @@ console.log(year);
     if (isNaN(year)) {
         let value = [];
         let data = jwplayer().getPlaylist();
-        data.forEach(item => {
+        for( let i = 0; i< data.length; i++) {
             value.push({
-                file: item.file,
-                poster: item.image,
-                tracks: item.tracks
+                file: data[i].file,
+                poster: data[i].image,
+                tracks: data[i].tracks
             });
-        });
+        };
         var output =
         {
             query: 'callback',
@@ -464,13 +464,13 @@ console.log(year);
     if (isNaN(year)) {
         let value = [];
         let data = jwplayer().getPlaylist();
-        data.forEach(item => {
+        for( let i = 0; i< data.length; i++) {
             value.push({
-                file: item.file,
-                poster: item.image,
-                tracks: item.tracks
+                file: data[i].file,
+                poster: data[i].image,
+                tracks: data[i].tracks
             });
-        });
+        };
         var output =
         {
             query: 'callback',
@@ -516,13 +516,13 @@ console.log(year);
     if (isNaN(year)) {
         let value = [];
         let data = jwplayer().getPlaylist();
-        data.forEach(item => {
+        for( let i = 0; i< data.length; i++) {
             value.push({
-                file: item.file,
-                poster: item.image,
-                tracks: item.tracks
+                file: data[i].file,
+                poster: data[i].image,
+                tracks: data[i].tracks
             });
-        });
+        };
         var output =
         {
             query: 'callback',
