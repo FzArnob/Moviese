@@ -1055,6 +1055,8 @@ getVideoData('` + dataTv[index].link + `');
 		var refresh_count = (loadedBuffer - 1) / 12;
 		emptyBuffer();
 		for(let j = 0; j < refresh_count; j++) loadingBuffer();
+    document.getElementsByClassName("load")[0].classList.remove("btn-grad");
+    document.getElementsByClassName("load")[0].innerHTML = "⟳ Load More";
 		setTimeout(function() {
 			if(activeTab == "Eng") {
 				for(let i = 1; i < loadedEng; i++) {
