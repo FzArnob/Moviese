@@ -1052,7 +1052,7 @@ getVideoData('` + dataTv[index].link + `');
 	}
 
 	function refreshBuffer() {
-    console.log("E: ", dataEng.length, dataHin, dataTv);
+    console.log("E: ", dataEng.length, dataHin.length, dataTv.length);
 		var refresh_count = (loadedBuffer - 1) / 12;
 		emptyBuffer();
 		for(let j = 0; j < refresh_count; j++) loadingBuffer();
