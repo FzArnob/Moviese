@@ -841,6 +841,7 @@ getVideoData('` + dataTv[index].link + `');
 					if(dataEng.length > loadedBuffer && loadedBuffer > 13) {
 						loadingBuffer();
 						document.getElementsByClassName("load")[0].classList.remove("btn-grad");
+            document.getElementsByClassName("load")[0].innerHTML = "⟳ Load More";
 						setTimeout(function() {
 							if(activeTab == 'Eng') loadContent('Eng');
 						}, 500);
@@ -860,6 +861,7 @@ getVideoData('` + dataTv[index].link + `');
 					if(dataHin.length > loadedBuffer && loadedBuffer > 13) {
 						loadingBuffer();
 						document.getElementsByClassName("load")[0].classList.remove("btn-grad");
+            document.getElementsByClassName("load")[0].innerHTML = "⟳ Load More";
 						setTimeout(function() {
 							if(activeTab == 'Hin') loadContent('Hin');
 						}, 500);
@@ -879,6 +881,7 @@ getVideoData('` + dataTv[index].link + `');
 					if(dataTv.length > loadedBuffer && loadedBuffer > 13) {
 						loadingBuffer();
 						document.getElementsByClassName("load")[0].classList.remove("btn-grad");
+            document.getElementsByClassName("load")[0].innerHTML = "⟳ Load More";
 						setTimeout(function() {
 							if(activeTab == 'Tv') loadContent('Tv');
 						}, 500);
@@ -902,6 +905,7 @@ getVideoData('` + dataTv[index].link + `');
 				if(pageEng > 1) {
 					getNextOffset('Eng', true);
 					document.getElementsByClassName("load")[0].classList.add("btn-grad");
+          document.getElementsByClassName("load")[0].innerHTML = "⟳ Loading...";
 				} else {
 					document.getElementById("Eng").click();
 				}
@@ -917,6 +921,7 @@ getVideoData('` + dataTv[index].link + `');
 				if(pageEng > 1) {
 					getNextOffset('Hin', true);
 					document.getElementsByClassName("load")[0].classList.add("btn-grad");
+          document.getElementsByClassName("load")[0].innerHTML = "⟳ Loading...";
 				} else {
 					document.getElementById("Hin").click();
 				}
@@ -932,6 +937,7 @@ getVideoData('` + dataTv[index].link + `');
 				if(pageEng > 1) {
 					getNextOffset('Tv', true);
 					document.getElementsByClassName("load")[0].classList.add("btn-grad");
+          document.getElementsByClassName("load")[0].innerHTML = "⟳ Loading...";
 				} else {
 					document.getElementById("Tv").click();
 				}
