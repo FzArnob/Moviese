@@ -1042,7 +1042,7 @@ getVideoData('` + dataTv[index].link + `');
 	function refreshBuffer() {
 		var refresh_count = (loadedBuffer - 1) / 12;
 		emptyBuffer();
-		for(let j = 0; j < refresh_count; i++) loadingBuffer();
+		for(let j = 0; j < refresh_count; j++) loadingBuffer();
 		setTimeout(function() {
 			if(activeTab == "Eng") {
 				for(let i = 1; i < loadedEng; i++) {
