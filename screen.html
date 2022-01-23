@@ -39,8 +39,8 @@
             left: 20px;
             z-index: 999;
         }
-        .back:hover{
-            background: rgb(0 179 255 / 50%);
+        .back:active{
+            background: rgb(255 255 255 / 30%);
         }
          
         .title{
@@ -140,7 +140,7 @@
         </div>
         <div class="site">
             <div id="header">
-                <img class="back" src="./icon/back.png">
+                <img class="back" src="./icon/back.png" onclick="go_back()">
                 <div class="title" id="title">NaN</div>
                 <div class="series_controls hide">
                     <div class="Seasons">
@@ -171,6 +171,9 @@
                 document.getElementById('title').innerHTML = dataObj.title;
             }
             console.log('vir_show');
+        }
+        function go_back() {
+            console.log("Go-Back");
         }
     </script>
     
