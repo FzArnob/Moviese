@@ -609,9 +609,6 @@ getVideoData('` + dataTv[index].link + `');
 			ele.parentElement.children[1].className = "tab-item";
 			ele.parentElement.children[2].className = "tab-item";
 			if(pageEng == 1) {
-				if(loader_count == 0) {
-					console.log("vir_off")
-				}
 				var query = JSON.stringify({
 					url: "https://www.mojaloss.stream/category/movies/",
 					query: "getData",
@@ -839,6 +836,9 @@ getVideoData('` + dataTv[index].link + `');
 		if(tab == "Eng") {
 			if(pageEng == page && JSON.parse(data).length > 0) {
 				loader_count += 1;
+        if(loader_count == 1) {
+					console.log("vir_off");
+				}
 				let temp = dataEng.concat(JSON.parse(data));
 				dataEng = temp;
 				pageEng += 1;
