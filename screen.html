@@ -157,7 +157,7 @@
         if (dataObj.type == "movie") {
           dataMovie = dataObj;
           document.getElementById("wrapper").innerHTML =
-            `<video controls poster="` +
+            `<video id="screen" controls poster="` +
             dataObj.poster +
             `" style="height: 100%">
                     <source id="video" src="` +
@@ -165,6 +165,13 @@
             `" type="video/mp4">
                 </video>`;
           document.getElementById("title").innerHTML = dataObj.title;
+        }
+        var vid = document.getElementById("screen");
+        vid.onpause = function() {
+            document.getElementById("header").style.display = "block";
+        };
+        vid.onplay = function() {
+            document.getElementById("header").style.display = "none";
         }
         console.log("vir_show");
       }
@@ -185,6 +192,7 @@
         fadeOutEffect("frame");
         console.log("Go-Back");
       }
+
     </script>
   </body>
 </html>
