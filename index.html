@@ -536,6 +536,7 @@ console.log(year);
     if (isNaN(year)) {
         let value = [];
         let data = jwplayer().getPlaylist();
+        console.log("data- ", data)
         for( let i = 0; i< data.length; i++) {
             value.push({
                 file: data[i].file,
