@@ -599,6 +599,8 @@ getVideoData('` + dataTv[index].link + `');
 			emptyBuffer();
 			loadedBuffer = 1;
 			loadingBuffer();
+      document.getElementsByClassName("load")[0].classList.remove("btn-grad");
+      document.getElementsByClassName("load")[0].innerHTML = "⟳ Load More";
 			loadedEng = 1;
 			loadedHin = 1;
 			loadedTv = 1;
@@ -657,6 +659,8 @@ getVideoData('` + dataTv[index].link + `');
 			emptyBuffer();
 			loadedBuffer = 1;
 			loadingBuffer();
+      document.getElementsByClassName("load")[0].classList.remove("btn-grad");
+      document.getElementsByClassName("load")[0].innerHTML = "⟳ Load More";
 			loadedEng = 1;
 			loadedHin = 1;
 			loadedTv = 1;
@@ -712,6 +716,8 @@ getVideoData('` + dataTv[index].link + `');
 			emptyBuffer();
 			loadedBuffer = 1;
 			loadingBuffer();
+      document.getElementsByClassName("load")[0].classList.remove("btn-grad");
+      document.getElementsByClassName("load")[0].innerHTML = "⟳ Load More";
 			loadedEng = 1;
 			loadedHin = 1;
 			loadedTv = 1;
@@ -837,7 +843,7 @@ getVideoData('` + dataTv[index].link + `');
 				dataEng = temp;
 				pageEng += 1;
 				// console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageEng, ' of Eng: ', dataEng.length)
-				if(load) {
+				if(load && activeTab == "Eng") {
 					if(dataEng.length > loadedBuffer && loadedBuffer > 13) {
 						loadingBuffer();
 						document.getElementsByClassName("load")[0].classList.remove("btn-grad");
@@ -857,7 +863,7 @@ getVideoData('` + dataTv[index].link + `');
 				dataHin = temp;
 				pageHin += 1;
 				// console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageHin, ' of Hin: ', dataHin.length)
-				if(load) {
+				if(load && activeTab == "Hin") {
 					if(dataHin.length > loadedBuffer && loadedBuffer > 13) {
 						loadingBuffer();
 						document.getElementsByClassName("load")[0].classList.remove("btn-grad");
@@ -877,7 +883,7 @@ getVideoData('` + dataTv[index].link + `');
 				dataTv = temp;
 				pageTv += 1;
 				// console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageTv, ' of Tv: ', dataTv.length)
-				if(load) {
+				if(load && activeTab == "Tv") {
 					if(dataTv.length > loadedBuffer && loadedBuffer > 13) {
 						loadingBuffer();
 						document.getElementsByClassName("load")[0].classList.remove("btn-grad");
