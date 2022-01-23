@@ -271,8 +271,8 @@
         background-color: #404040;
         border-radius: 18px;
       }
-      .load:hover{
-        background: #393939;
+      .load:active{
+        background: #282828;
         color: white;
         cursor: pointer;
       }
@@ -335,7 +335,7 @@
     </div>
       <div class="items" id="items"></div>
       <div class="footer">
-        <div class="load" onclick="loadMore()"><span id="rotar">⟳</span> Load More</span></div>
+        <div class="load" onclick="loadMore()">⟳ Load More</span></div>
       </div>
     </div>
     <script>
@@ -827,7 +827,7 @@ getVideoData('`+dataTv[index].link+`');
           if (load) {
             if(dataEng.length > loadedBuffer && loadedBuffer > 13) {
               loadingBuffer();
-              document.getElementById('rotar').style.animation = "none";
+              document.getElementsByClassName("load")[0].classList.remove("btn-grad");
             setTimeout(function() {
               if(activeTab == 'Eng') loadContent('Eng');
             }, 500);
@@ -846,7 +846,7 @@ getVideoData('`+dataTv[index].link+`');
           if (load) {
               if(dataHin.length > loadedBuffer && loadedBuffer > 13) {
                 loadingBuffer();
-                document.getElementById('rotar').style.animation = "none";
+                document.getElementsByClassName("load")[0].classList.remove("btn-grad");
               setTimeout(function() {
                 if(activeTab == 'Hin') loadContent('Hin');
               }, 500);
@@ -865,7 +865,7 @@ getVideoData('`+dataTv[index].link+`');
           if (load) {
               if(dataTv.length > loadedBuffer && loadedBuffer > 13) {
                 loadingBuffer();
-                document.getElementById('rotar').style.animation = "none";
+                document.getElementsByClassName("load")[0].classList.remove("btn-grad");
               setTimeout(function() {
                 if(activeTab == 'Tv') loadContent('Tv');
               }, 500);
@@ -888,7 +888,7 @@ getVideoData('`+dataTv[index].link+`');
           } else {
             if(pageEng > 1) { 
               getNextOffset('Eng', true); 
-              document.getElementById('rotar').style.animation = "rotation 2s infinite linear";
+              document.getElementsByClassName("load")[0].classList.add("btn-grad");
             }
             else { document.getElementById("Eng").click(); }
             
@@ -903,7 +903,7 @@ getVideoData('`+dataTv[index].link+`');
           } else {
             if(pageEng > 1) { 
               getNextOffset('Hin', true);
-              document.getElementById('rotar').style.animation = "rotation 2s infinite linear";
+              document.getElementsByClassName("load")[0].classList.add("btn-grad");
             }
             else { document.getElementById("Hin").click(); }
           }
@@ -917,7 +917,7 @@ getVideoData('`+dataTv[index].link+`');
           } else {
             if(pageEng > 1) { 
               getNextOffset('Tv', true);
-              document.getElementById('rotar').style.animation = "rotation 2s infinite linear";
+              document.getElementsByClassName("load")[0].classList.add("btn-grad");
             }
             else { document.getElementById("Tv").click(); }
           }
