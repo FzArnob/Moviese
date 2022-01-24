@@ -1,256 +1,305 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Moviease</title>
-    <link rel="shortcut icon" href="./icon/logo-contrust.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="./bootstrap.css" />
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.5.6/plyr.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.plyr.io/3.5.6/plyr.js"></script>
-    <style>
-      * {
-        user-select: none; /* supported by Chrome and Opera */
-        -webkit-user-select: none; /* Safari */
-        -khtml-user-select: none; /* Konqueror HTML */
-        -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-      }
-      body {
-        font-family: "Segoe UI";
-        color: white;
-        background-color: #000;
-        padding: 0;
-        margin: 0;
-      }
-      .hide {
-        visibility: hidden;
-      }
-      .back {
-        padding: 10px;
-        width: 40px;
-        height: 40px;
-        background: transparent;
-        color: white;
-        border-radius: 50%;
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        z-index: 999;
-      }
-      .back:active {
-        background: rgb(255 255 255 / 30%);
-      }
 
-      .title {
-        font-size: 15px;
-        font-family: "Segoe UI";
-        background: transparent;
-        color: white;
-        position: absolute;
-        width: auto;
-        top: 18px;
-        left: 50px;
-        z-index: 999;
-      }
-      .series_controls {
-        background: transparent;
-        color: white;
-        position: absolute;
-        width: auto;
-        top: 13px;
-        right: 13px;
-        font-size: 15px;
-        z-index: 999;
-        display: flex;
-      }
-      .site {
-        height: auto;
-        width: 100%;
-      }
-      select {
-      /* Reset */
-      -webkit-appearance: none;
-        -moz-appearance: none;
-              appearance: none;
-      border: 0;
-      outline: 0;
-      /* Custom */
-      font-family: 'Segoe UI';
-      font-size: 15;
-      width: 40px;
-      text-align: center;
-      padding: 5px;
-      background: white;
-      color: #383838;
-      border-radius: 0.25em;
-      box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-      margin-left: 10px;
-      }
-      .option {
-      /* Reset */
-      -webkit-appearance: none;
-        -moz-appearance: none;
-              appearance: none;
-      border: 0;
-      outline: 0;
-      /* Custom */
-      font-family: 'Segoe UI';
-      font-size: 15;
-      border-bottom: 1px solid #383838;
-      padding: 5px;
-      background: white;
-      color: #808080;
-      }
-      select:focus {
-        outline: none;
-      }
-      select::-ms-expand {
-        display: none;
-      }
-      .video-container {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-      .video-container video {
-        /* Make video to at least 100% wide and tall */
-        min-width: 100%;
-        min-height: 100%;
+<head>
+	<title>Moviease</title>
+	<link rel="shortcut icon" href="./icon/logo-contrust.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="./bootstrap.css" />
+	<link rel="stylesheet" href="https://cdn.plyr.io/3.5.6/plyr.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.plyr.io/3.5.6/plyr.js"></script>
+	<style>
+	* {
+		user-select: none;
+		/* supported by Chrome and Opera */
+		-webkit-user-select: none;
+		/* Safari */
+		-khtml-user-select: none;
+		/* Konqueror HTML */
+		-moz-user-select: none;
+		/* Firefox */
+		-ms-user-select: none;
+		/* Internet Explorer/Edge */
+	}
 
-        /* Setting width & height to auto prevents the browser from stretching or squishing the video */
-        width: 100%;
-        height: auto;
+	body {
+		font-family: "Segoe UI";
+		color: white;
+		background-color: #000;
+		padding: 0;
+		margin: 0;
+	}
 
-        /* Center the video */
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-      .poster {
-        width: auto;
-        height: 100%;
+	.hide {
+		visibility: hidden;
+	}
 
-        /* Center the video */
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-      #header {
-        position: fixed;
-        height: 60px;
-        z-index: 999;
-        width: 100%;
-      }
-    </style>
-  </head>
-  <body id="frame">
-    <div id="wrapper" class="video-container"></div>
-    <div class="site">
-      <div id="header">
-        <img class="back" src="./icon/back.png" onclick="go_back()" />
-        <div class="title" id="title">NaN</div>
-        <div class="series_controls hide">
-          <div>
-            <select name="seasons" id="season">
-              <option class="option" value="0">S1</option>
-            </select>
-          </div>
-          <div>
-            <select name="episodes" onchange="loadEpisode(this.value)" id="episode">
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script>
-      var dataMovie = {};
-      var dataSeries = [];
-      var season_count = 0;
-    </script>
-    <script>
-      function loadVideo(data) {
-        var dataObj = JSON.parse(data);
+	.back {
+		padding: 10px;
+		width: 40px;
+		height: 40px;
+		background: transparent;
+		color: white;
+		border-radius: 50%;
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		z-index: 999;
+	}
 
-        if (dataObj.type == "movie") {
-          dataMovie = dataObj;
-          document.getElementById("wrapper").innerHTML =
-            `<video id="screen" controls poster="` +
-            dataObj.poster +
-            `" style="height: 100%">
-                    <source id="video" src="` +
-            dataObj.file +
-            `" type="video/mp4">
+	.back:active {
+		background: rgb(255 255 255 / 30%);
+	}
+
+	.title {
+		font-size: 15px;
+		font-family: "Segoe UI";
+		background: transparent;
+		color: white;
+		position: absolute;
+		width: auto;
+		top: 18px;
+		left: 50px;
+		z-index: 999;
+	}
+
+	.series_controls {
+		background: transparent;
+		color: white;
+		position: absolute;
+		width: auto;
+		top: 13px;
+		right: 13px;
+		font-size: 15px;
+		z-index: 999;
+		display: flex;
+	}
+
+	.site {
+		height: auto;
+		width: 100%;
+	}
+
+	select {
+		/* Reset */
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		border: 0;
+		outline: 0;
+		/* Custom */
+		font-family: 'Segoe UI';
+		font-size: 15;
+		width: 40px;
+		text-align: center;
+		padding: 5px;
+		background: white;
+		color: #383838;
+		border-radius: 0.25em;
+		box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+		cursor: pointer;
+		margin-left: 10px;
+	}
+
+	.option {
+		/* Reset */
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		border: 0;
+		outline: 0;
+		/* Custom */
+		font-family: 'Segoe UI';
+		font-size: 15;
+		border-bottom: 1px solid #383838;
+		padding: 5px;
+		background: white;
+		color: #808080;
+	}
+
+	select:focus {
+		outline: none;
+	}
+
+	select::-ms-expand {
+		display: none;
+	}
+
+	.video-container {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+
+	.video-container video {
+		/* Make video to at least 100% wide and tall */
+		min-width: 100%;
+		min-height: 100%;
+		/* Setting width & height to auto prevents the browser from stretching or squishing the video */
+		width: 100%;
+		height: auto;
+		/* Center the video */
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.poster {
+		width: auto;
+		height: 100%;
+		/* Center the video */
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	#header {
+		position: fixed;
+		height: 60px;
+		z-index: 999;
+		width: 100%;
+	}
+	</style>
+</head>
+
+<body id="frame">
+	<div id="wrapper" class="video-container"></div>
+	<div class="site">
+		<div id="header">
+			<img class="back" src="./icon/back.png" onclick="go_back()" />
+			<div class="title" id="title">NaN</div>
+			<div class="series_controls hide">
+				<div>
+					<select name="seasons" id="season">
+						<option class="option" value="0">S1</option>
+					</select>
+				</div>
+				<div>
+					<select name="episodes" onchange="loadEpisode(this.value)" id="episode">
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+	var dataMovie = {};
+	var dataSeries = {};
+	var season_count = 0;
+	</script>
+	<script>
+	function loadVideo(data) {
+		var dataObj = JSON.parse(data);
+		if(dataObj.type == "movie") {
+			dataMovie = dataObj;
+			document.getElementById("wrapper").innerHTML = `<video id="screen" controls poster="` + dataObj.poster + `" style="height: 100%">
+                    <source id="video" src="` + dataObj.file + `" type="video/mp4">
                 </video>`;
-          document.getElementById("title").innerHTML = dataObj.title;
-        } else if (dataObj.type == "series") {
-          dataSeries.push(dataObj);
-          document.getElementById("wrapper").innerHTML =
-            `<video id="screen" controls poster="` +
-            dataObj.playlist[0].image +
-            `" style="height: 100%">
-                    <source id="video" src="` +
-            dataObj.playlist[0].file +
-            `" type="video/mp4">
+			document.getElementById("title").innerHTML = dataObj.title;
+		} else if(dataObj.type == "series") {
+			dataSeries = dataObj;
+			document.getElementById("wrapper").innerHTML = `<video id="screen" controls poster="` + dataObj.playlist[0].image + `" style="height: 100%">
+                    <source id="video" src="` + dataObj.playlist[0].file + `" type="video/mp4">
                 </video>`;
-          document.getElementById("title").innerHTML = dataObj.title;
-          document.getElementsByClassName('series_controls')[0].classList.remove('hide');
-          for(let i =0; i < dataObj.playlist.length; i++){
-            if(dataObj.playlist[i].file)
-            document.getElementById('episode').innerHTML += 
-            `<option class="option" value="`+i+`">E`+(i+1)+`</option>`
-          }
-          for(let i =1; i < dataObj.seasons; i++){
-            document.getElementById('season').innerHTML += 
-            `<option class="option" value="`+i+`">S`+(i+1)+`</option>`
-          }
+			document.getElementById("title").innerHTML = dataObj.title;
+			for(let i = 0; i < dataObj.playlist.length; i++) {
+				if(dataObj.playlist[i].file) document.getElementById('episode').innerHTML += `<option class="option" value="` + i + `">E` + (i + 1) + `</option>`
+			}
+			for(let i = 1; i < dataObj.seasons; i++) {
+				document.getElementById('season').innerHTML += `<option class="option" value="` + i + `">S` + (i + 1) + `</option>`
+			}
+			let s = document.getElementById('season')
+			s.value = toString(dataObj.season_active);
+			s.onchange = function() {
+				let query = {
+					query: 'getVideo',
+					url: dataObj.link+"/"+document.getElementById('season').value+"/",
+					callback: `function getVideoData(link) {
+                var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
+                title = title.substring(0, title.lastIndexOf(")") + 1);
+                var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
+                console.log(year);
+                if (isNaN(year)) {
+                    var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
+                var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
+                console.log(playlist);
+                    var output =
+                    {
+                        query: 'callback',
+                        type: 'series',
+                        title: title,
+                        season_active: `+document.getElementById('season').value+`,
+                        link: link,
+                        playlist: eval(playlist),
+                        seasons: document.getElementsByClassName('page_num').length
+                    };
+                    console.log(JSON.stringify(output));
+                } else {
+                    var output =
+                    {
+                        query: 'callback',
+                        type: 'movie',
+                        title: title,
+                        link: link,
+                        file: document.getElementsByTagName('video')[0].children[0].src,
+                        poster: document.getElementsByTagName('video')[0].poster,
+                        track: document.getElementsByTagName('video')[0].children[0].src.slice(0, -3) + 'srt'
+                    };
+                    console.log(JSON.stringify(output));
+                }
+            }
+            try{
+            getVideoData('` + dataObj.link + `');
+            } catch (err) {
+                console.log(err);
+                console.log("VideoDataLoadFailed");
+            }`
+				};
+				console.log(JSON.stringify(query))
+			}
+			document.getElementsByClassName('series_controls')[0].classList.remove('hide');
+		}
+		var vid = document.getElementById("screen");
+		vid.onpause = function() {
+			document.getElementById("header").style.display = "block";
+		};
+		vid.onplay = function() {
+			document.getElementById("header").style.display = "none";
+		}
+		console.log("vir_show");
+	}
 
-        }
-        var vid = document.getElementById("screen");
-        vid.onpause = function() {
-            document.getElementById("header").style.display = "block";
-        };
-        vid.onplay = function() {
-            document.getElementById("header").style.display = "none";
-        }
-        console.log("vir_show");
-      }
-      function fadeOutEffect(ele) {
-        var fadeTarget = document.getElementById(ele);
-        var fadeEffect = setInterval(function () {
-          if (!fadeTarget.style.opacity) {
-            fadeTarget.style.opacity = 1;
-          }
-          if (fadeTarget.style.opacity > 0) {
-            fadeTarget.style.opacity -= 0.1;
-          } else {
-            clearInterval(fadeEffect);
-          }
-        }, 100);
-      }
-      function go_back() {
-        fadeOutEffect("frame");
-        console.log("Go-Back");
-      }
-      function loadEpisode(episode){
-        let season = document.getElementById("season").value
-        document.getElementById("wrapper").innerHTML =
-            `<video id="screen" controls poster="` +
-            dataSeries[season].playlist[0].image +
-            `" style="height: 100%">
-                    <source id="video" src="` +
-            dataSeries[season].playlist[episode].file +
-            `" type="video/mp4">
+	function fadeOutEffect(ele) {
+		var fadeTarget = document.getElementById(ele);
+		var fadeEffect = setInterval(function() {
+			if(!fadeTarget.style.opacity) {
+				fadeTarget.style.opacity = 1;
+			}
+			if(fadeTarget.style.opacity > 0) {
+				fadeTarget.style.opacity -= 0.1;
+			} else {
+				clearInterval(fadeEffect);
+			}
+		}, 100);
+	}
+
+	function go_back() {
+		fadeOutEffect("frame");
+		console.log("Go-Back");
+	}
+
+	function loadEpisode(episode) {
+		document.getElementById("wrapper").innerHTML = `<video id="screen" controls poster="` + dataSeries.playlist[0].image + `" style="height: 100%">
+                    <source id="video" src="` + dataSeries.playlist[episode].file + `" type="video/mp4">
                 </video>`;
-      }
+	}
+	</script>
+</body>
 
-    </script>
-  </body>
 </html>

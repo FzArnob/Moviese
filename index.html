@@ -443,22 +443,17 @@
     var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
 console.log(year);
     if (isNaN(year)) {
-        let value = [];
-        let data = jwplayer().getPlaylist();
-        for( let i = 0; i< data.length; i++) {
-            value.push({
-                file: data[i].file,
-                poster: data[i].image,
-                tracks: data[i].tracks
-            });
-        };
+        var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
+		var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
+		console.log(playlist);
         var output =
         {
             query: 'callback',
             type: 'series',
             title: title,
+			season_active: 1,
             link: link,
-            data: value,
+            playlist: eval(playlist),
             seasons: document.getElementsByClassName('page_num').length
         };
         console.log(JSON.stringify(output));
@@ -494,22 +489,17 @@ getVideoData('` + dataEng[index].link + `');
     var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
 console.log(year);
     if (isNaN(year)) {
-        let value = [];
-        let data = jwplayer().getPlaylist();
-        for( let i = 0; i< data.length; i++) {
-            value.push({
-                file: data[i].file,
-                poster: data[i].image,
-                tracks: data[i].tracks
-            });
-        };
+        var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
+		var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
+		console.log(playlist);
         var output =
         {
             query: 'callback',
             type: 'series',
             title: title,
+			season_active: 1,
             link: link,
-            data: value,
+            playlist: eval(playlist),
             seasons: document.getElementsByClassName('page_num').length
         };
         console.log(JSON.stringify(output));
@@ -553,6 +543,7 @@ console.log(year);
             query: 'callback',
             type: 'series',
             title: title,
+			season_active: 1,
             link: link,
             playlist: eval(playlist),
             seasons: document.getElementsByClassName('page_num').length
