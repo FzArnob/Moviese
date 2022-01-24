@@ -65,32 +65,50 @@
         z-index: 999;
         display: flex;
       }
-      .Seasons {
-        margin-right: 10px;
-        border: 2px solid rgba(255, 255, 255, 0.65);
-        border-radius: 8px;
-        padding: 7px;
-        background: rgba(255, 255, 255, 0.103);
-        color: white;
-        width: auto;
-        height: 40px;
-        font-size: 15px;
-        font-family: "Segoe UI";
-      }
       .site {
         height: auto;
         width: 100%;
       }
-      .Episodes {
-        border: 2px solid rgba(255, 255, 255, 0.65);
-        border-radius: 8px;
-        padding: 5px;
-        background: rgba(255, 255, 255, 0.103);
-        color: white;
-        width: auto;
-        height: 40px;
-        font-size: 15px;
-        font-family: "Segoe UI";
+      select {
+      /* Reset */
+      -webkit-appearance: none;
+        -moz-appearance: none;
+              appearance: none;
+      border: 0;
+      outline: 0;
+      /* Custom */
+      font-family: 'Segoe UI';
+      font-size: 15;
+      width: 40px;
+      text-align: center;
+      padding: 5px;
+      background: white;
+      color: #383838;
+      border-radius: 0.25em;
+      box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      margin-left: 10px;
+      }
+      .option {
+      /* Reset */
+      -webkit-appearance: none;
+        -moz-appearance: none;
+              appearance: none;
+      border: 0;
+      outline: 0;
+      /* Custom */
+      font-family: 'Segoe UI';
+      font-size: 15;
+      border-bottom: 1px solid #383838;
+      padding: 5px;
+      background: white;
+      color: #808080;
+      }
+      select:focus {
+        outline: none;
+      }
+      select::-ms-expand {
+        display: none;
       }
       .video-container {
         position: absolute;
@@ -140,8 +158,15 @@
         <img class="back" src="./icon/back.png" onclick="go_back()" />
         <div class="title" id="title">NaN</div>
         <div class="series_controls hide">
-          <div class="Seasons">Season 1</div>
-          <div class="Episodes">Episode 1</div>
+          <div>
+            <select name="seasons" id="season">
+              <option class="option" value="0">S1</option>
+            </select>
+          </div>
+          <div>
+            <select name="episodes" onchange="loadEpisode(this.value)" id="episode">
+            </select>
+          </div>
         </div>
       </div>
     </div>
@@ -176,6 +201,16 @@
             `" type="video/mp4">
                 </video>`;
           document.getElementById("title").innerHTML = dataObj.title;
+          document.getElementsByClassName('series_controls')[0].classList.remove('hide');
+          for(let i =0; i < dataObj.playlist.length; i++){
+            document.getElementById('episode').innerHTML += 
+            `<option class="option" value="`+i+`">E`+(i+1)+`</option>`
+          }
+          for(let i =1; i < dataObj.seasons; i++){
+            document.getElementById('season').innerHTML += 
+            `<option class="option" value="`+i+`">S`+(i+1)+`</option>`
+          }
+
         }
         var vid = document.getElementById("screen");
         vid.onpause = function() {
@@ -202,6 +237,16 @@
       function go_back() {
         fadeOutEffect("frame");
         console.log("Go-Back");
+      }
+      function loadEpisode(episode){
+        document.getElementById("wrapper").innerHTML =
+            `<video id="screen" controls poster="` +
+            dataSeries.playlist[0].image +
+            `" style="height: 100%">
+                    <source id="video" src="` +
+            dataSeries.playlist[episode].file +
+            `" type="video/mp4">
+                </video>`;
       }
 
     </script>
