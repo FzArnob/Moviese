@@ -177,7 +177,7 @@
 			<div class="title" id="title">NaN</div>
 			<div class="series_controls hide">
 				<div>
-					<select name="seasons" id="season">
+					<select name="seasons" id="season" onchange="getSeason(this.value)">
 						<option class="option" value="0">S1</option>
 					</select>
 				</div>
@@ -215,55 +215,9 @@
 				document.getElementById('season').innerHTML += `<option class="option" value="` + i + `">S` + (i + 1) + `</option>`
 			}
 			let s = document.getElementById('season')
-      console.log(s.value,'->', dataObj.season_active);
-			s.value = dataObj.season_active;
-			s.onchange = function() {
-        let s_a = document.getElementById('season');
-				let query = {
-					query: 'getVideo',
-					url: dataObj.link+"/"+ (s_a.value+1) +"/",
-					callback: `function getVideoData(link) {
-                var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
-                title = title.substring(0, title.lastIndexOf(")") + 1);
-                var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
-                console.log(year);
-                if (isNaN(year)) {
-                    var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
-                var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
-                    var output =
-                    {
-                        query: 'callback',
-                        type: 'series',
-                        title: title,
-                        season_active: '`+ (s_a.value+1) +`',
-                        link: link,
-                        playlist: eval(playlist),
-                        seasons: document.getElementsByClassName('page_num').length
-                    };
-                    console.log(JSON.stringify(output));
-                } else {
-                    var output =
-                    {
-                        query: 'callback',
-                        type: 'movie',
-                        title: title,
-                        link: link,
-                        file: document.getElementsByTagName('video')[0].children[0].src,
-                        poster: document.getElementsByTagName('video')[0].poster,
-                        track: document.getElementsByTagName('video')[0].children[0].src.slice(0, -3) + 'srt'
-                    };
-                    console.log(JSON.stringify(output));
-                }
-            }
-            try{
-            getVideoData('` + dataObj.link + `');
-            } catch (err) {
-                console.log(err);
-                console.log("VideoDataLoadFailed");
-            }`
-				};
-				console.log(JSON.stringify(query))
-			}
+      console.log(s.value);
+      console.log(dataObj.season_active);
+			// s.value = (dataObj.season_active-1);
 			document.getElementsByClassName('series_controls')[0].classList.remove('hide');
 		}
 		var vid = document.getElementById("screen");
@@ -300,6 +254,53 @@
                     <source id="video" src="` + dataSeries.playlist[episode].file + `" type="video/mp4">
                 </video>`;
 	}
+  function getSeason(s) {
+        let page = parseInt(s) + 1;
+				let query = {
+					query: 'getVideo',
+					url: dataObj.link + page +"/",
+					callback: `function getVideoData(link) {
+                var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
+                title = title.substring(0, title.lastIndexOf(")") + 1);
+                var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
+                console.log(year);
+                if (isNaN(year)) {
+                    var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
+                var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
+                    var output =
+                    {
+                        query: 'callback',
+                        type: 'series',
+                        title: title,
+                        season_active: '`+ page +`',
+                        link: link,
+                        playlist: eval(playlist),
+                        seasons: document.getElementsByClassName('page_num').length
+                    };
+                    console.log(JSON.stringify(output));
+                } else {
+                    var output =
+                    {
+                        query: 'callback',
+                        type: 'movie',
+                        title: title,
+                        link: link,
+                        file: document.getElementsByTagName('video')[0].children[0].src,
+                        poster: document.getElementsByTagName('video')[0].poster,
+                        track: document.getElementsByTagName('video')[0].children[0].src.slice(0, -3) + 'srt'
+                    };
+                    console.log(JSON.stringify(output));
+                }
+            }
+            try{
+            getVideoData('` + dataObj.link + `');
+            } catch (err) {
+                console.log(err);
+                console.log("VideoDataLoadFailed");
+            }`
+				};
+				console.log(JSON.stringify(query))
+			}
 	</script>
 </body>
 
