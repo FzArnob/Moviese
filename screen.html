@@ -147,7 +147,7 @@
     </div>
     <script>
       var dataMovie = {};
-      var dataSeries = [];
+      var dataSeries = {};
       var season_count = 0;
     </script>
     <script>
@@ -162,6 +162,17 @@
             `" style="height: 100%">
                     <source id="video" src="` +
             dataObj.file +
+            `" type="video/mp4">
+                </video>`;
+          document.getElementById("title").innerHTML = dataObj.title;
+        } else if (dataObj.type == "series") {
+          dataSeries = dataObj;
+          ocument.getElementById("wrapper").innerHTML =
+            `<video id="screen" controls poster="` +
+            dataObj.playlist[0].image +
+            `" style="height: 100%">
+                    <source id="video" src="` +
+            dataObj.playlist[0].file +
             `" type="video/mp4">
                 </video>`;
           document.getElementById("title").innerHTML = dataObj.title;
