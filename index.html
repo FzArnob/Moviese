@@ -545,24 +545,7 @@ getVideoData('` + dataHin[index].link + `');
     var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
 console.log(year);
     if (isNaN(year)) {
-        let value = [];
-        console.log("data- ", playlist)
-        for( let i = 0; i< playlist.length; i++) {
-            value.push({
-                file: playlist[i].file,
-                poster: playlist[i].image,
-                tracks: playlist[i].tracks
-            });
-        };
-        var output =
-        {
-            query: 'callback',
-            type: 'series',
-            title: title,
-            link: link,
-            data: value,
-            seasons: document.getElementsByClassName('page_num').length
-        };
+        
         console.log(JSON.stringify(output));
     } else {
         var output =
@@ -578,9 +561,8 @@ console.log(year);
         console.log(JSON.stringify(output));
     }
 }
-try{
-	
 var playlist = jwplayer().getPlaylist();
+try{
 getVideoData('` + dataTv[index].link + `', playlist);
 } catch (err) {
     console.log(err);
