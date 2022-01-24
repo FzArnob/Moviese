@@ -545,7 +545,7 @@ getVideoData('` + dataHin[index].link + `');
     var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
 console.log(year);
     if (isNaN(year)) {
-        var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('center')[0].getElementsByTagName('script')[0].innerHTML;
+        var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
 		var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
 		console.log(playlist);
         var output =
