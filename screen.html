@@ -215,11 +215,13 @@
 				document.getElementById('season').innerHTML += `<option class="option" value="` + i + `">S` + (i + 1) + `</option>`
 			}
 			let s = document.getElementById('season')
+      console.log(s.value,'->', dataObj.season_active)
 			s.value = toString(dataObj.season_active);
 			s.onchange = function() {
+        let s_a = document.getElementById('season');
 				let query = {
 					query: 'getVideo',
-					url: dataObj.link+"/"+document.getElementById('season').value+"/",
+					url: dataObj.link+"/"+ (s_a.value+1) +"/",
 					callback: `function getVideoData(link) {
                 var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
                 title = title.substring(0, title.lastIndexOf(")") + 1);
@@ -234,7 +236,7 @@
                         query: 'callback',
                         type: 'series',
                         title: title,
-                        season_active: `+document.getElementById('season').value+`,
+                        season_active: `+ (s_a.value+1) +`,
                         link: link,
                         playlist: eval(playlist),
                         seasons: document.getElementsByClassName('page_num').length
