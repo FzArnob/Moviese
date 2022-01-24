@@ -445,7 +445,6 @@ console.log(year);
     if (isNaN(year)) {
         var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
 		var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
-		console.log(playlist);
         var output =
         {
             query: 'callback',
@@ -491,13 +490,12 @@ console.log(year);
     if (isNaN(year)) {
         var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
 		var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
-		console.log(playlist);
         var output =
         {
             query: 'callback',
             type: 'series',
             title: title,
-			season_active: 1,
+			season_active: '1',
             link: link,
             playlist: eval(playlist),
             seasons: document.getElementsByClassName('page_num').length
@@ -537,7 +535,6 @@ console.log(year);
     if (isNaN(year)) {
         var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
 		var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
-		console.log(playlist);
         var output =
         {
             query: 'callback',

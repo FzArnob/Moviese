@@ -215,8 +215,8 @@
 				document.getElementById('season').innerHTML += `<option class="option" value="` + i + `">S` + (i + 1) + `</option>`
 			}
 			let s = document.getElementById('season')
-      console.log(s.value,'->', dataObj.season_active)
-			s.value = toString(dataObj.season_active);
+      console.log(s.value,'->', dataObj.season_active);
+			s.value = dataObj.season_active;
 			s.onchange = function() {
         let s_a = document.getElementById('season');
 				let query = {
@@ -230,13 +230,12 @@
                 if (isNaN(year)) {
                     var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
                 var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
-                console.log(playlist);
                     var output =
                     {
                         query: 'callback',
                         type: 'series',
                         title: title,
-                        season_active: `+ (s_a.value+1) +`,
+                        season_active: '`+ (s_a.value+1) +`',
                         link: link,
                         playlist: eval(playlist),
                         seasons: document.getElementsByClassName('page_num').length
