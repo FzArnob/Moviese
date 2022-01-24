@@ -59,8 +59,8 @@
         color: white;
         position: absolute;
         width: auto;
-        top: 10px;
-        right: 20px;
+        top: 13px;
+        right: 13px;
         font-size: 15px;
         z-index: 999;
         display: flex;
@@ -172,7 +172,7 @@
     </div>
     <script>
       var dataMovie = {};
-      var dataSeries = {};
+      var dataSeries = [];
       var season_count = 0;
     </script>
     <script>
@@ -191,7 +191,7 @@
                 </video>`;
           document.getElementById("title").innerHTML = dataObj.title;
         } else if (dataObj.type == "series") {
-          dataSeries = dataObj;
+          dataSeries.push(dataObj);
           document.getElementById("wrapper").innerHTML =
             `<video id="screen" controls poster="` +
             dataObj.playlist[0].image +
@@ -203,6 +203,7 @@
           document.getElementById("title").innerHTML = dataObj.title;
           document.getElementsByClassName('series_controls')[0].classList.remove('hide');
           for(let i =0; i < dataObj.playlist.length; i++){
+            if(dataObj.playlist[i].file)
             document.getElementById('episode').innerHTML += 
             `<option class="option" value="`+i+`">E`+(i+1)+`</option>`
           }
@@ -239,12 +240,13 @@
         console.log("Go-Back");
       }
       function loadEpisode(episode){
+        let season = document.getElementById("season").value
         document.getElementById("wrapper").innerHTML =
             `<video id="screen" controls poster="` +
-            dataSeries.playlist[0].image +
+            dataSeries[season].playlist[0].image +
             `" style="height: 100%">
                     <source id="video" src="` +
-            dataSeries.playlist[episode].file +
+            dataSeries[season].playlist[episode].file +
             `" type="video/mp4">
                 </video>`;
       }
