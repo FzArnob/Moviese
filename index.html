@@ -539,20 +539,21 @@ getVideoData('` + dataHin[index].link + `');
 			let query = {
 				query: 'getVideo',
 				url: dataTv[index].link,
-				callback: `function getVideoData(link) {
+				callback: `
+				var datara = jwplayer("season1").getPlaylist();
+				function getVideoData(link) {
     var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
     title = title.substring(0, title.lastIndexOf(")") + 1);
     var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
 console.log(year);
     if (isNaN(year)) {
         let value = [];
-        let data = jwplayer("season1").getPlaylist();
-        console.log("data- ", data)
-        for( let i = 0; i< data.length; i++) {
+        console.log("data- ", datara)
+        for( let i = 0; i< datara.length; i++) {
             value.push({
-                file: data[i].file,
-                poster: data[i].image,
-                tracks: data[i].tracks
+                file: datara[i].file,
+                poster: datara[i].image,
+                tracks: datara[i].tracks
             });
         };
         var output =
