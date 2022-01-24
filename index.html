@@ -539,21 +539,19 @@ getVideoData('` + dataHin[index].link + `');
 			let query = {
 				query: 'getVideo',
 				url: dataTv[index].link,
-				callback: `
-				var datara = jwplayer("season1").getPlaylist();
-				function getVideoData(link) {
+				callback: `function getVideoData(link, playlist) {
     var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
     title = title.substring(0, title.lastIndexOf(")") + 1);
     var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
 console.log(year);
     if (isNaN(year)) {
         let value = [];
-        console.log("data- ", datara)
-        for( let i = 0; i< datara.length; i++) {
+        console.log("data- ", playlist)
+        for( let i = 0; i< playlist.length; i++) {
             value.push({
-                file: datara[i].file,
-                poster: datara[i].image,
-                tracks: datara[i].tracks
+                file: playlist[i].file,
+                poster: playlist[i].image,
+                tracks: playlist[i].tracks
             });
         };
         var output =
@@ -581,7 +579,9 @@ console.log(year);
     }
 }
 try{
-getVideoData('` + dataTv[index].link + `');
+	
+var playlist = jwplayer().getPlaylist();
+getVideoData('` + dataTv[index].link + `', playlist);
 } catch (err) {
     console.log(err);
     console.log("VideoDataLoadFailed");
