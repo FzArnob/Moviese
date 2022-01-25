@@ -588,9 +588,57 @@
 						box.children[1].children[1].style.width = "auto";
 						box.children[1].children[1].style.padding = "5px";
 					}
-				}, 500);
+				}, 100);
 		}
 	} 
+	function loadSearchVideo(index){
+		let query = {
+				query: 'getVideo',
+				url: search_results[index].link,
+				callback: `function getVideoData(link) {
+					var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
+					title = title.substring(0, title.lastIndexOf(")") + 1);
+					var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
+					console.log(year);
+					if (isNaN(year)) {
+						var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
+						var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
+						let s = document.getElementsByClassName('page_num').length;
+						if(s == 0) { s = 1; }
+						var output =
+						{
+							query: 'callback',
+							type: 'series',
+							title: title,
+							season_active: 1,
+							link: link,
+							playlist: eval(playlist),
+							seasons: s
+						};
+						console.log(JSON.stringify(output));
+					} else {
+						var output =
+						{
+							query: 'callback',
+							type: 'movie',
+							title: title,
+							link: link,
+							file: document.getElementsByTagName('video')[0].children[0].src,
+							poster: document.getElementsByTagName('video')[0].poster,
+							track: document.getElementsByTagName('video')[0].children[0].src.slice(0, -3) + 'srt'
+						};
+						console.log(JSON.stringify(output));
+					}
+				}
+				try{
+				getVideoData('` + search_results[index].link + `');
+				} catch (err) {
+					console.log(err);
+					console.log("VideoDataLoadFailed");
+				}`
+			};
+			console.log(JSON.stringify(query))
+	}
 	function emptyBuffer() {
 		loadedBuffer = 1;
 		document.getElementById("items").innerHTML = "";
