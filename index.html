@@ -603,7 +603,7 @@
 					var test = document.getElementsByClassName('alert');
 					var seriesType = false;
 					for(let i= 0; i<test.length; i++){
-						if(test[i].children[0].innerHTML == 'Season 1'){ seriesType = true; }
+						if(test[i].children[0].innerHTML.includes('Season')){ seriesType = true; break;}
 					}
 
 					if (seriesType) {
@@ -680,46 +680,50 @@
 				query: 'getVideo',
 				url: dataEng[index].link,
 				callback: `function getVideoData(link) {
-    var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
-    title = title.substring(0, title.lastIndexOf(")") + 1);
-    var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
-console.log(year);
-    if (isNaN(year)) {
-        var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
-		var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
-		let s = document.getElementsByClassName('page_num').length;
-		if(s == 0) { s = 1; }
-        var output =
-        {
-            query: 'callback',
-            type: 'series',
-            title: title,
-			season_active: 1,
-            link: link,
-            playlist: eval(playlist),
-            seasons: s
-        };
-        console.log(JSON.stringify(output));
-    } else {
-        var output =
-        {
-            query: 'callback',
-            type: 'movie',
-            title: title,
-            link: link,
-            file: document.getElementsByTagName('video')[0].children[0].src,
-            poster: document.getElementsByTagName('video')[0].poster,
-            track: document.getElementsByTagName('video')[0].children[0].src.slice(0, -3) + 'srt'
-        };
-        console.log(JSON.stringify(output));
-    }
-}
-try{
-getVideoData('` + dataEng[index].link + `');
-} catch (err) {
-    console.log(err);
-    console.log("VideoDataLoadFailed");
-}`
+					var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
+					title = title.substring(0, title.lastIndexOf(")") + 1);
+					var test = document.getElementsByClassName('alert');
+					var seriesType = false;
+					for(let i= 0; i<test.length; i++){
+						if(test[i].children[0].innerHTML.includes('Season')){ seriesType = true; break;}
+					}
+
+					if (seriesType) {
+						var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
+						var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
+						let s = document.getElementsByClassName('page_num').length;
+						if(s == 0) { s = 1; }
+						var output =
+						{
+							query: 'callback',
+							type: 'series',
+							title: title,
+							season_active: 1,
+							link: link,
+							playlist: eval(playlist),
+							seasons: s
+						};
+						console.log(JSON.stringify(output));
+					} else {
+						var output =
+						{
+							query: 'callback',
+							type: 'movie',
+							title: title,
+							link: link,
+							file: document.getElementsByTagName('video')[0].children[0].src,
+							poster: document.getElementsByTagName('video')[0].poster,
+							track: document.getElementsByTagName('video')[0].children[0].src.slice(0, -3) + 'srt'
+						};
+						console.log(JSON.stringify(output));
+					}
+				}
+				try{
+				getVideoData('` + dataEng[index].link + `');
+				} catch (err) {
+					console.log(err);
+					console.log("VideoDataLoadFailed");
+				}`
 			};
 			console.log(JSON.stringify(query))
 		} else if(activeTab == "Hin") {
@@ -727,46 +731,50 @@ getVideoData('` + dataEng[index].link + `');
 				query: 'getVideo',
 				url: dataHin[index].link,
 				callback: `function getVideoData(link) {
-    var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
-    title = title.substring(0, title.lastIndexOf(")") + 1);
-    var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
-console.log(year);
-    if (isNaN(year)) {
-        var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
-		var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
-		let s = document.getElementsByClassName('page_num').length;
-		if(s == 0) { s = 1; }
-        var output =
-        {
-            query: 'callback',
-            type: 'series',
-            title: title,
-			season_active: '1',
-            link: link,
-            playlist: eval(playlist),
-            seasons: s
-        };
-        console.log(JSON.stringify(output));
-    } else {
-        var output =
-        {
-            query: 'callback',
-            type: 'movie',
-            title: title,
-            link: link,
-            file: document.getElementsByTagName('video')[0].children[0].src,
-            poster: document.getElementsByTagName('video')[0].poster,
-            track: document.getElementsByTagName('video')[0].children[0].src.slice(0, -3) + 'srt'
-        };
-        console.log(JSON.stringify(output));
-    }
-}
-try{
-getVideoData('` + dataHin[index].link + `');
-} catch (err) {
-    console.log(err);
-    console.log("VideoDataLoadFailed");
-}`
+					var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
+					title = title.substring(0, title.lastIndexOf(")") + 1);
+					var test = document.getElementsByClassName('alert');
+					var seriesType = false;
+					for(let i= 0; i<test.length; i++){
+						if(test[i].children[0].innerHTML.includes('Season')){ seriesType = true; break;}
+					}
+
+					if (seriesType) {
+						var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
+						var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
+						let s = document.getElementsByClassName('page_num').length;
+						if(s == 0) { s = 1; }
+						var output =
+						{
+							query: 'callback',
+							type: 'series',
+							title: title,
+							season_active: '1',
+							link: link,
+							playlist: eval(playlist),
+							seasons: s
+						};
+						console.log(JSON.stringify(output));
+					} else {
+						var output =
+						{
+							query: 'callback',
+							type: 'movie',
+							title: title,
+							link: link,
+							file: document.getElementsByTagName('video')[0].children[0].src,
+							poster: document.getElementsByTagName('video')[0].poster,
+							track: document.getElementsByTagName('video')[0].children[0].src.slice(0, -3) + 'srt'
+						};
+						console.log(JSON.stringify(output));
+					}
+				}
+				try{
+				getVideoData('` + dataHin[index].link + `');
+				} catch (err) {
+					console.log(err);
+					console.log("VideoDataLoadFailed");
+				}`
 			};
 			console.log(JSON.stringify(query))
 		} else if(activeTab == "Tv") {
@@ -774,46 +782,50 @@ getVideoData('` + dataHin[index].link + `');
 				query: 'getVideo',
 				url: dataTv[index].link,
 				callback: `function getVideoData(link) {
-    var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
-    title = title.substring(0, title.lastIndexOf(")") + 1);
-    var year = title.substring(title.indexOf("(") + 1, title.lastIndexOf(")"));
-console.log(year);
-    if (isNaN(year)) {
-        var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
-		var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
-		let s = document.getElementsByClassName('page_num').length;
-		if(s == 0) { s = 1; }
-        var output =
-        {
-            query: 'callback',
-            type: 'series',
-            title: title,
-			season_active: 1,
-            link: link,
-            playlist: eval(playlist),
-            seasons: s
-        };
-        console.log(JSON.stringify(output));
-    } else {
-        var output =
-        {
-            query: 'callback',
-            type: 'movie',
-            title: title,
-            link: link,
-            file: document.getElementsByTagName('video')[0].children[0].src,
-            poster: document.getElementsByTagName('video')[0].poster,
-            track: document.getElementsByTagName('video')[0].children[0].src.slice(0, -3) + 'srt'
-        };
-        console.log(JSON.stringify(output));
-    }
-}
-try{
-getVideoData('` + dataTv[index].link + `');
-} catch (err) {
-    console.log(err);
-    console.log("VideoDataLoadFailed");
-}`
+					var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
+					title = title.substring(0, title.lastIndexOf(")") + 1);
+					var test = document.getElementsByClassName('alert');
+					var seriesType = false;
+					for(let i= 0; i<test.length; i++){
+						if(test[i].children[0].innerHTML.includes('Season')){ seriesType = true; break;}
+					}
+
+					if (seriesType) {
+						var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
+						var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
+						let s = document.getElementsByClassName('page_num').length;
+						if(s == 0) { s = 1; }
+						var output =
+						{
+							query: 'callback',
+							type: 'series',
+							title: title,
+							season_active: 1,
+							link: link,
+							playlist: eval(playlist),
+							seasons: s
+						};
+						console.log(JSON.stringify(output));
+					} else {
+						var output =
+						{
+							query: 'callback',
+							type: 'movie',
+							title: title,
+							link: link,
+							file: document.getElementsByTagName('video')[0].children[0].src,
+							poster: document.getElementsByTagName('video')[0].poster,
+							track: document.getElementsByTagName('video')[0].children[0].src.slice(0, -3) + 'srt'
+						};
+						console.log(JSON.stringify(output));
+					}
+				}
+				try{
+				getVideoData('` + dataTv[index].link + `');
+				} catch (err) {
+					console.log(err);
+					console.log("VideoDataLoadFailed");
+				}`
 			};
 			console.log(JSON.stringify(query))
 		}
