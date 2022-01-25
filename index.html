@@ -494,27 +494,30 @@
 					query: "getSearchResult",
 					search_value: search_value,
 					callback: `function getData(target, search_value){
-                  var collection = document.getElementsByTagName(target);
-                  var dataArr = [];
-                  for (let i = 0; i < collection.length; i++) {
-                      let item = {
-                                  title: collection[i].children[0].children[3].children[2].children[0].innerHTML,
-                                  category: collection[i].children[0].children[3].children[0].innerHTML,
-                                  link: collection[i].children[0].children[0].href,
-                                  image: collection[i].children[0].children[0].children[0].children[1].src
-                              };
-                              dataArr.push(item);
-                  }
-                  let dataObj = {
-                      query: 'callback',
-                      output: dataArr,
-                      search_value: search_value
-                  };
-                  console.log(JSON.stringify(dataObj));
-              }
-              getData("article", "`+search_value+`");`,
-				});
-				console.log(query);
+						var titles = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var categories = document.querySelectorAll("article .post_content_light .post_category");
+						var links = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var images = document.querySelectorAll("article picture img");
+                  		var dataArr = [];
+                  		for (let i = 0; i < titles.length; i++) {
+                      		let item = {
+                                  title: titles[i].innerHTML,
+                                  category: categories[i].innerHTML,
+                                  link: links[i].href,
+                                  image: images[i].src
+                            };
+                            dataArr.push(item);
+                  		}
+						let dataObj = {
+							query: 'callback',
+							output: dataArr,
+							search_value: search_value
+						};
+						console.log(JSON.stringify(dataObj));
+					}
+					getData("article", "`+search_value+`");`,
+					});
+					console.log(query);
 				} else {
 				}
 			}
@@ -565,8 +568,7 @@
 	}
 	function loadSearchResult(res, res_search_value){
 		if(res_search_value == search_value){
-			let resTemp = JSON.parse(res)
-			search_results = resTemp.output;
+			search_results = JSON.parse(res);
 			last_search_value = res_search_value;
 			loadSearchBuffer(search_results.length);
 			setTimeout(function() {

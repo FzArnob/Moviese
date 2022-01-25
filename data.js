@@ -20,3 +20,11 @@ function getData(target, page, load, tab){
     console.log(JSON.stringify(dataObj));
 }
 getData('article', 1, true, 'Tv');
+
+
+console.log(
+    document.querySelectorAll("article .post_content_light .post_subtitle a").length, 
+    document.querySelectorAll("article .post_content_light .post_category").length, 
+    document.querySelectorAll("article .post_content_light .post_subtitle a").length, 
+    document.querySelectorAll("article picture img").length
+);
