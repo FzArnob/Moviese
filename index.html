@@ -52,15 +52,15 @@
 		color: rgb(158, 158, 158);
 	}
 
-	.search .row .col input {
+	.search input {
 		height: 35px;
 		border: none;
 		background-color: #404040;
 		color: white;
-		min-width: 300px;
+		width: calc(100%);
 	}
 
-	.search .row .col input:focus {
+	.search input:focus {
 		border: none;
 		outline: none;
 	}
@@ -130,7 +130,10 @@
 	}
 
 	.items {
-		margin-top: 20px;
+		margin: auto;
+		padding: 25px;
+		margin-top: 15px;
+		max-width: 960px;
 	}
 
 	.item {
@@ -174,9 +177,8 @@
 
 	.site {
 		margin: auto;
-		max-width: 1000px;
-		padding: 20px;
-		padding-bottom: 0;
+		max-width: 960px;
+		margin-top: 20px;
 	}
 
 	.header {
@@ -228,7 +230,7 @@
 
 	.btn-grad {
 		cursor: pointer;
-		padding: 5px 15px;
+		padding: 6px 14px;
 		text-align: center;
 		transition: 0.5s;
 		background-size: 200% auto;
@@ -240,6 +242,8 @@
 	.abs {
 		position: absolute;
 		right: 10px;
+		top: 9px;
+		transition: width 2s;
 	}
 
 	.btn-grad:hover {
@@ -256,6 +260,8 @@
 		border-top-right-radius: 8px;
 		display: flex;
 		margin-top: 20px;
+		z-index: 100;
+		margin-bottom: -6px;
 	}
 
 	.tab-item {
@@ -281,10 +287,12 @@
 	}
 
 	.line {
+		box-shadow: 0 0 10px #282828;
+		margin: auto;
 		margin-top: -5px;
-		width: 100%;
-		height: 0px;
-		border-radius: 50%;
+		width: calc(100% - 2px);
+		height: 10px;
+		border-radius: 90%;
 	}
 
 	.footer {
@@ -301,7 +309,7 @@
 		height: auto;
 		text-align: center;
 		margin-top: 20px;
-		padding: 8px 10px;
+		padding: 6px 14px;
 		box-shadow: 0 0 10px #282828;
 		background-color: #404040;
 		border-radius: 18px;
@@ -323,44 +331,122 @@
 		max-width: 960px;
 		-webkit-transition: all 0.3s ease-in;
 		transition: all 0.3s ease-in;
-		padding-top: 20px;
+		padding: 20px;
 		background-color: #383838;
+		padding-bottom: 0;
+		height: 156px;
+
 	}
 
 	.fixed {
-		width: calc(100% - 40px);
+		width: calc(100%);
 		position: fixed;
 		top: 0;
 		z-index: 99;
+	}
+	.results{
+		width: 100%;
+		background: #383838;
+		padding: 20px;
+		animation:animatebottom 0.4s;
+	}
+	@keyframes animatebottom{
+		from{bottom:-600px;opacity:0} 
+		to{bottom:0;opacity:1}
+	}
+	.warning{
+		text-align: center;
+		font-family: 'Segoe UI';
+		font-size: 12px;
+		color: #808080;
+	}
+	.hide{
+		display: none;
+	}
+	.hidden_text{
+		height: 35px;
+		padding: 5px;
+		border: none;
+		background-color: #404040;
+		color: rgb(158, 158, 158);
+		width: calc(100%);
 	}
 	</style>
 </head>
 
 <body>
 	<div class="site">
-		<div class="header">
-			<img class="logo" src="./icon/logo-contrust.png" />
-			<div class="logo-text">MOVIEASE</div>
-			<div class="dev">Made in <span>FZ'S LAB</span></div>
+			<div class="header">
+				<img class="logo" src="./icon/logo-contrust.png" />
+				<div class="logo-text">MOVIEASE</div>
+				<div class="dev">Made in <span>FZ'S LAB</span></div>
+			</div>
+			<div id="top">
+				<div class="search">
+					<input type="text" id="search_input" placeholder="Search Movies or TV Series..." />
+					<div class="hidden_text hide" id="hidden_input"></div>
+					<div class="btn-grad abs" onclick="trigger_search(this)">Search</div>
+				</div>
+				<div class="tabs" id="tabs">
+					<div id="Eng" onclick="tabEng(this)" class="tab-item active" style="border-top-left-radius: 8px; border-right: 2px solid #343434"> Hollywood </div>
+					<div id="Hin" onclick="tabHin(this)" class="tab-item">Bollywood</div>
+					<div id="Tv" onclick="tabTv(this)" class="tab-item" style="border-top-right-radius: 8px; border-left: 2px solid #343434"> TV Series </div>
+				</div>
+				<div class="line btn-grad" id="line"></div>
+			</div>
 		</div>
-		<div id="top">
-			<div class="search" onclick="search_focus(this)">
+		<div class="results hide" id="result_div">
+			<div class="warning">
+				Search related words, or
+				<br> Add release year with the title. E.g. "Friends 1994"
+				<br>
+				<br>
+			</div>
+			<div class="result-view">
 				<div class="row">
-					<div class="col">
-						<input type="text" placeholder="Search Movies or TV Series..." />
+					<div class="col-sm">
+					<div class="item" id="item` + i + `" onclick="loadVideo(` + (i - 1) + `)">
+						<div class="image"></div>
+						<div class="text">
+						<div class="text-line1"></div>
+						<div class="text-line2"></div>
+						</div>
 					</div>
-					<div class="btn-grad abs" onclick="trigger_search()">Search</div>
+					</div>
+					<div class="col-sm">
+					<div class="item" id="item` + (i + 1) + `" onclick="loadVideo(` + i + `)">
+						<div class="image"></div>
+						<div class="text">
+						<div class="text-line1"></div>
+						<div class="text-line2"></div>
+						</div>
+					</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm">
+					<div class="item" id="item` + i + `" onclick="loadVideo(` + (i - 1) + `)">
+						<div class="image"></div>
+						<div class="text">
+						<div class="text-line1"></div>
+						<div class="text-line2"></div>
+						</div>
+					</div>
+					</div>
+					<div class="col-sm">
+					<div class="item" id="item` + (i + 1) + `" onclick="loadVideo(` + i + `)">
+						<div class="image"></div>
+						<div class="text">
+						<div class="text-line1"></div>
+						<div class="text-line2"></div>
+						</div>
+					</div>
+					</div>
 				</div>
 			</div>
-			<div class="tabs">
-				<div id="Eng" onclick="tabEng(this)" class="tab-item active" style="border-top-left-radius: 8px; border-right: 2px solid #343434"> Hollywood </div>
-				<div id="Hin" onclick="tabHin(this)" class="tab-item">Bollywood</div>
-				<div id="Tv" onclick="tabTv(this)" class="tab-item" style="border-top-right-radius: 8px; border-left: 2px solid #343434"> TV Series </div>
-			</div>
-			<div class="line btn-grad"></div>
 		</div>
 		<div class="items" id="items"></div>
-		<div class="footer">
+		<div class="footer" id="footer">
 			<div class="load" onclick="loadMore()">⟳ Load More</span></div>
 		</div>
 	</div>
@@ -369,12 +455,16 @@
 	var nav_fixed = false;
 	var stickyNavTop = $('#top').offset().top;
 	$(window).scroll(function() {
+		console.log($(window).scrollTop(),"->",stickyNavTop)
 		if($(window).scrollTop() > stickyNavTop) {
+			
 			$('#top').addClass('fixed');
+			$('.results').css('padding-top', 96);
 			$('#items').css('padding-top', 170);
 			nav_fixed = true;
 		} else {
 			$('#items').css('padding-top', 0);
+			$('.results').css('padding-top', 20);
 			$('#top').removeClass('fixed');
 			nav_fixed = false;
 		}
@@ -394,14 +484,49 @@
 	var pageTv = 1;
 	var activeTab = ""
 	var loader_count = 0;
+	var search_results = [];
+	var search_value = "";
 	</script>
 	<script>
 	// WORKING FUNC.
-	function search_focus(ele) {
-		ele.children[0].children[0].children[0].focus();
+	function blurAll(){
+		var tmp = document.createElement("input");
+		document.body.appendChild(tmp);
+		tmp.focus();
+		document.body.removeChild(tmp);
 	}
+	function trigger_search(ele) {
+		search_value = document.getElementById('search_input').value;
+		document.getElementById('hidden_input').innerHTML = search_value;
+		if(search_value.length > 2){
+			document.getElementById('result_div').classList.toggle('hide');
+			document.getElementById('items').classList.toggle('hide');
+			document.getElementById('footer').classList.toggle('hide');
+			document.getElementById('tabs').classList.toggle('hide');
+			document.getElementById('line').classList.toggle('hide');
+			document.getElementById('hidden_input').classList.toggle('hide');
+			document.getElementById('search_input').classList.toggle('hide');
+			if(ele.innerHTML == "X"){
+				ele.innerHTML = 'Search';
+				ele.style.	borderRadius = "10px";
+				search_value = "";
+				document.getElementById('search_input').disabled = false;
+				document.getElementById('search_input').focus();
+				document.getElementById('search_input').value = "";
+				document.getElementById('top').style.height = "156px";
+			} else {
+				ele.innerHTML = 'X';
+				ele.style.	borderRadius = "50%";
+				blurAll();
+				document.getElementById('top').style.height = "76px";
+				document.getElementById('search_input').disabled = true;
+				window.scrollTo(0, 76);
+			}
 
-	function trigger_search() {}
+		}
+		
+		
+	}
 
 	function emptyBuffer() {
 		loadedBuffer = 1;
