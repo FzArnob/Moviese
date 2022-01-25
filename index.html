@@ -675,7 +675,6 @@
         </div>`;
 		loadedBuffer += 12;
 	}
-	// function getData(tab, index, length) {}
 	function loadVideo(index) {
 		if(activeTab == "Eng") {
 			let query = {
@@ -860,17 +859,20 @@
 					page: "1",
 					load: true,
 					callback: `function getData(target, page, load, tab){
-                  var collection = document.getElementsByTagName(target);
-                  var dataArr = [];
-                  for (let i = 0; i < collection.length; i++) {
-                      let item = {
-                                  title: collection[i].children[0].children[3].children[2].children[0].innerHTML,
-                                  category: collection[i].children[0].children[3].children[0].innerHTML,
-                                  link: collection[i].children[0].children[0].href,
-                                  image: collection[i].children[0].children[0].children[0].children[1].src
-                              };
-                              dataArr.push(item);
-                  }
+						var titles = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var categories = document.querySelectorAll("article .post_content_light .post_category");
+						var links = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var images = document.querySelectorAll("article picture img");
+                  		var dataArr = [];
+                  		for (let i = 0; i < titles.length; i++) {
+                      		let item = {
+                                  title: titles[i].innerHTML,
+                                  category: categories[i].innerHTML,
+                                  link: links[i].href,
+                                  image: images[i].src
+                            };
+                            dataArr.push(item);
+                  		}
                   let dataObj = {
                       query: 'callback',
                       output: dataArr,
@@ -920,17 +922,20 @@
 					page: "1",
 					load: true,
 					callback: `function getData(target, page, load, tab){
-                  var collection = document.getElementsByTagName(target);
-                  var dataArr = [];
-                  for (let i = 0; i < collection.length; i++) {
-                      let item = {
-                                  title: collection[i].children[0].children[3].children[2].children[0].innerHTML,
-                                  category: collection[i].children[0].children[3].children[0].innerHTML,
-                                  link: collection[i].children[0].children[0].href,
-                                  image: collection[i].children[0].children[0].children[0].children[1].src
-                              };
-                              dataArr.push(item);
-                  }
+						var titles = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var categories = document.querySelectorAll("article .post_content_light .post_category");
+						var links = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var images = document.querySelectorAll("article picture img");
+                  		var dataArr = [];
+                  		for (let i = 0; i < titles.length; i++) {
+                      		let item = {
+                                  title: titles[i].innerHTML,
+                                  category: categories[i].innerHTML,
+                                  link: links[i].href,
+                                  image: images[i].src
+                            };
+                            dataArr.push(item);
+                  		}
                   let dataObj = {
                       query: 'callback',
                       output: dataArr,
@@ -977,17 +982,20 @@
 					page: "1",
 					load: true,
 					callback: `function getData(target, page, load, tab){
-                  var collection = document.getElementsByTagName(target);
-                  var dataArr = [];
-                  for (let i = 0; i < collection.length; i++) {
-                      let item = {
-                                  title: collection[i].children[0].children[3].children[2].children[0].innerHTML,
-                                  category: collection[i].children[0].children[3].children[0].innerHTML,
-                                  link: collection[i].children[0].children[0].href,
-                                  image: collection[i].children[0].children[0].children[0].children[1].src
-                              };
-                              dataArr.push(item);
-                  }
+						var titles = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var categories = document.querySelectorAll("article .post_content_light .post_category");
+						var links = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var images = document.querySelectorAll("article picture img");
+                  		var dataArr = [];
+                  		for (let i = 0; i < titles.length; i++) {
+                      		let item = {
+                                  title: titles[i].innerHTML,
+                                  category: categories[i].innerHTML,
+                                  link: links[i].href,
+                                  image: images[i].src
+                            };
+                            dataArr.push(item);
+                  		}
                   let dataObj = {
                       query: 'callback',
                       output: dataArr,
@@ -1204,17 +1212,20 @@
 				page: pageEng,
 				load: load,
 				callback: `function getData(target, page, load, tab){
-                  var collection = document.getElementsByTagName(target);
-                  var dataArr = [];
-                  for (let i = 0; i < collection.length; i++) {
-                      let item = {
-                                  title: collection[i].children[0].children[3].children[2].children[0].innerHTML,
-                                  category: collection[i].children[0].children[3].children[0].innerHTML,
-                                  link: collection[i].children[0].children[0].href,
-                                  image: collection[i].children[0].children[0].children[0].children[1].src
-                              };
-                              dataArr.push(item);
-                  }
+					var titles = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var categories = document.querySelectorAll("article .post_content_light .post_category");
+						var links = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var images = document.querySelectorAll("article picture img");
+                  		var dataArr = [];
+                  		for (let i = 0; i < titles.length; i++) {
+                      		let item = {
+                                  title: titles[i].innerHTML,
+                                  category: categories[i].innerHTML,
+                                  link: links[i].href,
+                                  image: images[i].src
+                            };
+                            dataArr.push(item);
+                  		}
                   let dataObj = {
                       query: 'callback',
                       output: dataArr,
@@ -1236,17 +1247,20 @@
 				page: pageHin,
 				load: load,
 				callback: `function getData(target, page, load, tab){
-                  var collection = document.getElementsByTagName(target);
-                  var dataArr = [];
-                  for (let i = 0; i < collection.length; i++) {
-                      let item = {
-                                  title: collection[i].children[0].children[3].children[2].children[0].innerHTML,
-                                  category: collection[i].children[0].children[3].children[0].innerHTML,
-                                  link: collection[i].children[0].children[0].href,
-                                  image: collection[i].children[0].children[0].children[0].children[1].src
-                              };
-                              dataArr.push(item);
-                  }
+					var titles = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var categories = document.querySelectorAll("article .post_content_light .post_category");
+						var links = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var images = document.querySelectorAll("article picture img");
+                  		var dataArr = [];
+                  		for (let i = 0; i < titles.length; i++) {
+                      		let item = {
+                                  title: titles[i].innerHTML,
+                                  category: categories[i].innerHTML,
+                                  link: links[i].href,
+                                  image: images[i].src
+                            };
+                            dataArr.push(item);
+                  		}
                   let dataObj = {
                       query: 'callback',
                       output: dataArr,
@@ -1268,17 +1282,20 @@
 				page: pageTv,
 				load: load,
 				callback: `function getData(target, page, load, tab){
-                  var collection = document.getElementsByTagName(target);
-                  var dataArr = [];
-                  for (let i = 0; i < collection.length; i++) {
-                      let item = {
-                                  title: collection[i].children[0].children[3].children[2].children[0].innerHTML,
-                                  category: collection[i].children[0].children[3].children[0].innerHTML,
-                                  link: collection[i].children[0].children[0].href,
-                                  image: collection[i].children[0].children[0].children[0].children[1].src
-                              };
-                              dataArr.push(item);
-                  }
+					var titles = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var categories = document.querySelectorAll("article .post_content_light .post_category");
+						var links = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var images = document.querySelectorAll("article picture img");
+                  		var dataArr = [];
+                  		for (let i = 0; i < titles.length; i++) {
+                      		let item = {
+                                  title: titles[i].innerHTML,
+                                  category: categories[i].innerHTML,
+                                  link: links[i].href,
+                                  image: images[i].src
+                            };
+                            dataArr.push(item);
+                  		}
                   let dataObj = {
                       query: 'callback',
                       output: dataArr,
