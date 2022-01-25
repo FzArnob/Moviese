@@ -349,6 +349,8 @@
 		background: #383838;
 		padding: 20px;
 		animation:animatebottom 0.4s;
+		max-width: 960px;
+		margin: auto;
 	}
 	@keyframes animatebottom{
 		from{bottom:-600px;opacity:0} 
@@ -526,13 +528,40 @@
 				document.getElementById('top').style.height = "76px";
 				document.getElementById('search_input').disabled = true;
 				window.scrollTo(0, 76);
+				var query = JSON.stringify({
+					url: "https://www.mojaloss.stream/?s="+search_value.replace(/ /g, "+"),
+					query: "getSearchResult",
+					search_value: search_value,
+					callback: `function getData(target, search_value){
+                  var collection = document.getElementsByTagName(target);
+                  var dataArr = [];
+                  for (let i = 0; i < collection.length; i++) {
+                      let item = {
+                                  title: collection[i].children[0].children[3].children[2].children[0].innerHTML,
+                                  category: collection[i].children[0].children[3].children[0].innerHTML,
+                                  link: collection[i].children[0].children[0].href,
+                                  image: collection[i].children[0].children[0].children[0].children[1].src
+                              };
+                              dataArr.push(item);
+                  }
+                  let dataObj = {
+                      query: 'callback',
+                      output: dataArr,
+                      search_value: search_value
+                  };
+                  console.log(JSON.stringify(dataObj));
+              }
+              getData("article", "`+search_value+`");`,
+				});
+				console.log(query);
+				
 			}
 
 		}
-		
-		
 	}
-
+	function loadSearchResult(res, search_value){
+		console.log(res);
+	} 
 	function emptyBuffer() {
 		loadedBuffer = 1;
 		document.getElementById("items").innerHTML = "";
