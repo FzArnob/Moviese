@@ -568,7 +568,7 @@
 			last_search_value = res_search_value;
 			loadSearchBuffer(search_results.length);
 			setTimeout(function() {
-					for(let i = 1; i < search_results.length; i++) {
+					for(let i = 1; i <= search_results.length; i++) {
 						let box = document.getElementById('res' + i);
 						box.children[0].style.backgroundSize = "cover";
 						box.children[0].style.backgroundImage = "url(" + search_results[i - 1].image; + ")";
