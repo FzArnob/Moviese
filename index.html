@@ -385,7 +385,7 @@
 				<div class="search">
 					<input type="text" id="search_input" placeholder="Search Movies or TV Series..." />
 					<div class="hidden_text hide" id="hidden_input"></div>
-					<div class="btn-grad abs" onclick="trigger_search(this)">Search</div>
+					<div class="btn-grad abs" id="search_button" onclick="trigger_search(this)">Search</div>
 				</div>
 				<div class="tabs" id="tabs">
 					<div id="Eng" onclick="tabEng(this)" class="tab-item active" style="border-top-left-radius: 8px; border-right: 2px solid #343434"> Hollywood </div>
@@ -467,6 +467,11 @@
 			$('.results').css('padding-top', 20);
 			$('#top').removeClass('fixed');
 			nav_fixed = false;
+		}
+	});
+	$("#search_input").on('keyup', function (e) {
+		if (e.key === 'Enter' || e.keyCode === 13) {
+			document.getElementById('search_button').click();
 		}
 	});
 	</script>
