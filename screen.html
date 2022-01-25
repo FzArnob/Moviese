@@ -258,7 +258,7 @@
         let page = parseInt(s) + 1;
 				let query = {
 					query: 'getVideo',
-					url: dataObj.link + page +"/",
+					url: dataSeries.link + page +"/",
 					callback: `function getVideoData(link) {
                 var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
                 title = title.substring(0, title.lastIndexOf(")") + 1);
@@ -293,7 +293,7 @@
                 }
             }
             try{
-            getVideoData('` + dataObj.link + `');
+            getVideoData('` + dataSeries.link + `');
             } catch (err) {
                 console.log(err);
                 console.log("VideoDataLoadFailed");
