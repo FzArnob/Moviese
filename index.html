@@ -404,7 +404,7 @@
 				<br>
 				<br>
 			</div>
-			<div class="result_view">
+			<div id="result_view">
 			</div>
 		</div>
 		<div class="items" id="items"></div>
@@ -417,7 +417,6 @@
 	var nav_fixed = false;
 	var stickyNavTop = $('#top').offset().top;
 	$(window).scroll(function() {
-		console.log($(window).scrollTop(),"->",stickyNavTop)
 		if($(window).scrollTop() > stickyNavTop) {
 			
 			$('#top').addClass('fixed');
@@ -552,7 +551,7 @@
 			last_search_value = res_search_value;
 			loadSearchBuffer(search_results.length);
 			setTimeout(function() {
-				document.getElementById('result_view').innerHTML = res;
+				document.getElementById('result_view').innerHTML += res;
 				}, 500);
 		}
 	} 
