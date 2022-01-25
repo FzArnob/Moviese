@@ -404,47 +404,7 @@
 				<br>
 				<br>
 			</div>
-			<div class="result-view">
-				<div class="row">
-					<div class="col-sm">
-					<div class="item" id="item` + i + `" onclick="loadVideo(` + (i - 1) + `)">
-						<div class="image"></div>
-						<div class="text">
-						<div class="text-line1"></div>
-						<div class="text-line2"></div>
-						</div>
-					</div>
-					</div>
-					<div class="col-sm">
-					<div class="item" id="item` + (i + 1) + `" onclick="loadVideo(` + i + `)">
-						<div class="image"></div>
-						<div class="text">
-						<div class="text-line1"></div>
-						<div class="text-line2"></div>
-						</div>
-					</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm">
-					<div class="item" id="item` + i + `" onclick="loadVideo(` + (i - 1) + `)">
-						<div class="image"></div>
-						<div class="text">
-						<div class="text-line1"></div>
-						<div class="text-line2"></div>
-						</div>
-					</div>
-					</div>
-					<div class="col-sm">
-					<div class="item" id="item` + (i + 1) + `" onclick="loadVideo(` + i + `)">
-						<div class="image"></div>
-						<div class="text">
-						<div class="text-line1"></div>
-						<div class="text-line2"></div>
-						</div>
-					</div>
-					</div>
-				</div>
+			<div class="result_view">
 			</div>
 		</div>
 		<div class="items" id="items"></div>
@@ -493,6 +453,7 @@
 	var loader_count = 0;
 	var search_results = [];
 	var search_value = "";
+	var last_search_value = "";
 	</script>
 	<script>
 	// WORKING FUNC.
@@ -506,7 +467,6 @@
 		search_value = document.getElementById('search_input').value;
 		document.getElementById('hidden_input').innerHTML = search_value;
 		if(search_value.length > 2){
-			document.getElementById('result_div').classList.toggle('hide');
 			document.getElementById('items').classList.toggle('hide');
 			document.getElementById('footer').classList.toggle('hide');
 			document.getElementById('tabs').classList.toggle('hide');
@@ -528,7 +488,9 @@
 				document.getElementById('top').style.height = "76px";
 				document.getElementById('search_input').disabled = true;
 				window.scrollTo(0, 76);
-				var query = JSON.stringify({
+				if(search_value != last_search_value){
+					loadSearchBuffer(12);
+					var query = JSON.stringify({
 					url: "https://www.mojaloss.stream/?s="+search_value.replace(/ /g, "+"),
 					query: "getSearchResult",
 					search_value: search_value,
@@ -554,13 +516,45 @@
               getData("article", "`+search_value+`");`,
 				});
 				console.log(query);
-				
+				}
 			}
+			document.getElementById('result_div').classList.toggle('hide');
 
 		}
 	}
-	function loadSearchResult(res, search_value){
-		console.log(res);
+	function loadSearchBuffer(count){
+		document.getElementById('result_view').innerHTML = "";
+		for(let i = 1; i <= count; i += 2) document.getElementById('result_view').innerHTML += 
+		`<div class="row">
+			<div class="col-sm">
+			<div class="item" id="res` + i + `" onclick="loadSearchVideo(` + (i - 1) + `)">
+				<div class="image"></div>
+				<div class="text">
+				<div class="text-line1"></div>
+				<div class="text-line2"></div>
+				</div>
+			</div>
+			</div>
+			<div class="col-sm">
+			<div class="item" id="res` + (i + 1) + `" onclick="loadSearchVideo(` + i + `)">
+				<div class="image"></div>
+				<div class="text">
+				<div class="text-line1"></div>
+				<div class="text-line2"></div>
+				</div>
+			</div>
+			</div>
+		</div>` 
+	}
+	function loadSearchResult(res, res_search_value){
+		if(res_search_value == search_value){
+			search_results = JSON.parse(res);
+			last_search_value = res_search_value;
+			loadSearchBuffer(search_results.length);
+			setTimeout(function() {
+				document.getElementById('result_view').innerHTML = res;
+				}, 500);
+		}
 	} 
 	function emptyBuffer() {
 		loadedBuffer = 1;
