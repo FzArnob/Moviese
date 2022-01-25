@@ -523,27 +523,44 @@
 	}
 	function loadSearchBuffer(count){
 		document.getElementById('result_view').innerHTML = "";
-		for(let i = 1; i <= count; i += 2) document.getElementById('result_view').innerHTML += 
-		`<div class="row">
-			<div class="col-sm">
-			<div class="item" id="res` + i + `" onclick="loadSearchVideo(` + (i - 1) + `)">
-				<div class="image"></div>
-				<div class="text">
-				<div class="text-line1"></div>
-				<div class="text-line2"></div>
-				</div>
-			</div>
-			</div>
-			<div class="col-sm">
-			<div class="item" id="res` + (i + 1) + `" onclick="loadSearchVideo(` + i + `)">
-				<div class="image"></div>
-				<div class="text">
-				<div class="text-line1"></div>
-				<div class="text-line2"></div>
-				</div>
-			</div>
-			</div>
-		</div>` 
+		for(let i = 1; i <= count; i += 2) {
+			if(i == count){
+				document.getElementById('result_view').innerHTML += 
+				`<div class="row">
+					<div class="col-sm">
+					<div class="item" id="res` + i + `" onclick="loadSearchVideo(` + (i - 1) + `)">
+						<div class="image"></div>
+						<div class="text">
+						<div class="text-line1"></div>
+						<div class="text-line2"></div>
+						</div>
+					</div>
+					</div>
+				</div>`
+			} else {
+				document.getElementById('result_view').innerHTML += 
+				`<div class="row">
+					<div class="col-sm">
+					<div class="item" id="res` + i + `" onclick="loadSearchVideo(` + (i - 1) + `)">
+						<div class="image"></div>
+						<div class="text">
+						<div class="text-line1"></div>
+						<div class="text-line2"></div>
+						</div>
+					</div>
+					</div>
+					<div class="col-sm">
+					<div class="item" id="res` + (i + 1) + `" onclick="loadSearchVideo(` + i + `)">
+						<div class="image"></div>
+						<div class="text">
+						<div class="text-line1"></div>
+						<div class="text-line2"></div>
+						</div>
+					</div>
+					</div>
+				</div>`
+			} 
+		}
 	}
 	function loadSearchResult(res, res_search_value){
 		if(res_search_value == search_value){
