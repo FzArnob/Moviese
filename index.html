@@ -565,7 +565,8 @@
 	}
 	function loadSearchResult(res, res_search_value){
 		if(res_search_value == search_value){
-			search_results = JSON.parse(res);
+			let resTemp = JSON.parse(res)
+			search_results = resTemp.output;
 			last_search_value = res_search_value;
 			loadSearchBuffer(search_results.length);
 			setTimeout(function() {
