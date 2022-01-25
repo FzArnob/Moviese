@@ -217,7 +217,7 @@
         let option = `<option class="option" value="` + i + `"`;
         if(i == s_active) option += ` selected`;
         option +=`>S` + (i + 1) + `</option>`;
-				document.getElementById('season').innerHTML += `<option class="option" value="` + i + `">S` + (i + 1) + `</option>`
+				document.getElementById('season').innerHTML += option;
 			}
 			document.getElementsByClassName('series_controls')[0].classList.remove('hide');
 		}
