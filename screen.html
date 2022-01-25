@@ -178,7 +178,6 @@
 			<div class="series_controls hide">
 				<div>
 					<select name="seasons" id="season" onchange="getSeason(this.value)">
-						<option class="option" value="0">S1</option>
 					</select>
 				</div>
 				<div>
@@ -211,6 +210,9 @@
 			for(let i = 0; i < dataObj.playlist.length; i++) {
 				if(dataObj.playlist[i].file) document.getElementById('episode').innerHTML += `<option class="option" value="` + i + `">E` + (i + 1) + `</option>`
 			}
+
+
+      document.getElementById('season').innerHTML += `<option class="option" value="` + 0 + `">S` + (0 + 1) + `</option>`
 			for(let i = 1; i < dataObj.seasons; i++) {
 				document.getElementById('season').innerHTML += `<option class="option" value="` + i + `">S` + (i + 1) + `</option>`
 			}
