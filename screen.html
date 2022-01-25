@@ -210,16 +210,15 @@
 			for(let i = 0; i < dataObj.playlist.length; i++) {
 				if(dataObj.playlist[i].file) document.getElementById('episode').innerHTML += `<option class="option" value="` + i + `">E` + (i + 1) + `</option>`
 			}
+      var s_active = parseInt(dataObj.season_active) - 1;
+      console.log(s_active);
 
-
-      document.getElementById('season').innerHTML += `<option class="option" value="` + 0 + `">S` + (0 + 1) + `</option>`
-			for(let i = 1; i < dataObj.seasons; i++) {
+      for(let i = 0; i < dataObj.seasons; i++) {
+        let option = `<option class="option" value="` + i + `"`;
+        if(i == s_active) option += ` selected`;
+        option +=`>S` + (i + 1) + `</option>`;
 				document.getElementById('season').innerHTML += `<option class="option" value="` + i + `">S` + (i + 1) + `</option>`
 			}
-			let s = document.getElementById('season')
-      console.log(s.value);
-      console.log(dataObj.season_active);
-			// s.value = (dataObj.season_active-1);
 			document.getElementsByClassName('series_controls')[0].classList.remove('hide');
 		}
 		var vid = document.getElementById("screen");
@@ -268,7 +267,9 @@
                 console.log(year);
                 if (isNaN(year)) {
                     var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
-                var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
+                    var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
+                    let s = document.getElementsByClassName('page_num').length;
+		                if(s == 0) { s = 1; }
                     var output =
                     {
                         query: 'callback',
@@ -277,7 +278,7 @@
                         season_active: '`+ page +`',
                         link: link,
                         playlist: eval(playlist),
-                        seasons: document.getElementsByClassName('page_num').length
+                        seasons: s
                     };
                     console.log(JSON.stringify(output));
                 } else {
