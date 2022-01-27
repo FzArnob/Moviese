@@ -487,7 +487,6 @@
 				document.getElementById('top').style.height = "76px";
 				document.getElementById('search_input').disabled = true;
 				window.scrollTo(0, 76);
-				if(search_value != last_search_value){
 					loadSearchBuffer(12);
 					var query = JSON.stringify({
 					url: "https://www.mojaloss.stream/?s="+search_value.replace(/ /g, "+"),
@@ -518,8 +517,6 @@
 					getData("article", "`+search_value+`");`,
 					});
 					console.log(query);
-				} else {
-				}
 			}
 			document.getElementById('result_div').classList.toggle('hide');
 
@@ -1313,10 +1310,40 @@
 	}
 
 	function refreshBuffer() {
-		if(search_value != "" && search_value != last_search_value){
-			document.getElementById('search_button').click();
-		} else {
-			loadSearchResult(search_results, last_search_value);
+		if(search_value != "" && search_value == last_search_value){
+			loadSearchResult(JSON.stringify(search_results), last_search_value);
+		} else if (search_value != "" && search_value != last_search_value) {
+					window.scrollTo(0, 76);
+					loadSearchBuffer(12);
+					var query = JSON.stringify({
+					url: "https://www.mojaloss.stream/?s="+search_value.replace(/ /g, "+"),
+					query: "getSearchResult",
+					search_value: search_value,
+					callback: `function getData(target, search_value){
+						var titles = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var categories = document.querySelectorAll("article .post_content_light .post_category");
+						var links = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var images = document.querySelectorAll("article picture img");
+                  		var dataArr = [];
+                  		for (let i = 0; i < titles.length; i++) {
+                      		let item = {
+                                  title: titles[i].innerHTML,
+                                  category: categories[i].innerHTML,
+                                  link: links[i].href,
+                                  image: images[i].src
+                            };
+                            dataArr.push(item);
+                  		}
+						let dataObj = {
+							query: 'callback',
+							output: dataArr,
+							search_value: search_value
+						};
+						console.log(JSON.stringify(dataObj));
+					}
+					getData("article", "`+search_value+`");`,
+					});
+					console.log(query);
 		}
     // console.log("E: ", dataEng.length, dataHin.length, dataTv.length);
 		var refresh_count = (loadedBuffer - 1) / 12;
