@@ -374,10 +374,14 @@
 		width: calc(100%);
 	}
 	.search_fail{
-		height: 80px;
-		width: 80px;
-		margin: auto;
-		margin-top: 40px;
+		margin-left: 50%;
+		transform: translateX(-50%);
+		text-align: left;
+		max-width: 150px;
+		font-family: 'Segoe UI';
+		font-size: 14px;
+		color: #808080;
+		margin-top: 50px;
 	}
 	</style>
 </head>
@@ -599,7 +603,12 @@
 				}, 100);
 			} else {
 				document.getElementById('result_view').innerHTML = 
-				`<img class"search_fail" src="./icon/search_fail.png"/>`;
+				`<div class"search_fail">
+					Your search did not match anything.
+					<br>✓ Make sure that all words are spelled correctly.
+					<br>✓ Try different keywords.
+					<br>✓ Try follow above steps.
+					<br>✓ Lastly check your network.`;
 			}
 		}
 	} 
