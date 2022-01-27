@@ -197,13 +197,13 @@
 		var dataObj = JSON.parse(data);
 		if(dataObj.type == "movie") {
 			dataMovie = dataObj;
-			document.getElementById("wrapper").innerHTML = `<video id="screen" controls poster="` + dataObj.poster + `" style="height: 100%">
+			document.getElementById("wrapper").innerHTML = `<video id="screen" controls controlsList="nodownload" poster="` + dataObj.poster + `" style="height: 100%">
                     <source id="video" src="` + dataObj.file + `" type="video/mp4">
                 </video>`;
 			document.getElementById("title").innerHTML = dataObj.title;
 		} else if(dataObj.type == "series") {
 			dataSeries = dataObj;
-			document.getElementById("wrapper").innerHTML = `<video id="screen" controls poster="` + dataObj.playlist[0].image + `" style="height: 100%">
+			document.getElementById("wrapper").innerHTML = `<video id="screen" controls controlsList="nodownload" poster="` + dataObj.playlist[0].image + `" style="height: 100%">
                     <source id="video" src="` + dataObj.playlist[0].file + `" type="video/mp4">
                 </video>`;
 			document.getElementById("title").innerHTML = dataObj.title;
@@ -251,7 +251,7 @@
 	}
 
 	function loadEpisode(episode) {
-		document.getElementById("wrapper").innerHTML = `<video id="screen" controls poster="` + dataSeries.playlist[0].image + `" style="height: 100%">
+		document.getElementById("wrapper").innerHTML = `<video id="screen" controls controlsList="nodownload" poster="` + dataSeries.playlist[0].image + `" style="height: 100%">
                     <source id="video" src="` + dataSeries.playlist[episode].file + `" type="video/mp4">
                 </video>`;
 	}
