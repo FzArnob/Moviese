@@ -373,6 +373,12 @@
 		color: rgb(158, 158, 158);
 		width: calc(100%);
 	}
+	.search_fail{
+		height: 80px;
+		width: 80px;
+		margin: auto;
+		margin-top: 40px;
+	}
 	</style>
 </head>
 
@@ -566,6 +572,7 @@
 	function loadSearchResult(res, res_search_value){
 		if(res_search_value == search_value){
 			search_results = JSON.parse(res);
+			if(search_results.length != 0) {
 			last_search_value = res_search_value;
 			loadSearchBuffer(search_results.length);
 			setTimeout(function() {
@@ -590,6 +597,10 @@
 						box.children[1].children[1].style.padding = "5px";
 					}
 				}, 100);
+			} else {
+				document.getElementById('result_view').innerHTML = 
+				`<img class"search_fail" src="./icon/search_fail.png"/>`;
+			}
 		}
 	} 
 	function loadSearchVideo(index){
@@ -1312,7 +1323,7 @@
 	function refreshBuffer() {
 		if(search_value != "" && search_value == last_search_value){
 			loadSearchResult(JSON.stringify(search_results), last_search_value);
-		} else if (search_value != "" && search_value != last_search_value) {
+		} else if (search_value != "" && search_results.length == 0) {
 					window.scrollTo(0, 76);
 					loadSearchBuffer(12);
 					var query = JSON.stringify({
