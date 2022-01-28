@@ -373,7 +373,7 @@
 		color: rgb(158, 158, 158);
 		width: calc(100%);
 	}
-	.search_fail{
+	.searchf{
 		margin-left: 50%;
 		transform: translateX(-50%);
 		text-align: left;
@@ -383,10 +383,56 @@
 		color: #808080;
 		margin-top: 50px;
 	}
+	.back{
+		box-shadow: 0 0 10px #282828;
+		border-radius: 10px;
+		background: #383838;
+		z-index: 103;
+		width: 250px;
+		height: 120px;
+		margin-top: 25%;
+		margin-left: 50%;
+		transform: translate(-50%, -50%);
+		padding: 20px;
+	}
+	.cover{
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0,0,0, 0.5);
+		z-index: 102;
+	}
+	.b-btn{
+		background-image: linear-gradient(to right,
+			#9f46ce 0%,
+			#31a2db 51%,
+			#9f46ce 100%);
+		width: 50px;
+		cursor: pointer;
+		padding: 4px 6px;
+		text-align: center;
+		transition: 0.5s;
+		background-size: 200% auto;
+		color: white;
+		border-radius: 10px;
+		display: block;
+		margin: 10px;
+		position: absolute;
+		bottom: 15px;
+	}
 	</style>
 </head>
 
 <body>
+	<div class="cover hide" id="cover">
+		<div class="back">
+			<div class="bText">Do you want to exit?</div>
+			<div class="b-btn" style="right: 80px;" onclick="exit()">Yes</div>
+			<div class="b-btn" style="right: 15px;" onclick="noExit()">No</div>
+		</div>
+	</div>
 	<div class="site">
 			<div class="header">
 				<img class="logo" src="./icon/logo-contrust.png" />
@@ -466,6 +512,12 @@
 	</script>
 	<script>
 	// WORKING FUNC.
+	function exit(){
+		console.log("exit-app");
+	}
+	function noExit(){
+		document.getElementById('cover').classList.toggle('hide');
+	}
 	function blurAll(){
 		var tmp = document.createElement("input");
 		document.body.appendChild(tmp);
@@ -603,7 +655,7 @@
 				}, 100);
 			} else {
 				document.getElementById('result_view').innerHTML = 
-				`<div class"search_fail">
+				`<div class"searchf">
 					Your search did not match anything.
 					<br>✓ Make sure that all words are spelled correctly.
 					<br>✓ Try different keywords.
