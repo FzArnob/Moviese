@@ -7,8 +7,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="./bootstrap.css" />
+	<link rel="stylesheet" href="https://cdn.plyr.io/3.5.6/plyr.css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script src="https://cdn.plyr.io/3.5.6/plyr.js"></script>
 	<style>
 	* {
 		user-select: none;
@@ -36,12 +37,15 @@
 	}
 
 	.back {
-		padding: 7px;
-		width: 30px;
-		height: 30px;
+		padding: 10px;
+		width: 40px;
+		height: 40px;
 		background: transparent;
 		color: white;
 		border-radius: 50%;
+		position: absolute;
+		top: 10px;
+		left: 10px;
 		z-index: 999;
 	}
 
@@ -50,23 +54,25 @@
 	}
 
 	.title {
-		font-size: 14px;
+		font-size: 15px;
 		font-family: "Segoe UI";
+		background: transparent;
 		color: white;
+		position: absolute;
 		width: auto;
+		top: 18px;
+		left: 50px;
 		z-index: 999;
-		overflow-x: hidden;
-		margin-top: 4px;
-		margin-left: 5px;
 	}
 
 	.series_controls {
-		margin-top: -2px;
-		margin-left: 15px;
-		font-size: 14px;
-		padding: 1px;
-		cursor: pointer;
+		background: transparent;
+		color: white;
+		position: absolute;
 		width: auto;
+		top: 13px;
+		right: 13px;
+		font-size: 15px;
 		z-index: 999;
 		display: flex;
 	}
@@ -85,11 +91,12 @@
 		outline: 0;
 		/* Custom */
 		font-family: 'Segoe UI';
-		font-size: 10px;
+		font-size: 15;
+		width: 40px;
 		text-align: center;
-		padding: 0;
+		padding: 5px;
 		background: white;
-		color: black;
+		color: #383838;
 		border-radius: 0.25em;
 		box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
 		cursor: pointer;
@@ -155,121 +162,9 @@
 
 	#header {
 		position: fixed;
-		top: 0;
-		left: 0;
-		height: 30px;
+		height: 60px;
 		z-index: 999;
 		width: 100%;
-		display: flex;
-		justify-content: left;
-		padding: 0px 10px;
-	}
-	#pause_play{
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		background-image: linear-gradient(to right,
-			#9f46ce 0%,
-			#31a2db 51%,
-			#9f46ce 100%);
-		width: 45px;
-		height: 45px;
-		cursor: pointer;
-		font-size: 16px;
-		padding: 8px;
-		text-align: center;
-		background-size: 200% auto;
-		color: white;
-		border-radius: 50%;
-		border: 3px solid rgba(255, 255, 255, 0.4);
-	}
-	#footer{
-		position: fixed;
-		/* background: red; */
-		height: 50px;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-	}
-	#top{
-		/* background: green; */
-		height: 30px;
-		width: 100%;
-		padding: 0px 10px;
-		display: flex;
-		justify-content: right;
-		margin-bottom: 10px;
-	}
-	#bottom{
-		/* background: brown; */
-		height: 10px;
-		width: 100%;
-		padding: 0px 10px;
-		display: flex;
-		margin-top: -20px;
-	}
-	#float_btn{
-		color: white;
-		margin-left: 15px;
-		font-size: 14px;
-		padding: 1px;
-		cursor: pointer;
-	}
-	#sound_btn{
-		color: white;
-		margin-left: 15px;
-		font-size: 14px;
-		cursor: pointer;
-		padding: 1px;
-	}
-	#fullscreen_btn{
-		color: white;
-		margin-left: 15px;
-		font-size: 14px;
-		cursor: pointer;
-		padding: 1px;
-	}
-	#position_slider{
-		width: 100%;
-		/* background: red; */
-	}
-	.slider {
-	-webkit-appearance: none;
-	width: auto;
-	width: 100%;
-	height: 3px;
-	border-radius: 5px;
-	background: white;
-	outline: none;
-	cursor: pointer;
-	pointer-events: auto;
-	}
-
-	.slider::-webkit-slider-thumb {
-	-webkit-appearance: none;
-	pointer-events: auto;
-	appearance: none;
-	width: 10px;
-	height: 10px;
-	border-radius: 50%;
-	background: white;
-	cursor: pointer;
-	}
-
-	.slider::-moz-range-thumb {
-	width: 10px;
-	pointer-events: auto;
-	height: 10px;
-	border-radius: 50%;
-	background: white;
-	cursor: pointer;
-	}
-	#position_timer{
-		font-size: 12px;
-		margin-top: 8px;
-		margin-left: 10px;
-		letter-spacing: 2px;
 	}
 	</style>
 </head>
@@ -280,152 +175,19 @@
 		<div id="header">
 			<img class="back" src="./icon/back.png" onclick="go_back()" />
 			<div class="title" id="title">NaN</div>
-		</div>
-			<div id="pause_play">
-				<i class="fas fa-play"></i>
-			</div>
-			<div id="footer">
-				<div id="top">
-					<div class="series_controls hide">
-						<div>
-							<select name="seasons" id="season" onchange="getSeason(this.value)">
-							</select>
-						</div>
-						<div>
-							<select name="episodes" onchange="loadEpisode(this.value)" id="episode">
-							</select>
-						</div>
-					</div>
-					<div id="float_btn">
-						<i class="fas fa-sign-out-alt"></i>
-					</div>
-					<div id="sound_btn">
-						<i class="fas fa-volume-up"></i>
-					</div>
-					<div id="fullscreen_btn">
-						<i class="fas fa-expand"></i>
-					</div>
+			<div class="series_controls hide">
+				<div>
+					<select name="seasons" id="season" onchange="getSeason(this.value)">
+					</select>
 				</div>
-				<div id="bottom">
-					<div id="position_slider">
-						<input type="range" min="0" max="100" value="0" step="0.01" class="slider" id="slider">
-					</div>
-					<div id="position_timer">
-					00:00:00
-					</div>
+				<div>
+					<select name="episodes" onchange="loadEpisode(this.value)" id="episode">
+					</select>
 				</div>
 			</div>
 		</div>
 	</div>
 	<script>
-		// PLAYER CONTROLS
-		document.getElementById("slider").oninput = function() {
-  var value = (this.value-this.min)/(this.max-this.min)*100
-  this.style.background = 'linear-gradient(to right, #9f46ce 0%, #31a2db ' + value + '%, #fff ' + value + '%, white 100%)'
-  	let vid = document.getElementById('screen');
-	let range = document.getElementById('slider').value;
-	let totalSeconds = vid.duration - vid.currentTime;
-	let hours = Math.floor(totalSeconds / 3600);
-	totalSeconds %= 3600;
-	let minutes = Math.floor(totalSeconds / 60);
-	let seconds = parseInt(totalSeconds % 60);
-	document.getElementById('position_timer').innerHTML = hours > 0 ? '-'+hours+':'+minutes+':'+seconds : '-'+minutes+':'+seconds;
-	vid.currentTime = vid.duration * range / 100;
-};
- function playerControlHide(){
-	 console.log("hide");
-	document.getElementById("pause_play").style.display = "none";
-	document.getElementById("header").style.display = "none";
-	document.getElementById("footer").style.display = "none";
- }
- function playerControlShow(){
-	document.getElementById("pause_play").style.display = "block";
-	document.getElementById("header").style.display = "block";
-	document.getElementById("footer").style.display = "block";
- }
-var hideF1, hideF2;
-var pause_play = document.getElementById('pause_play'); 
- pause_play.onclick = function() {
-	var player = document.getElementById('screen');
-	if(player.paused) {
-		pause_play.children[0].className = 'fas fa-pause';
-		player.play();
-		hideF1 = setTimeout(playerControlHide, 2000);
-	} else {
-		pause_play.children[0].className = 'fas fa-play';
-		player.pause();
-		clearTimeout(hideF1);
-		clearTimeout(hideF2);
-	}
- }
- document.getElementById("slider").onmousedown = function() {
-	 console.log('down');
-	 document.getElementById('screen').pause();
-	 pause_play.children[0].className = 'fas fa-play';
-	 clearTimeout(hideF1);
-	 clearTimeout(hideF2);
- }
- document.getElementById("slider").onmouseup = function() {
-	console.log('up');
- }
- document.getElementById('sound_btn').onclick = function() {
-	 let btn = document.getElementById('sound_btn');
-	 if(btn.muted) {
-		 btn.muted = false;
-		 btn.children[0].className = 'fas fa-volume-up';
-	 } else {
-		 btn.muted = true;
-		 btn.children[0].className = 'fas fa-volume-mute';
-	 }
- }
- /* View in fullscreen */
-function openFullscreen(elem) {
-  if (elem.requestFullscreen) {
-    elem.requestFullscreen();
-  } else if (elem.webkitRequestFullscreen) { /* Safari */
-    elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) { /* IE11 */
-    elem.msRequestFullscreen();
-  }
-}
-
-/* Close fullscreen */
-function closeFullscreen() {
-  if (document.exitFullscreen) {
-    document.exitFullscreen();
-  } else if (document.webkitExitFullscreen) { /* Safari */
-    document.webkitExitFullscreen();
-  } else if (document.msExitFullscreen) { /* IE11 */
-    document.msExitFullscreen();
-  }
-}
-var fullscreen = false;
-$('video').on('fullscreenchange webkitfullscreenchange mozfullscreenchange', function() {
-  fullscreen = document.fullscreenElement == this;
-});
-document.getElementById('fullscreen_btn').onclick = function() {
-	 let btn = document.getElementById('fullscreen_btn');
-	 if(fullscreen) {
-		closeFullscreen();
-		btn.children[0].className = 'fas fa-expand';
-	 } else {
-		openFullscreen(document.getElementById('screen'));
-		btn.children[0].className = 'fas fa-compress';
-	 }
- }
- var float = false;
- document.getElementById('float_btn').onclick = function() {
-	 let btn = document.getElementById('float_btn');
-	 if(float) {
-		 console.log('Close-Float');
-		 btn.children[0].className = 'fas fa-sign-out-alt';
-		 float = false;
-	 } else {
-		console.log('Req-Float');
-		 btn.children[0].className = 'fas fa-sign-in-alt';
-		 float = true;
-	 }
- }
 	var dataMovie = {};
 	var dataSeries = {};
 	var season_count = 0;
@@ -435,18 +197,18 @@ document.getElementById('fullscreen_btn').onclick = function() {
 		var dataObj = JSON.parse(data);
 		if(dataObj.type == "movie") {
 			dataMovie = dataObj;
-			document.getElementById("wrapper").innerHTML = `<video id="screen" poster="` + dataObj.poster + `" style="height: 100%">
+			document.getElementById("wrapper").innerHTML = `<video id="screen" controls controlsList="nodownload" poster="` + dataObj.poster + `" style="height: 100%">
                     <source id="video" src="` + dataObj.file + `" type="video/mp4">
                 </video>`;
 			document.getElementById("title").innerHTML = dataObj.title;
 		} else if(dataObj.type == "series") {
 			dataSeries = dataObj;
-			document.getElementById("wrapper").innerHTML = `<video id="screen" poster="` + dataObj.playlist[0].image + `" style="height: 100%">
+			document.getElementById("wrapper").innerHTML = `<video id="screen" controls controlsList="nodownload" poster="` + dataObj.playlist[0].image + `" style="height: 100%">
                     <source id="video" src="` + dataObj.playlist[0].file + `" type="video/mp4">
                 </video>`;
 			document.getElementById("title").innerHTML = dataObj.title;
 			for(let i = 0; i < dataObj.playlist.length; i++) {
-				if(dataObj.playlist[i].file) document.getElementById('episode').innerHTML += `<option class="option" value="` + i + `">Episode ` + (i + 1) + `</option>`
+				if(dataObj.playlist[i].file) document.getElementById('episode').innerHTML += `<option class="option" value="` + i + `">E` + (i + 1) + `</option>`
 			}
       var s_active = parseInt(dataObj.season_active) - 1;
       console.log(s_active);
@@ -454,39 +216,18 @@ document.getElementById('fullscreen_btn').onclick = function() {
       for(let i = 0; i < dataObj.seasons; i++) {
         let option = `<option class="option" value="` + i + `"`;
         if(i == s_active) option += ` selected`;
-        option +=`>Season ` + (i + 1) + `</option>`;
-		document.getElementById('season').innerHTML += option;
-		}
+        option +=`>S` + (i + 1) + `</option>`;
+				document.getElementById('season').innerHTML += option;
+			}
 			document.getElementsByClassName('series_controls')[0].classList.remove('hide');
 		}
 		var vid = document.getElementById("screen");
-		vid.onclick = function() {
-			if(!vid.paused){
-			playerControlShow();
-			hideF2 = setTimeout(playerControlHide , 4000);
-			}
+		vid.onpause = function() {
+			document.getElementById("header").style.display = "block";
 		};
-		vid.onloadeddata = function() {
-			let totalSeconds = vid.duration;
-			let hours = Math.floor(totalSeconds / 3600);
-			totalSeconds %= 3600;
-			let minutes = Math.floor(totalSeconds / 60);
-			let seconds = parseInt(totalSeconds % 60);
-			document.getElementById('position_timer').innerHTML = hours > 0 ? hours+':'+minutes+':'+seconds : minutes+':'+seconds;
-		};
-		vid.ontimeupdate = function() {
-			let vid = document.getElementById('screen');
-			let range = document.getElementById('slider');
-			var value = (range.value-range.min)/(range.max-range.min)*100
-  			range.style.background = 'linear-gradient(to right, #9f46ce 0%, #31a2db ' + value + '%, #fff ' + value + '%, white 100%)'
-			range.value = vid.currentTime * 100 / vid.duration;
-			let totalSeconds = vid.duration - vid.currentTime;
-			let hours = Math.floor(totalSeconds / 3600);
-			totalSeconds %= 3600;
-			let minutes = Math.floor(totalSeconds / 60);
-			let seconds = parseInt(totalSeconds % 60);
-			document.getElementById('position_timer').innerHTML = hours > 0 ? '-'+hours+':'+minutes+':'+seconds : '-'+minutes+':'+seconds;
-		};
+		vid.onplay = function() {
+			document.getElementById("header").style.display = "none";
+		}
 		console.log("vir_show");
 	}
 
@@ -510,7 +251,7 @@ document.getElementById('fullscreen_btn').onclick = function() {
 	}
 
 	function loadEpisode(episode) {
-		document.getElementById("wrapper").innerHTML = `<video id="screen" poster="` + dataSeries.playlist[0].image + `" style="height: 100%">
+		document.getElementById("wrapper").innerHTML = `<video id="screen" controls controlsList="nodownload" poster="` + dataSeries.playlist[0].image + `" style="height: 100%">
                     <source id="video" src="` + dataSeries.playlist[episode].file + `" type="video/mp4">
                 </video>`;
 	}
