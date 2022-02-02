@@ -340,7 +340,7 @@
  }
  function playerControlShow(){
 	document.getElementById("pause_play").style.display = "block";
-	document.getElementById("header").style.display = "block";
+	document.getElementById("header").style.display = "flex";
 	document.getElementById("footer").style.display = "block";
  }
 var hideF1, hideF2;
@@ -369,13 +369,13 @@ var pause_play = document.getElementById('pause_play');
 	console.log('up');
  }
  document.getElementById('sound_btn').onclick = function() {
-	 let btn = document.getElementById('sound_btn');
-	 if(btn.muted) {
-		 btn.muted = false;
-		 btn.children[0].className = 'fas fa-volume-up';
+	 let vid = document.getElementById('screen');
+	 if(vid.muted) {
+		vid.muted = false;
+		 this.children[0].className = 'fas fa-volume-up';
 	 } else {
-		 btn.muted = true;
-		 btn.children[0].className = 'fas fa-volume-mute';
+		vid.muted = true;
+		 this.children[0].className = 'fas fa-volume-mute';
 	 }
  }
  /* View in fullscreen */
