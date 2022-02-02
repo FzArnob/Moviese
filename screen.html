@@ -37,15 +37,11 @@
 	}
 
 	.back {
-		padding: 10px;
-		width: 40px;
-		height: 40px;
-		background: transparent;
+		padding: 5px;
+		width: 30px;
+		height: 30px;
 		color: white;
 		border-radius: 50%;
-		position: absolute;
-		top: 10px;
-		left: 10px;
 		z-index: 999;
 	}
 
@@ -56,25 +52,24 @@
 	.title {
 		font-size: 15px;
 		font-family: "Segoe UI";
-		background: transparent;
 		color: white;
-		position: absolute;
-		width: auto;
-		top: 18px;
-		left: 50px;
+		position: relative;
+		margin-left: 5px;
+		margin-top: 3px;
+		width: 100%;
 		z-index: 999;
 	}
 
 	.series_controls {
 		background: transparent;
 		color: white;
-		position: absolute;
-		width: auto;
-		top: 13px;
-		right: 13px;
-		font-size: 15px;
-		z-index: 999;
+		margin-left: 10px;
+		margin-top: 5px;
+		font-size: 14px;
+		z-index: 998;
 		display: flex;
+		width: 100%;
+		justify-content: right;
 	}
 
 	.site {
@@ -92,15 +87,14 @@
 		/* Custom */
 		font-family: 'Segoe UI';
 		font-size: 15;
-		width: 40px;
 		text-align: center;
-		padding: 5px;
+		padding: 0px 5px;
 		background: white;
 		color: #383838;
 		border-radius: 0.25em;
 		box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
 		cursor: pointer;
-		margin-left: 10px;
+		margin-right: 10px;
 	}
 
 	.option {
@@ -162,8 +156,10 @@
 
 	#header {
 		position: fixed;
-		height: 60px;
+		display: flex;
+		height: 30px;
 		z-index: 999;
+		justify-content: right;
 		width: 100%;
 	}
 	</style>
@@ -223,7 +219,7 @@
 		}
 		var vid = document.getElementById("screen");
 		vid.onpause = function() {
-			document.getElementById("header").style.display = "block";
+			document.getElementById("header").style.display = "flex";
 		};
 		vid.onplay = function() {
 			document.getElementById("header").style.display = "none";
@@ -254,6 +250,13 @@
 		document.getElementById("wrapper").innerHTML = `<video id="screen" controls controlsList="nodownload" poster="` + dataSeries.playlist[0].image + `" style="height: 100%">
                     <source id="video" src="` + dataSeries.playlist[episode].file + `" type="video/mp4">
                 </video>`;
+		var vid = document.getElementById("screen");
+		vid.onpause = function() {
+			document.getElementById("header").style.display = "flex";
+		};
+		vid.onplay = function() {
+			document.getElementById("header").style.display = "none";
+		}
 	}
   function getSeason(s) {
         let page = parseInt(s) + 1;
