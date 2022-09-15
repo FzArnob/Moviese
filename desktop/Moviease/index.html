@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Moviease</title>
+	<link rel="shortcut icon" href="./icon/logo-contrust.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="./bootstrap.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style>
+	* {
+		user-select: none;
+		/* supported by Chrome and Opera */
+		-webkit-user-select: none;
+		/* Safari */
+		-khtml-user-select: none;
+		/* Konqueror HTML */
+		-moz-user-select: none;
+		/* Firefox */
+		-ms-user-select: none;
+		/* Internet Explorer/Edge */
+	}
+	::-webkit-scrollbar {
+			width: 5px;
+		}
+
+	/* Track */
+	::-webkit-scrollbar-track {
+		border-radius: 6px;
+		background: rgba(219, 219, 219, 0.2);
+	}
+
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+		background: rgba(0,0,0,0.2); 
+		border-radius: 6px;
+	}
+
+	/* Handle on hover */
+	::-webkit-scrollbar-thumb:hover {
+		background: rgba(0,0,0,0.3); 
+	}
+	body {
+		font-family: "Segoe UI";
+		color: white;
+		background-color: #383838;
+	}
+
+	::-webkit-input-placeholder {
+		/* Chrome/Opera/Safari */
+		font-size: 15px;
+		color: rgb(158, 158, 158);
+	}
+
+	::-moz-placeholder {
+		/* Firefox 19+ */
+		font-size: 15px;
+		color: rgb(158, 158, 158);
+	}
+
+	:-ms-input-placeholder {
+		/* IE 10+ */
+		font-size: 15px;
+		color: rgb(158, 158, 158);
+	}
+
+	:-moz-placeholder {
+		/* Firefox 18- */
+		font-size: 15px;
+		color: rgb(158, 158, 158);
+	}
+
+	.search input {
+		height: 35px;
+		border: none;
+		background-color: #404040;
+		color: white;
+		width: calc(100%);
+	}
+
+	.search input:focus {
+		border: none;
+		outline: none;
+	}
+
+	@-webkit-keyframes rotation {
+		from {
+			-webkit-transform: rotate(0deg);
+		}
+
+		to {
+			-webkit-transform: rotate(359deg);
+		}
+	}
+
+	@keyframes rotation {
+		from {
+			-webkit-transform: rotate(0deg);
+		}
+
+		to {
+			-webkit-transform: rotate(359deg);
+		}
+	}
+
+	@-webkit-keyframes placeHolderShimmer {
+		0% {
+			background-position: -368px 0;
+		}
+
+		100% {
+			background-position: 368px 0;
+		}
+	}
+
+	@keyframes placeHolderShimmer {
+		0% {
+			background-position: -368px 0;
+		}
+
+		100% {
+			background-position: 368px 0;
+		}
+	}
+
+	.animated-background,
+	.text-line1,
+	.text-line2,
+	.image {
+		-webkit-animation-duration: 1.25s;
+		animation-duration: 1.25s;
+		-webkit-animation-fill-mode: forwards;
+		animation-fill-mode: forwards;
+		-webkit-animation-iteration-count: infinite;
+		animation-iteration-count: infinite;
+		-webkit-animation-name: placeHolderShimmer;
+		animation-name: placeHolderShimmer;
+		-webkit-animation-timing-function: ease;
+		animation-timing-function: ease;
+		background: #404040;
+		background: linear-gradient(to right,
+			#404040 8%,
+			#484848 18%,
+			#404040 33%);
+		background-size: 800px 104px;
+		height: 96px;
+		position: relative;
+	}
+
+	.items {
+		margin: auto;
+		padding: 25px;
+		margin-top: 15px;
+		max-width: 960px;
+	}
+
+	.item {
+		margin: auto;
+		padding: 10px;
+		max-width: 330px;
+	}
+
+	.image {
+		box-shadow: 0 0 10px #282828;
+		padding-bottom: 100%;
+		width: 100%;
+		max-width: 310px;
+		border-radius: 10px;
+	}
+
+	.text {
+		font-family: "Segoe UI";
+		font-size: 15px;
+		width: 100%;
+		margin: 10px 0;
+	}
+
+	.text-line1 {
+		font-weight: 400;
+		border-radius: 4px;
+		height: 20px;
+		width: 70%;
+		margin: 20px 0;
+		margin-bottom: 5px;
+	}
+
+	.text-line2 {
+		border-radius: 3px;
+		font-size: 10px;
+		color: #606060;
+		height: 15px;
+		width: 30%;
+		margin: 5px 0;
+	}
+
+	.site {
+		margin: auto;
+		max-width: 960px;
+		margin-top: 20px;
+	}
+
+	.header {
+		width: 150px;
+		display: flex;
+		margin-left: 50%;
+		transform: translateX(-50%);
+		margin-bottom: 10px;
+	}
+
+	.logo {
+		width: 50px;
+		height: 50px;
+	}
+
+	.logo-text {
+		font-family: "Segoe UI";
+		margin-top: 0px;
+		margin-left: 0px;
+		font-size: 20px;
+		color: white;
+	}
+
+	.dev {
+		font-family: "Segoe UI";
+		position: absolute;
+		margin-top: 28px;
+		margin-left: 52px;
+		font-size: 12px;
+		color: rgb(158, 158, 158);
+	}
+
+	.search {
+		position: relative;
+		box-shadow: 0 0 10px #282828;
+		background-color: #404040;
+		border-radius: 8px;
+		padding: 10px;
+		height: 55px;
+		width: auto;
+	}
+
+	.btn-grad {
+		background-image: linear-gradient(to right,
+			#9f46ce 0%,
+			#31a2db 51%,
+			#9f46ce 100%);
+	}
+
+	.btn-grad {
+		cursor: pointer;
+		padding: 6px 14px;
+		text-align: center;
+		transition: 0.5s;
+		background-size: 200% auto;
+		color: white;
+		border-radius: 10px;
+		display: block;
+	}
+
+	.abs {
+		position: absolute;
+		right: 10px;
+		top: 9px;
+		transition: width 2s;
+	}
+
+	.btn-grad:hover {
+		background-position: right center;
+		/* change the direction of the change here */
+		color: #fff;
+		text-decoration: none;
+	}
+
+	.tabs {
+		box-shadow: 0 0 10px #282828;
+		background-color: #404040;
+		border-top-left-radius: 8px;
+		border-top-right-radius: 8px;
+		display: flex;
+		margin-top: 20px;
+		z-index: 100;
+		margin-bottom: -6px;
+	}
+
+	.tab-item {
+		cursor: pointer;
+		background-color: #404040;
+		width: 33.33%;
+		height: 60px;
+		font-weight: 400;
+		font-size: 15px;
+		text-align: center;
+		color: rgb(158, 158, 158);
+		padding: 18px;
+	}
+
+	.tab-item:active {
+		color: white;
+		background-color: #393939;
+	}
+
+	.active {
+		color: white;
+		background-color: #393939;
+	}
+
+	.line {
+		box-shadow: 0 0 10px #282828;
+		margin: auto;
+		margin-top: -5px;
+		width: calc(100% - 2px);
+		height: 10px;
+		border-radius: 90%;
+	}
+
+	.footer {
+		margin-bottom: 40px;
+	}
+
+	.load {
+		margin-left: 50%;
+		transform: translateX(-50%);
+		font-family: "Segoe UI";
+		font-size: 15px;
+		color: rgb(158, 158, 158);
+		width: 150px;
+		height: auto;
+		text-align: center;
+		margin-top: 20px;
+		padding: 6px 14px;
+		box-shadow: 0 0 10px #282828;
+		background-color: #404040;
+		border-radius: 18px;
+	}
+
+	.load:active {
+		background: #282828;
+		color: white;
+		cursor: pointer;
+	}
+
+	.dev span {
+		font-family: "Segoe UI";
+		font-size: 12px;
+		color: #31a2db;
+	}
+
+	#top {
+		max-width: 960px;
+		-webkit-transition: all 0.3s ease-in;
+		transition: all 0.3s ease-in;
+		padding: 20px;
+		background-color: #383838;
+		padding-bottom: 0;
+		height: 156px;
+
+	}
+
+	.fixed {
+		width: calc(100%);
+		position: fixed;
+		top: 0;
+		z-index: 99;
+	}
+	.results{
+		width: 100%;
+		background: #383838;
+		padding: 20px;
+		animation:animatebottom 0.4s;
+		max-width: 960px;
+		margin: auto;
+	}
+	@keyframes animatebottom{
+		from{bottom:-600px;opacity:0} 
+		to{bottom:0;opacity:1}
+	}
+	.warning{
+		text-align: center;
+		font-family: 'Segoe UI';
+		font-size: 12px;
+		color: #808080;
+	}
+	.hide{
+		display: none;
+	}
+	.hidden_text{
+		height: 35px;
+		padding: 5px;
+		border: none;
+		background-color: #404040;
+		color: rgb(158, 158, 158);
+		width: calc(100%);
+	}
+	.searchf{
+		margin-left: 50%;
+		transform: translateX(-50%);
+		text-align: left;
+		max-width: 250px;
+		font-family: 'Segoe UI';
+		font-size: 14px;
+		color: #72808c;
+		margin-top: 50px;
+	}
+	.back{
+		box-shadow: 0 0 10px #282828;
+		border-radius: 10px;
+		background: #383838;
+		z-index: 103;
+		width: 250px;
+		height: 120px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		padding: 20px;
+	}
+	.cover{
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0,0,0, 0.5);
+		z-index: 102;
+	}
+	.b-btn{
+		background-image: linear-gradient(to right,
+			#9f46ce 0%,
+			#31a2db 51%,
+			#9f46ce 100%);
+		width: 50px;
+		cursor: pointer;
+		padding: 4px 6px;
+		text-align: center;
+		transition: 0.5s;
+		background-size: 200% auto;
+		color: white;
+		border-radius: 10px;
+		display: block;
+		margin: 10px;
+		position: absolute;
+		bottom: 15px;
+	}
+	.B-btn:hover {
+		background-position: right center;
+		color: #fff;
+		text-decoration: none;
+	}
+	
+	</style>
+</head>
+
+<body>
+	<div class="bar">
+
+	</div>
+	<div class="page">
+	<div class="cover hide" id="cover">
+		<div class="back">
+			<div class="bText">Do you want to exit?</div>
+			<div class="b-btn" style="right: 80px;" onclick="exit()">Yes</div>
+			<div class="b-btn" style="right: 15px;" onclick="noExit()">No</div>
+		</div>
+	</div>
+	<div class="site">
+			<div class="header">
+				<img class="logo" src="./icon/logo-contrust.png" />
+				<div class="logo-text">MOVIEASE</div>
+				<div class="dev">Made in <span>FZ'S LAB</span></div>
+			</div>
+			<div id="top">
+				<div class="search">
+					<input type="text" id="search_input" placeholder="Search Movies or TV Series..." />
+					<div class="hidden_text hide" id="hidden_input"></div>
+					<div class="btn-grad abs" id="search_button" onclick="trigger_search(this)">Search</div>
+				</div>
+				<div class="tabs" id="tabs">
+					<div id="Eng" onclick="tabEng(this)" class="tab-item active" style="border-top-left-radius: 8px; border-right: 2px solid #343434"> Hollywood </div>
+					<div id="Hin" onclick="tabHin(this)" class="tab-item">Bollywood</div>
+					<div id="Tv" onclick="tabTv(this)" class="tab-item" style="border-top-right-radius: 8px; border-left: 2px solid #343434"> TV Series </div>
+				</div>
+				<div class="line btn-grad" id="line"></div>
+			</div>
+		</div>
+		<div class="results hide" id="result_div">
+			<div class="warning">
+				Search related words, or
+				<br> Add release year with the title. E.g. "Friends 1994"
+				<br>
+				<br>
+			</div>
+			<div id="result_view">
+			</div>
+		</div>
+		<div class="items" id="items"></div>
+		<div class="footer" id="footer">
+			<div class="load" onclick="loadMore()">⟳ Load More</span></div>
+		</div>
+	</div>
+	<script>
+	// Nav Bar
+	var nav_fixed = false;
+	var stickyNavTop = $('#top').offset().top;
+	$(window).scroll(function() {
+		if($(window).scrollTop() > stickyNavTop) {
+			
+			$('#top').addClass('fixed');
+			$('.results').css('padding-top', 96);
+			$('#items').css('padding-top', 170);
+			nav_fixed = true;
+		} else {
+			$('#items').css('padding-top', 0);
+			$('.results').css('padding-top', 20);
+			$('#top').removeClass('fixed');
+			nav_fixed = false;
+		}
+	});
+	$("#search_input").on('keyup', function (e) {
+		if (e.key === 'Enter' || e.keyCode === 13) {
+			document.getElementById('search_button').click();
+		}
+	});
+	</script>
+	<script>
+	// GLOBAL VARIABLE
+	var loadedBuffer = 1;
+	var dataEng = [];
+	var dataHin = [];
+	var dataTv = [];
+	var loadedEng = 1;
+	var loadedHin = 1;
+	var loadedTv = 1;
+	var pageEng = 1;
+	var pageHin = 1;
+	var pageTv = 1;
+	var activeTab = ""
+	var loader_count = 0;
+	var search_results = [];
+	var search_value = "";
+	var last_search_value = "";
+	</script>
+	<script>
+	// WORKING FUNC.
+	function exit(){
+		console.log("exit-app");
+	}
+	function noExit(){
+		document.getElementById('cover').classList.toggle('hide');
+	}
+	function blurAll(){
+		var tmp = document.createElement("input");
+		document.body.appendChild(tmp);
+		tmp.focus();
+		document.body.removeChild(tmp);
+	}
+	function trigger_search(ele) {
+		search_value = document.getElementById('search_input').value;
+		document.getElementById('hidden_input').innerHTML = search_value;
+		if(search_value.length > 2){
+			document.getElementById('items').classList.toggle('hide');
+			document.getElementById('footer').classList.toggle('hide');
+			document.getElementById('tabs').classList.toggle('hide');
+			document.getElementById('line').classList.toggle('hide');
+			document.getElementById('hidden_input').classList.toggle('hide');
+			document.getElementById('search_input').classList.toggle('hide');
+			if(ele.innerHTML == "X"){
+				ele.innerHTML = 'Search';
+				ele.style.	borderRadius = "10px";
+				search_value = "";
+				document.getElementById('search_input').disabled = false;
+				document.getElementById('search_input').focus();
+				document.getElementById('search_input').value = "";
+				document.getElementById('top').style.height = "156px";
+			} else {
+				ele.innerHTML = 'X';
+				ele.style.	borderRadius = "50%";
+				blurAll();
+				document.getElementById('top').style.height = "76px";
+				document.getElementById('search_input').disabled = true;
+				window.scrollTo(0, 76);
+					loadSearchBuffer(12);
+					var query = JSON.stringify({
+					url: "https://www.mojaloss.stream/?s="+search_value.replace(/ /g, "+"),
+					query: "getSearchResult",
+					search_value: search_value,
+					callback: `function getData(target, search_value){
+						var titles = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var categories = document.querySelectorAll("article .post_content_light .post_category");
+						var links = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var images = document.querySelectorAll("article picture img");
+                  		var dataArr = [];
+                  		for (let i = 0; i < titles.length; i++) {
+                      		let item = {
+                                  title: titles[i].innerHTML,
+                                  category: categories[i].innerHTML,
+                                  link: links[i].href,
+                                  image: images[i].src
+                            };
+                            dataArr.push(item);
+                  		}
+						let dataObj = {
+							query: 'callback',
+							output: dataArr,
+							search_value: search_value
+						};
+						console.log(JSON.stringify(dataObj));
+					}
+					getData("article", "`+search_value+`");`,
+					});
+					console.log(query);
+			}
+			document.getElementById('result_div').classList.toggle('hide');
+
+		}
+	}
+	function loadSearchBuffer(count){
+		document.getElementById('result_view').innerHTML = "";
+		for(let i = 1; i <= count; i += 2) {
+			if(i == count){
+				document.getElementById('result_view').innerHTML += 
+				`<div class="row">
+					<div class="col-sm">
+					<div class="item" id="res` + i + `" onclick="loadSearchVideo(` + (i - 1) + `)">
+						<div class="image"></div>
+						<div class="text">
+						<div class="text-line1"></div>
+						<div class="text-line2"></div>
+						</div>
+					</div>
+					</div>
+				</div>`
+			} else {
+				document.getElementById('result_view').innerHTML += 
+				`<div class="row">
+					<div class="col-sm">
+					<div class="item" id="res` + i + `" onclick="loadSearchVideo(` + (i - 1) + `)">
+						<div class="image"></div>
+						<div class="text">
+						<div class="text-line1"></div>
+						<div class="text-line2"></div>
+						</div>
+					</div>
+					</div>
+					<div class="col-sm">
+					<div class="item" id="res` + (i + 1) + `" onclick="loadSearchVideo(` + i + `)">
+						<div class="image"></div>
+						<div class="text">
+						<div class="text-line1"></div>
+						<div class="text-line2"></div>
+						</div>
+					</div>
+					</div>
+				</div>`
+			} 
+		}
+	}
+	function loadSearchResult(res, res_search_value){
+		if(res_search_value == search_value){
+			search_results = JSON.parse(res);
+			if(search_results.length != 0) {
+			last_search_value = res_search_value;
+			loadSearchBuffer(search_results.length);
+			setTimeout(function() {
+					for(let i = 1; i <= search_results.length; i++) {
+						let box = document.getElementById('res' + i);
+						box.children[0].style.backgroundSize = "cover";
+						box.children[0].style.backgroundImage = "url(" + search_results[i - 1].image; + ")";
+						box.children[0].style.animationName = "none";
+						box.children[1].children[0].innerHTML = search_results[i - 1].title;
+						box.children[1].children[0].style.animationName = "none";
+						box.children[1].children[0].style.backgroundSize = "cover";
+						box.children[1].children[0].style.background = "#383838";
+						box.children[1].children[0].style.height = "auto";
+						box.children[1].children[0].style.width = "auto";
+						box.children[1].children[0].style.padding = "5px";
+						box.children[1].children[1].innerHTML = search_results[i - 1].category;
+						box.children[1].children[1].style.animationName = "none";
+						box.children[1].children[1].style.backgroundSize = "cover";
+						box.children[1].children[1].style.background = "#383838";
+						box.children[1].children[1].style.height = "auto";
+						box.children[1].children[1].style.width = "auto";
+						box.children[1].children[1].style.padding = "5px";
+					}
+				}, 100);
+			} else {
+				document.getElementById('result_view').innerHTML = 
+				`<div class="searchf">
+					Your search did not match anything.
+					<br>✓ Make sure that all words are spelled correctly.
+					<br>✓ Try different keywords.
+					<br>✓ Try adding release year.
+					<br>✓ Also check your network.
+				</div>`;
+			}
+		}
+	} 
+	function loadSearchVideo(index){
+		let query = {
+				query: 'getVideo',
+				url: search_results[index].link,
+				callback: `function getVideoData(link) {
+					var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
+					title = title.substring(0, title.lastIndexOf(")") + 1);
+					var test = document.getElementsByClassName('alert');
+					var seriesType = false;
+					for(let i= 0; i<test.length; i++){
+						if(test[i].children[0].innerHTML.includes('Season')){ seriesType = true; break;}
+					}
+
+					if (seriesType) {
+						var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
+						var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
+						let s = document.getElementsByClassName('page_num').length;
+						if(s == 0) { s = 1; }
+						var output =
+						{
+							query: 'callback',
+							type: 'series',
+							title: title,
+							season_active: 1,
+							link: link,
+							playlist: eval(playlist),
+							seasons: s
+						};
+						console.log(JSON.stringify(output));
+					} else {
+						var output =
+						{
+							query: 'callback',
+							type: 'movie',
+							title: title,
+							link: link,
+							file: document.getElementsByTagName('video')[0].children[0].src,
+							poster: document.getElementsByTagName('video')[0].poster,
+							track: document.getElementsByTagName('video')[0].children[0].src.slice(0, -3) + 'srt'
+						};
+						console.log(JSON.stringify(output));
+					}
+				}
+				try{
+				getVideoData('` + search_results[index].link + `');
+				} catch (err) {
+					console.log(err);
+					console.log("VideoDataLoadFailed");
+				}`
+			};
+			console.log(JSON.stringify(query))
+	}
+	function emptyBuffer() {
+		loadedBuffer = 1;
+		document.getElementById("items").innerHTML = "";
+	}
+
+	function loadingBuffer() {
+		for(var i = loadedBuffer; i < loadedBuffer + 12; i += 2) document.getElementById("items").innerHTML += `<div class="row">
+          <div class="col-sm">
+            <div class="item" id="item` + i + `" onclick="loadVideo(` + (i - 1) + `)">
+              <div class="image"></div>
+              <div class="text">
+                <div class="text-line1"></div>
+                <div class="text-line2"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="item" id="item` + (i + 1) + `" onclick="loadVideo(` + i + `)">
+              <div class="image"></div>
+              <div class="text">
+                <div class="text-line1"></div>
+                <div class="text-line2"></div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+		loadedBuffer += 12;
+	}
+	function loadVideo(index) {
+		if(activeTab == "Eng") {
+			let query = {
+				query: 'getVideo',
+				url: dataEng[index].link,
+				callback: `function getVideoData(link) {
+					var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
+					title = title.substring(0, title.lastIndexOf(")") + 1);
+					var test = document.getElementsByClassName('alert');
+					var seriesType = false;
+					for(let i= 0; i<test.length; i++){
+						if(test[i].children[0].innerHTML.includes('Season')){ seriesType = true; break;}
+					}
+
+					if (seriesType) {
+						var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
+						var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
+						let s = document.getElementsByClassName('page_num').length;
+						if(s == 0) { s = 1; }
+						var output =
+						{
+							query: 'callback',
+							type: 'series',
+							title: title,
+							season_active: 1,
+							link: link,
+							playlist: eval(playlist),
+							seasons: s
+						};
+						console.log(JSON.stringify(output));
+					} else {
+						var output =
+						{
+							query: 'callback',
+							type: 'movie',
+							title: title,
+							link: link,
+							file: document.getElementsByTagName('video')[0].children[0].src,
+							poster: document.getElementsByTagName('video')[0].poster,
+							track: document.getElementsByTagName('video')[0].children[0].src.slice(0, -3) + 'srt'
+						};
+						console.log(JSON.stringify(output));
+					}
+				}
+				try{
+				getVideoData('` + dataEng[index].link + `');
+				} catch (err) {
+					console.log(err);
+					console.log("VideoDataLoadFailed");
+				}`
+			};
+			console.log(JSON.stringify(query))
+		} else if(activeTab == "Hin") {
+			let query = {
+				query: 'getVideo',
+				url: dataHin[index].link,
+				callback: `function getVideoData(link) {
+					var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
+					title = title.substring(0, title.lastIndexOf(")") + 1);
+					var test = document.getElementsByClassName('alert');
+					var seriesType = false;
+					for(let i= 0; i<test.length; i++){
+						if(test[i].children[0].innerHTML.includes('Season')){ seriesType = true; break;}
+					}
+
+					if (seriesType) {
+						var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
+						var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
+						let s = document.getElementsByClassName('page_num').length;
+						if(s == 0) { s = 1; }
+						var output =
+						{
+							query: 'callback',
+							type: 'series',
+							title: title,
+							season_active: '1',
+							link: link,
+							playlist: eval(playlist),
+							seasons: s
+						};
+						console.log(JSON.stringify(output));
+					} else {
+						var output =
+						{
+							query: 'callback',
+							type: 'movie',
+							title: title,
+							link: link,
+							file: document.getElementsByTagName('video')[0].children[0].src,
+							poster: document.getElementsByTagName('video')[0].poster,
+							track: document.getElementsByTagName('video')[0].children[0].src.slice(0, -3) + 'srt'
+						};
+						console.log(JSON.stringify(output));
+					}
+				}
+				try{
+				getVideoData('` + dataHin[index].link + `');
+				} catch (err) {
+					console.log(err);
+					console.log("VideoDataLoadFailed");
+				}`
+			};
+			console.log(JSON.stringify(query))
+		} else if(activeTab == "Tv") {
+			let query = {
+				query: 'getVideo',
+				url: dataTv[index].link,
+				callback: `function getVideoData(link) {
+					var title = document.getElementsByClassName('post_content')[0].children[2].children[0].innerHTML
+					title = title.substring(0, title.lastIndexOf(")") + 1);
+					var test = document.getElementsByClassName('alert');
+					var seriesType = false;
+					for(let i= 0; i<test.length; i++){
+						if(test[i].children[0].innerHTML.includes('Season')){ seriesType = true; break;}
+					}
+
+					if (seriesType) {
+						var raw = document.getElementsByClassName('post_text_area')[0].getElementsByTagName('script')[0].innerHTML;
+						var playlist = raw.substring( raw.indexOf("["), raw.lastIndexOf("]")+1 );
+						let s = document.getElementsByClassName('page_num').length;
+						if(s == 0) { s = 1; }
+						var output =
+						{
+							query: 'callback',
+							type: 'series',
+							title: title,
+							season_active: 1,
+							link: link,
+							playlist: eval(playlist),
+							seasons: s
+						};
+						console.log(JSON.stringify(output));
+					} else {
+						var output =
+						{
+							query: 'callback',
+							type: 'movie',
+							title: title,
+							link: link,
+							file: document.getElementsByTagName('video')[0].children[0].src,
+							poster: document.getElementsByTagName('video')[0].poster,
+							track: document.getElementsByTagName('video')[0].children[0].src.slice(0, -3) + 'srt'
+						};
+						console.log(JSON.stringify(output));
+					}
+				}
+				try{
+				getVideoData('` + dataTv[index].link + `');
+				} catch (err) {
+					console.log(err);
+					console.log("VideoDataLoadFailed");
+				}`
+			};
+			console.log(JSON.stringify(query))
+		}
+	}
+
+	function tabEng(ele) {
+
+		if(activeTab != "Eng") {
+			if(nav_fixed) {
+				var itemsTop = $('#items').offset().top;
+				window.scrollTo(0, itemsTop);
+			}
+			emptyBuffer();
+			loadedBuffer = 1;
+			loadingBuffer();
+      document.getElementsByClassName("load")[0].classList.remove("btn-grad");
+      document.getElementsByClassName("load")[0].innerHTML = "⟳ Load More";
+			loadedEng = 1;
+			loadedHin = 1;
+			loadedTv = 1;
+			activeTab = "Eng"
+			ele.parentElement.children[0].className = "tab-item active";
+			ele.parentElement.children[1].className = "tab-item";
+			ele.parentElement.children[2].className = "tab-item";
+			if(pageEng == 1) {
+				var query = JSON.stringify({
+					url: "https://www.mojaloss.stream/category/movies/",
+					query: "getData",
+					tab: "Eng",
+					page: "1",
+					load: true,
+					callback: `function getData(target, page, load, tab){
+						var titles = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var categories = document.querySelectorAll("article .post_content_light .post_category");
+						var links = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var images = document.querySelectorAll("article picture img");
+                  		var dataArr = [];
+                  		for (let i = 0; i < titles.length; i++) {
+                      		let item = {
+                                  title: titles[i].innerHTML,
+                                  category: categories[i].innerHTML,
+                                  link: links[i].href,
+                                  image: images[i].src
+                            };
+                            dataArr.push(item);
+                  		}
+                  let dataObj = {
+                      query: 'callback',
+                      output: dataArr,
+                      page: page,
+                      load: load,
+                      tab: tab,
+                  };
+                  console.log(JSON.stringify(dataObj));
+              }
+              getData('article', 1, true, 'Eng');`,
+				});
+				console.log(query);
+        setTimeout(function() {
+					console.log("vir_off");
+				}, 1000);
+			} else {
+				setTimeout(function() {
+					if(activeTab == 'Eng') loadContent('Eng');
+				}, 500);
+			}
+		}
+	}
+
+	function tabHin(ele) {
+		if(activeTab != "Hin") {
+			if(nav_fixed) {
+				var itemsTop = $('#items').offset().top;
+				window.scrollTo(0, itemsTop);
+			}
+			emptyBuffer();
+			loadedBuffer = 1;
+			loadingBuffer();
+      document.getElementsByClassName("load")[0].classList.remove("btn-grad");
+      document.getElementsByClassName("load")[0].innerHTML = "⟳ Load More";
+			loadedEng = 1;
+			loadedHin = 1;
+			loadedTv = 1;
+			activeTab = "Hin"
+			ele.parentElement.children[0].className = "tab-item";
+			ele.parentElement.children[1].className = "tab-item active";
+			ele.parentElement.children[2].className = "tab-item";
+			if(pageHin == 1) {
+				var query = JSON.stringify({
+					url: "https://www.mojaloss.stream/category/hindi/",
+					query: "getData",
+					tab: "Hin",
+					page: "1",
+					load: true,
+					callback: `function getData(target, page, load, tab){
+						var titles = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var categories = document.querySelectorAll("article .post_content_light .post_category");
+						var links = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var images = document.querySelectorAll("article picture img");
+                  		var dataArr = [];
+                  		for (let i = 0; i < titles.length; i++) {
+                      		let item = {
+                                  title: titles[i].innerHTML,
+                                  category: categories[i].innerHTML,
+                                  link: links[i].href,
+                                  image: images[i].src
+                            };
+                            dataArr.push(item);
+                  		}
+                  let dataObj = {
+                      query: 'callback',
+                      output: dataArr,
+                      page: page,
+                      load: load,
+                      tab: tab
+                  };
+                  console.log(JSON.stringify(dataObj));
+              }
+              getData('article', 1, true, 'Hin');`,
+				});
+				console.log(query);
+			} else {
+				setTimeout(function() {
+					if(activeTab == 'Hin') loadContent('Hin');
+				}, 500);
+			}
+		}
+	}
+
+	function tabTv(ele) {
+		if(activeTab != "Tv") {
+			if(nav_fixed) {
+				var itemsTop = $('#items').offset().top;
+				window.scrollTo(0, itemsTop);
+			}
+			emptyBuffer();
+			loadedBuffer = 1;
+			loadingBuffer();
+      document.getElementsByClassName("load")[0].classList.remove("btn-grad");
+      document.getElementsByClassName("load")[0].innerHTML = "⟳ Load More";
+			loadedEng = 1;
+			loadedHin = 1;
+			loadedTv = 1;
+			activeTab = "Tv"
+			ele.parentElement.children[0].className = "tab-item";
+			ele.parentElement.children[1].className = "tab-item";
+			ele.parentElement.children[2].className = "tab-item active";
+			if(pageTv == 1) {
+				var query = JSON.stringify({
+					url: "https://www.mojaloss.stream/category/tv-shows/",
+					query: "getData",
+					tab: "Tv",
+					page: "1",
+					load: true,
+					callback: `function getData(target, page, load, tab){
+						var titles = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var categories = document.querySelectorAll("article .post_content_light .post_category");
+						var links = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var images = document.querySelectorAll("article picture img");
+                  		var dataArr = [];
+                  		for (let i = 0; i < titles.length; i++) {
+                      		let item = {
+                                  title: titles[i].innerHTML,
+                                  category: categories[i].innerHTML,
+                                  link: links[i].href,
+                                  image: images[i].src
+                            };
+                            dataArr.push(item);
+                  		}
+                  let dataObj = {
+                      query: 'callback',
+                      output: dataArr,
+                      page: page,
+                      load: load,
+                      tab: tab
+                  };
+                  console.log(JSON.stringify(dataObj));
+              }
+              getData('article', 1, true, 'Tv');`,
+				});
+				console.log(query);
+			} else {
+				setTimeout(function() {
+					if(activeTab == 'Tv') loadContent('Tv');
+				}, 500);
+			}
+		}
+	}
+
+	function loadContent(tab) {
+		if(tab == "Eng") {
+			for(let i = loadedEng; i < loadedEng + 12; i++) {
+				let box = document.getElementById('item' + i);
+				box.children[0].style.backgroundSize = "cover";
+				box.children[0].style.backgroundImage = "url(" + dataEng[i - 1].image; + ")";
+				box.children[0].style.animationName = "none";
+				box.children[1].children[0].innerHTML = dataEng[i - 1].title;
+				box.children[1].children[0].style.animationName = "none";
+				box.children[1].children[0].style.backgroundSize = "cover";
+				box.children[1].children[0].style.background = "#383838";
+				box.children[1].children[0].style.height = "auto";
+				box.children[1].children[0].style.width = "auto";
+				box.children[1].children[0].style.padding = "5px";
+				box.children[1].children[1].innerHTML = dataEng[i - 1].category;
+				box.children[1].children[1].style.animationName = "none";
+				box.children[1].children[1].style.backgroundSize = "cover";
+				box.children[1].children[1].style.background = "#383838";
+				box.children[1].children[1].style.height = "auto";
+				box.children[1].children[1].style.width = "auto";
+				box.children[1].children[1].style.padding = "5px";
+			}
+			loadedEng += 12;
+		} else if(tab == "Hin") {
+			for(let i = loadedHin; i < loadedHin + 12; i++) {
+				let box = document.getElementById('item' + i);
+				box.children[0].style.backgroundSize = "cover";
+				box.children[0].style.backgroundImage = "url(" + dataHin[i - 1].image; + ")";
+				box.children[0].style.animationName = "none";
+				box.children[1].children[0].innerHTML = dataHin[i - 1].title;
+				box.children[1].children[0].style.animationName = "none";
+				box.children[1].children[0].style.backgroundSize = "cover";
+				box.children[1].children[0].style.background = "#383838";
+				box.children[1].children[0].style.height = "auto";
+				box.children[1].children[0].style.width = "auto";
+				box.children[1].children[0].style.padding = "5px";
+				box.children[1].children[1].innerHTML = dataHin[i - 1].category;
+				box.children[1].children[1].style.animationName = "none";
+				box.children[1].children[1].style.backgroundSize = "cover";
+				box.children[1].children[1].style.background = "#383838";
+				box.children[1].children[1].style.height = "auto";
+				box.children[1].children[1].style.width = "auto";
+				box.children[1].children[1].style.padding = "5px";
+			}
+			loadedHin += 12;
+		} else if(tab == "Tv") {
+			// console.log(loadedTv, 'from', dataTv.length)
+			for(let i = loadedTv; i < loadedTv + 12; i++) {
+				let box = document.getElementById('item' + i);
+				box.children[0].style.backgroundSize = "cover";
+				box.children[0].style.backgroundImage = "url(" + dataTv[i - 1].image; + ")";
+				box.children[0].style.animationName = "none";
+				box.children[1].children[0].innerHTML = dataTv[i - 1].title;
+				box.children[1].children[0].style.animationName = "none";
+				box.children[1].children[0].style.backgroundSize = "cover";
+				box.children[1].children[0].style.background = "#383838";
+				box.children[1].children[0].style.height = "auto";
+				box.children[1].children[0].style.width = "auto";
+				box.children[1].children[0].style.padding = "5px";
+				box.children[1].children[1].innerHTML = dataTv[i - 1].category;
+				box.children[1].children[1].style.animationName = "none";
+				box.children[1].children[1].style.backgroundSize = "cover";
+				box.children[1].children[1].style.background = "#383838";
+				box.children[1].children[1].style.height = "auto";
+				box.children[1].children[1].style.width = "auto";
+				box.children[1].children[1].style.padding = "5px";
+			}
+			loadedTv += 12;
+		}
+	}
+
+	function recieveData(data, page, tab, load) {
+		if(tab == "Eng") {
+			if(pageEng == page && JSON.parse(data).length > 0) {
+				loader_count += 1;
+				let temp = dataEng.concat(JSON.parse(data));
+				dataEng = temp;
+				pageEng += 1;
+				// console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageEng, ' of Eng: ', dataEng.length)
+				if(load && activeTab == "Eng") {
+					if(dataEng.length > loadedBuffer && loadedBuffer > 13) {
+						loadingBuffer();
+						document.getElementsByClassName("load")[0].classList.remove("btn-grad");
+            document.getElementsByClassName("load")[0].innerHTML = "⟳ Load More";
+						setTimeout(function() {
+							if(activeTab == 'Eng') loadContent('Eng');
+						}, 500);
+					} else {
+						loadContent('Eng');
+					}
+				}
+			}
+		} else if(tab == "Hin") {
+			if(pageHin == page && JSON.parse(data).length > 0) {
+				loader_count += 1;
+				let temp = dataHin.concat(JSON.parse(data));
+				dataHin = temp;
+				pageHin += 1;
+				// console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageHin, ' of Hin: ', dataHin.length)
+				if(load && activeTab == "Hin") {
+					if(dataHin.length > loadedBuffer && loadedBuffer > 13) {
+						loadingBuffer();
+						document.getElementsByClassName("load")[0].classList.remove("btn-grad");
+            document.getElementsByClassName("load")[0].innerHTML = "⟳ Load More";
+						setTimeout(function() {
+							if(activeTab == 'Hin') loadContent('Hin');
+						}, 500);
+					} else {
+						loadContent('Hin');
+					}
+				}
+			}
+		} else if(tab == "Tv") {
+			if(pageTv == page && JSON.parse(data).length > 0) {
+				loader_count += 1;
+				let temp = dataTv.concat(JSON.parse(data));
+				dataTv = temp;
+				pageTv += 1;
+				// console.log('data: '+JSON.parse(data).length, ' Nextpage: ', pageTv, ' of Tv: ', dataTv.length)
+				if(load && activeTab == "Tv") {
+					if(dataTv.length > loadedBuffer && loadedBuffer > 13) {
+						loadingBuffer();
+						document.getElementsByClassName("load")[0].classList.remove("btn-grad");
+            document.getElementsByClassName("load")[0].innerHTML = "⟳ Load More";
+						setTimeout(function() {
+							if(activeTab == 'Tv') loadContent('Tv');
+						}, 500);
+					} else {
+						loadContent('Tv');
+					}
+				}
+			}
+		}
+	}
+
+	function loadMore() {
+		if(activeTab == 'Eng') {
+			if(loadedEng < dataEng.length) {
+				getNextOffset('Eng', false)
+				loadingBuffer();
+				setTimeout(function() {
+					if(activeTab == 'Eng') loadContent('Eng');
+				}, 500);
+			} else {
+				if(pageEng > 1) {
+					getNextOffset('Eng', true);
+					document.getElementsByClassName("load")[0].classList.add("btn-grad");
+          document.getElementsByClassName("load")[0].innerHTML = "⟳ Loading...";
+				} else {
+					document.getElementById("Eng").click();
+				}
+			}
+		} else if(activeTab == 'Hin') {
+			if(loadedHin < dataHin.length) {
+				getNextOffset('Hin', false)
+				loadingBuffer();
+				setTimeout(function() {
+					if(activeTab == 'Hin') loadContent('Hin');
+				}, 500);
+			} else {
+				if(pageEng > 1) {
+					getNextOffset('Hin', true);
+					document.getElementsByClassName("load")[0].classList.add("btn-grad");
+          document.getElementsByClassName("load")[0].innerHTML = "⟳ Loading...";
+				} else {
+					document.getElementById("Hin").click();
+				}
+			}
+		} else if(activeTab == 'Tv') {
+			if(loadedTv < dataTv.length) {
+				getNextOffset('Tv', false)
+				loadingBuffer();
+				setTimeout(function() {
+					if(activeTab == 'Tv') loadContent('Tv');
+				}, 500);
+			} else {
+				if(pageEng > 1) {
+					getNextOffset('Tv', true);
+					document.getElementsByClassName("load")[0].classList.add("btn-grad");
+          document.getElementsByClassName("load")[0].innerHTML = "⟳ Loading...";
+				} else {
+					document.getElementById("Tv").click();
+				}
+			}
+		}
+	}
+
+	function getNextOffset(tab, load) {
+		if(tab == 'Eng') {
+			var query = JSON.stringify({
+				url: "https://www.mojaloss.stream/category/movies/page/" + pageEng + "/",
+				query: "getData",
+				tab: "Eng",
+				page: pageEng,
+				load: load,
+				callback: `function getData(target, page, load, tab){
+					var titles = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var categories = document.querySelectorAll("article .post_content_light .post_category");
+						var links = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var images = document.querySelectorAll("article picture img");
+                  		var dataArr = [];
+                  		for (let i = 0; i < titles.length; i++) {
+                      		let item = {
+                                  title: titles[i].innerHTML,
+                                  category: categories[i].innerHTML,
+                                  link: links[i].href,
+                                  image: images[i].src
+                            };
+                            dataArr.push(item);
+                  		}
+                  let dataObj = {
+                      query: 'callback',
+                      output: dataArr,
+                      page: page,
+                      load: load,
+                      tab: tab,
+                  };
+                  console.log(JSON.stringify(dataObj));
+              }
+              getData('article', ` + pageEng + `, ` + load + `, 'Eng');`,
+			});
+			// console.log("https://www.mojaloss.stream/category/movies/page/"+pageEng+"/");
+			console.log(query);
+		} else if(tab == 'Hin') {
+			var query = JSON.stringify({
+				url: "https://www.mojaloss.stream/category/hindi/page/" + pageHin + "/",
+				query: "getData",
+				tab: "Hin",
+				page: pageHin,
+				load: load,
+				callback: `function getData(target, page, load, tab){
+					var titles = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var categories = document.querySelectorAll("article .post_content_light .post_category");
+						var links = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var images = document.querySelectorAll("article picture img");
+                  		var dataArr = [];
+                  		for (let i = 0; i < titles.length; i++) {
+                      		let item = {
+                                  title: titles[i].innerHTML,
+                                  category: categories[i].innerHTML,
+                                  link: links[i].href,
+                                  image: images[i].src
+                            };
+                            dataArr.push(item);
+                  		}
+                  let dataObj = {
+                      query: 'callback',
+                      output: dataArr,
+                      page: page,
+                      load: load,
+                      tab: tab,
+                  };
+                  console.log(JSON.stringify(dataObj));
+              }
+              getData('article', ` + pageHin + `, ` + load + `, 'Hin');`,
+			});
+			// console.log("https://www.mojaloss.stream/category/hindi/page/"+pageHin+"/");
+			console.log(query);
+		} else if(tab == 'Tv') {
+			var query = JSON.stringify({
+				url: "https://www.mojaloss.stream/category/tv-shows/page/" + pageTv + "/",
+				query: "getData",
+				tab: "Tv",
+				page: pageTv,
+				load: load,
+				callback: `function getData(target, page, load, tab){
+					var titles = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var categories = document.querySelectorAll("article .post_content_light .post_category");
+						var links = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var images = document.querySelectorAll("article picture img");
+                  		var dataArr = [];
+                  		for (let i = 0; i < titles.length; i++) {
+                      		let item = {
+                                  title: titles[i].innerHTML,
+                                  category: categories[i].innerHTML,
+                                  link: links[i].href,
+                                  image: images[i].src
+                            };
+                            dataArr.push(item);
+                  		}
+                  let dataObj = {
+                      query: 'callback',
+                      output: dataArr,
+                      page: page,
+                      load: load,
+                      tab: tab,
+                  };
+                  console.log(JSON.stringify(dataObj));
+              }
+              getData('article', ` + pageTv + `, ` + load + `, 'Tv');`,
+			});
+			// console.log("https://www.mojaloss.stream/category/tv-shows/page/"+pageTv+"/");
+			console.log(query);
+		}
+	}
+
+	function refreshBuffer() {
+		if(search_value != "" && search_value == last_search_value){
+			loadSearchResult(JSON.stringify(search_results), last_search_value);
+		} else if (search_value != "" && search_results.length == 0) {
+					window.scrollTo(0, 76);
+					loadSearchBuffer(12);
+					var query = JSON.stringify({
+					url: "https://www.mojaloss.stream/?s="+search_value.replace(/ /g, "+"),
+					query: "getSearchResult",
+					search_value: search_value,
+					callback: `function getData(target, search_value){
+						var titles = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var categories = document.querySelectorAll("article .post_content_light .post_category");
+						var links = document.querySelectorAll("article .post_content_light .post_subtitle a");
+						var images = document.querySelectorAll("article picture img");
+                  		var dataArr = [];
+                  		for (let i = 0; i < titles.length; i++) {
+                      		let item = {
+                                  title: titles[i].innerHTML,
+                                  category: categories[i].innerHTML,
+                                  link: links[i].href,
+                                  image: images[i].src
+                            };
+                            dataArr.push(item);
+                  		}
+						let dataObj = {
+							query: 'callback',
+							output: dataArr,
+							search_value: search_value
+						};
+						console.log(JSON.stringify(dataObj));
+					}
+					getData("article", "`+search_value+`");`,
+					});
+					console.log(query);
+		}
+    // console.log("E: ", dataEng.length, dataHin.length, dataTv.length);
+		var refresh_count = (loadedBuffer - 1) / 12;
+		emptyBuffer();
+		for(let j = 0; j < refresh_count; j++) loadingBuffer();
+    document.getElementsByClassName("load")[0].classList.remove("btn-grad");
+    document.getElementsByClassName("load")[0].innerHTML = "⟳ Load More";
+		setTimeout(function() {
+			if(activeTab == "Eng") {
+        if(dataEng.length == 0) {
+          console.log("call-Eng");
+          activeTab = "Hin";
+          tabEng(document.getElementById("Eng"));
+        }
+				for(let i = 1; i < loadedEng; i++) {
+					let box = document.getElementById('item' + i);
+					box.children[0].style.backgroundSize = "cover";
+					box.children[0].style.backgroundImage = "url(" + dataEng[i - 1].image; + ")";
+					box.children[0].style.animationName = "none";
+					box.children[1].children[0].innerHTML = dataEng[i - 1].title;
+					box.children[1].children[0].style.animationName = "none";
+					box.children[1].children[0].style.backgroundSize = "cover";
+					box.children[1].children[0].style.background = "#383838";
+					box.children[1].children[0].style.height = "auto";
+					box.children[1].children[0].style.width = "auto";
+					box.children[1].children[0].style.padding = "5px";
+					box.children[1].children[1].innerHTML = dataEng[i - 1].category;
+					box.children[1].children[1].style.animationName = "none";
+					box.children[1].children[1].style.backgroundSize = "cover";
+					box.children[1].children[1].style.background = "#383838";
+					box.children[1].children[1].style.height = "auto";
+					box.children[1].children[1].style.width = "auto";
+					box.children[1].children[1].style.padding = "5px";
+				}
+			} else if(activeTab == "Hin") {
+        if(dataHin.length == 0) {
+          console.log("call-Hin");
+          activeTab = "Eng";
+          tabHin(document.getElementById("Hin"));
+        }
+				for(let i = 1; i < loadedHin; i++) {
+					let box = document.getElementById('item' + i);
+					box.children[0].style.backgroundSize = "cover";
+					box.children[0].style.backgroundImage = "url(" + dataHin[i - 1].image; + ")";
+					box.children[0].style.animationName = "none";
+					box.children[1].children[0].innerHTML = dataHin[i - 1].title;
+					box.children[1].children[0].style.animationName = "none";
+					box.children[1].children[0].style.backgroundSize = "cover";
+					box.children[1].children[0].style.background = "#383838";
+					box.children[1].children[0].style.height = "auto";
+					box.children[1].children[0].style.width = "auto";
+					box.children[1].children[0].style.padding = "5px";
+					box.children[1].children[1].innerHTML = dataHin[i - 1].category;
+					box.children[1].children[1].style.animationName = "none";
+					box.children[1].children[1].style.backgroundSize = "cover";
+					box.children[1].children[1].style.background = "#383838";
+					box.children[1].children[1].style.height = "auto";
+					box.children[1].children[1].style.width = "auto";
+					box.children[1].children[1].style.padding = "5px";
+				}
+			} else if(activeTab == "Tv") {
+        if(dataTv.length == 0) {
+          console.log("call-Tv");
+          activeTab = "Hin";
+          tabTv(document.getElementById("Tv"));
+        }
+				for(let i = 1; i < loadedTv; i++) {
+					let box = document.getElementById('item' + i);
+					box.children[0].style.backgroundSize = "cover";
+					box.children[0].style.backgroundImage = "url(" + dataTv[i - 1].image; + ")";
+					box.children[0].style.animationName = "none";
+					box.children[1].children[0].innerHTML = dataTv[i - 1].title;
+					box.children[1].children[0].style.animationName = "none";
+					box.children[1].children[0].style.backgroundSize = "cover";
+					box.children[1].children[0].style.background = "#383838";
+					box.children[1].children[0].style.height = "auto";
+					box.children[1].children[0].style.width = "auto";
+					box.children[1].children[0].style.padding = "5px";
+					box.children[1].children[1].innerHTML = dataTv[i - 1].category;
+					box.children[1].children[1].style.animationName = "none";
+					box.children[1].children[1].style.backgroundSize = "cover";
+					box.children[1].children[1].style.background = "#383838";
+					box.children[1].children[1].style.height = "auto";
+					box.children[1].children[1].style.width = "auto";
+					box.children[1].children[1].style.padding = "5px";
+				}
+			}
+		}, 600);
+	}
+	</script>
+	<script>
+		require('./index.js')
+	</script>
+	<script>
+	// INITIATE
+	document.getElementById("Eng").click();
+	
+	</script>
+</body>
+
+</html>
